@@ -62,4 +62,28 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 
-# NutriBook
+# NutriBook  :apple:
+## O NutriBook é um sistema que tem como finalidade facilitar na interação entre nutricionistas e seus respectivos pacientes.
+
+### Com o NutriBook, será possivel:
+
+#### Para o nutricionista:
+* Encontrar novos pacientes na plataforma
+* Salvar e gerenciar dados nutricionais do paciente
+* Cadastrar e editar planos alimentares
+* Automatizar cálculos como IMC e TMB
+
+#### Para o paciente:
+* Encontrar um nutricionista para marcar consultas
+* Verificar os planos alimentares disponibilizados pelo profissional
+* Acompanhar sua evolução através de um histórico de suas avaliações
+
+## Equipe :computer:
+* Alice Costa
+* Arthur Lima
+* Bismark Meneses
+* Fábio Moura de Fraga
+* Giovanna Fernandes
+* Heitor Gomes
+* Huanderson Lima
+* Ian Silva
