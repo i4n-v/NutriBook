@@ -78,6 +78,12 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 * Verificar os planos alimentares disponibilizados pelo profissional
 * Acompanhar sua evolução através de um histórico de suas avaliações
 
+## Tecnologias usadas no projeto
+* Laravel
+* Tailwind
+
+
+
 ## Equipe :computer:
 * Alice Costa
 * Arthur Lima
