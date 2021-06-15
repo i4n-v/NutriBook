@@ -79,8 +79,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 * Acompanhar sua evolução através de um histórico de suas avaliações
 
 ## Tecnologias usadas no projeto
-* Laravel
-* Tailwind
+[![Laravel Badge](https://img.shields.io/badge/Laravel-Version__8.0-%23FF2D20?style=plastic&logo=Laravel&link=https://laravel.com)](https://laravel.com/) 
+[![Tailwind Badge](https://img.shields.io/badge/Tailwind-Version__2.1-%2338B2AC?style=plastic&logo=Tailwindcss&link=https://tailwindcss.com/)](https://tailwindcss.com/)
 
 
 
