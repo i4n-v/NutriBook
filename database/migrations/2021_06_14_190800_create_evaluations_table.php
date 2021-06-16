@@ -19,7 +19,7 @@ class CreateEvaluationsTable extends Migration
             $table->float('height', 9, 2);
             $table->float('lean_mass', 9, 2);
             $table->float('body_fat', 8, 2);
-            $table->integer('nutri_id');
+            $table->integer('nutricionist_id');
             $table->integer('patient_id');
             $table->timestamps();
         });
