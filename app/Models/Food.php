@@ -20,5 +20,5 @@ class Food extends Model
         'protein',
         'carbohydrate',
         'energetic value',
-    ]
+    ];
 }
