@@ -22,17 +22,17 @@ class SkinFoldFactory extends Factory
     public function definition()
     {
         return [
-            'breastplate' =>$this->faker->randomFloat(2),
-            'biceps' => $this->faker->randomFloat(2),
-            'triceps' => $this->faker->randomFloat(2),
-            'abdominal' => $this->faker->randomFloat(2),
-            'subscapular' => $this->faker->randomFloat(2),
-            'suprailiaco' => $this->faker->randomFloat(2),
-            'middle_axillary' => $this->faker->randomFloat(2),
-            'thigh' => $this->faker->randomFloat(2),
-            'calf' => $this->faker->randomFloat(2),
-            'lumbar' => $this->faker->randomFloat(2),
-            'evaluation_id' => $this->faker->randomFloat(2),
+            'breastplate' =>$this->faker->randomNumber(2, false),
+            'biceps' => $this->faker->randomNumber(2, false),
+            'triceps' => $this->faker->randomNumber(2, false),
+            'abdominal' => $this->faker->randomNumber(2, false),
+            'subscapular' => $this->faker->randomNumber(2, false),
+            'suprailiaco' => $this->faker->randomNumber(2, false),
+            'middle_axillary' => $this->faker->randomFloat(2, 40, 200),
+            'thigh' => $this->faker->randomNumber(2, false),
+            'calf' => $this->faker->randomNumber(2, false),
+            'lumbar' => $this->faker->randomNumber(2, false),
+            'evaluation_id' => $this->faker->randomNumber(2, false), 
         ];
     }
 }

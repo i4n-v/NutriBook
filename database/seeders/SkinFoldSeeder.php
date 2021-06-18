@@ -15,7 +15,7 @@ class SkinFoldSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=0; $i < 5; $i++) {           
+        for ($i=1; $i <= 5; $i++) {           
             skinFold::factory(1)->create([
                 'evaluation_id' => Evaluation::find($i),
             ]);
