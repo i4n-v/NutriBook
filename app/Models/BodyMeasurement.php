@@ -17,4 +17,9 @@ class BodyMeasurement extends Model
         'calf',
         'evaluation_id', 
     ];
+
+    public function evaluation(){
+        return $this->belongsTo(Evaluation::class);
+    }
+
 }

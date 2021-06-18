@@ -22,12 +22,12 @@ class BodyMeasurementFactory extends Factory
     public function definition()
     {
         return [
-            'bust' => $this->faker->randomFloat(1, 70, 100),
-            'thorax' => $this->faker->randomFloat(1, 70, 85),
-            'waist'=> $this->faker->randomFloat(1, 60, 80),
-            'hip'=> $this->faker->randomFloat(1, 85, 100),
-            'thigh'=> $this->faker->randomFloat(1, 50, 70),
-            'calf'=> $this->faker->randomFloat(1, 30, 50),
+            'bust' => $this->faker->randomNumber(2, false),
+            'thorax' => $this->faker->randomNumber(2, false),
+            'waist'=> $this->faker->randomNumber(2, false),
+            'hip'=> $this->faker->randomNumber(2, false),
+            'thigh'=> $this->faker->randomNumber(2, false),
+            'calf'=> $this->faker->randomNumber(2, false),
         ];
     }
 }

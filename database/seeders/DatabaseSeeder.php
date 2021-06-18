@@ -17,6 +17,9 @@ class DatabaseSeeder extends Seeder
             NutritionistSeeder::class,
             PatientSeeder::class,
             EvaluationSeeder::class,
+            SkinFoldSeeder::class,
+            BodyMeasurementSeeder::class,
+            AnamneseSeeder::class,
         ]);
     }
 }

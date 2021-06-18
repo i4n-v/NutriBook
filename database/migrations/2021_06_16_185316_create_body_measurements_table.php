@@ -15,13 +15,13 @@ class CreateBodyMeasurementsTable extends Migration
     {
         Schema::create('body_measurements', function (Blueprint $table) {
             $table->id();
-            $table->float('bust', 3, 2);//busto
-            $table->float('thorax', 3, 2);//torax
-            $table->float('waist', 3, 2);//cintura
-            $table->float('hip', 3, 2);//quadril
-            $table->float('thigh', 3, 2);//coxa
-            $table->float('calf', 3, 2);//panturrilha
-            $table->integer('evaluations_id');
+            $table->integer('bust');//busto
+            $table->integer('thorax');//torax
+            $table->integer('waist');//cintura
+            $table->integer('hip');//quadril
+            $table->integer('thigh');//coxa
+            $table->integer('calf');//panturrilha
+            $table->integer('evaluation_id');
             $table->timestamps();
         });
     }
