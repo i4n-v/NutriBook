@@ -16,5 +16,6 @@ class Anamnese extends Model
         'used_drugs', //farmacos usados regularmente
         'life_style', //estilo de vida
         'allergies', //alergias
+        'evaluation_id', 
     ];
 }
