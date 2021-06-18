@@ -13,6 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\Nutricionist::factory(10)->create();
+        $this->call([
+            NutritionistSeeder::class,
+            PatientSeeder::class,
+            EvaluationSeeder::class,
+        ]);
     }
 }
