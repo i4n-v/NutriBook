@@ -15,9 +15,9 @@ class CreateAnamnesesTable extends Migration
     {
         Schema::create('anamneses', function (Blueprint $table) {
             $table->id();
-            $table->string('Objective'); //Objetivo
+            $table->string('objective'); //Objetivo
             $table->string('pathological_history'); //histórico patológico 
-            $table->string('Family history'); //histótico familiar
+            $table->string('family_history'); //histótico familiar
             $table->string('used_drugs'); //farmacos usados regularmente
             $table->string('life_style'); //estilo de vida
             $table->string('allergies'); //alergias

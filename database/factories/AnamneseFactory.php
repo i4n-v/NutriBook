@@ -19,13 +19,16 @@ class AnamneseFactory extends Factory
      *
      * @return array
      */
-    public function definition()   {
+    public function definition()
+    {
         return [
-            'Objective' => $this->faker->word(),
+            'objective' => $this->faker->word(),
             'pathological_history' => $this->faker->sentence(),
-            'Family history' => $this->faker->sentence(),
-            'used_drugs' => $this->faker->words(),
-            'life_style' => $this->faker->word(),           
+            'family_history' => $this->faker->sentence(),
+            'used_drugs' => $this->faker->word(),
+            'life_style' => $this->faker->word(), 
+            'allergies' => $this->faker->word(),          
         ];
     }
 }
+
