@@ -10,12 +10,17 @@ class Anamnese extends Model
     use HasFactory;
     
     protected $fillable = [
-        'Objective', //Objetivo
+        'objective', //Objetivo
         'pathological_history', //histórico patológico 
-        'Family history', //histótico familiar
+        'family_history', //histótico familiar
         'used_drugs', //farmacos usados regularmente
         'life_style', //estilo de vida
         'allergies', //alergias
         'evaluation_id', 
     ];
+
+    public function evaluation(){
+        return $this->belongsTo(Evaluation::class);
+    }
+
 }
