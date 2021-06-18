@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Evaluation;
+use App\Models\Nutritionist;
+use App\Models\Patient;
 
 class EvaluationSeeder extends Seeder
 {
@@ -13,6 +16,11 @@ class EvaluationSeeder extends Seeder
      */
     public function run()
     {
-        //
+        for($i = 1; $i <= 5; $i++){
+            Evaluation::factory(1)->create([
+                'nutritionist_id' => Nutritionist::find($i), 
+                'patient_id' => Patient::find($i) 
+            ]);
+        }    
     }
 }
