@@ -11,7 +11,7 @@ class EatingPlan extends Model
     protected $fillable = [
         'date_start',
         'date_finish',
-        'nutricionist_id',
+        'nutritionist_id',
         'patient_id',
    ];
 }

@@ -17,7 +17,7 @@ class CreateEatingPlansTable extends Migration
             $table->id();
             $table->string('date_start');
             $table->string('date_finish');
-            $table->integer('nutricionist_id');
+            $table->integer('nutritionist_id');
             $table->integer('patient_id');
             $table->timestamps();
         });

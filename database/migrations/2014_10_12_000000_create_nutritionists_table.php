@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNutricionistsTable extends Migration
+class CreateNutritionistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateNutricionistsTable extends Migration
      */
     public function up()
     {
-        Schema::create('nutricionists', function (Blueprint $table) {
+        Schema::create('nutritionists', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('CPF')->unique();
+            $table->string('CPF')->unique();
             $table->integer('CRN')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -33,6 +33,6 @@ class CreateNutricionistsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nutricionists');
+        Schema::dropIfExists('nutritionists');
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class Nutricionist extends Authenticatable
+class Nutritionist extends Authenticatable
 {
     use HasFactory, Notifiable;
 
@@ -42,4 +42,9 @@ class Nutricionist extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function patients() {
+        return $this->belongsToMany(Patient::class, 'evaluations', 'nutritionist_id', 'patient_id')->using(Evaluation::class)->as('evaluation')->withPivot('id', 'weight', 'height', 'lean_mass', 'body_fat'); 
+    }
+
 }
