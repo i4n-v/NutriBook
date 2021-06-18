@@ -22,16 +22,16 @@ class FoodFactory extends Factory
     public function definition()
     {
         return [
-            'weight'=> $this->faker->randomFloat(2),
+            'weight'=> $this->faker->randomNumber(2, false),
             'food'=> $this->faker->word(),
-            'sodium'=> $this->faker->randomFloat(2),
-            'dietary_fiber'=> $this->faker->randomFloat(2),
-            'trans_fat'=> $this->faker->randomFloat(2),
-            'saturated_fat'=> $this->faker->randomFloat(2),
-            'total_fat'=> $this->faker->randomFloat(2),
-            'protein'=> $this->faker->randomFloat(2),
-            'carbohydrate'=> $this->faker->randomFloat(2),
-            'energetic value'=> $this->faker->randomFloat(2),
+            'sodium'=> $this->faker->randomNumber(2, false),
+            'dietary_fiber'=> $this->faker->randomNumber(2, false),
+            'trans_fat'=> $this->faker->randomNumber(2, false),
+            'saturated_fat'=> $this->faker->randomNumber(2, false),
+            'total_fat'=> $this->faker->randomNumber(2, false),
+            'protein'=> $this->faker->randomNumber(2, false),
+            'carbohydrate'=> $this->faker->randomNumber(2, false),
+            'energetic value'=> $this->faker->randomNumber(2, false),
         ];
     }
 }

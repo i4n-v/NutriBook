@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             SkinFoldSeeder::class,
             BodyMeasurementSeeder::class,
             AnamneseSeeder::class,
+            FoodSeeder::class,
         ]);
     }
 }

@@ -15,16 +15,16 @@ class CreateFoodTable extends Migration
     {
         Schema::create('foods', function (Blueprint $table) {
             $table->id();
-            $table->float('weight',3,2);//peso
+            $table->Integer('weight');//peso
             $table->string('food');//alimento
-            $table->float('sodium',3,2);//sodio
-            $table->float('dietary_fiber',3,2);//fibra alimentar
-            $table->float('trans_fat',3,2);//gordura trans
-            $table->float('saturated_fat',3,2);//gordura saturada
-            $table->float('total_fat',3,2);//gordura total
-            $table->float('protein',3,2);//proteina
-            $table->float('carbohydrate',3,2);//carboidrato
-            $table->float('energetic value',3,2);//valor energetico
+            $table->Integer('sodium');//sodio
+            $table->Integer('dietary_fiber');//fibra alimentar
+            $table->Integer('trans_fat');//gordura trans
+            $table->Integer('saturated_fat');//gordura saturada
+            $table->Integer('total_fat');//gordura total
+            $table->Integer('protein');//proteina
+            $table->Integer('carbohydrate');//carboidrato
+            $table->Integer('energetic value');//valor energetico
             $table->timestamps();
         });
     }

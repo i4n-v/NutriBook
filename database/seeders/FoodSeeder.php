@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Food;
 
 class FoodSeeder extends Seeder
 {
@@ -12,7 +13,7 @@ class FoodSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        //
+    {    
+            Food::factory(10)->create();
     }
 }
