@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Patient;
 
 class PatientSeeder extends Seeder
 {
@@ -13,6 +14,10 @@ class PatientSeeder extends Seeder
      */
     public function run()
     {
-        //
+        for($i = 1; $i<=5; $i++){
+            Patient::factory(1)->create([
+                'email' => "paciente$i@gmail.com"
+            ]); 
+        }
     }
 }
