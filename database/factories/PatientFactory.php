@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use App\Models\Patient;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class PatientFactory extends Factory
 {
@@ -23,7 +25,7 @@ class PatientFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'CPF' => $this->faker->unique()->randomNumber(11, true),
+            'CPF' => $this->faker->unique()->cpf(false),
             'email' => $this->faker->unique()->safeEmail(),
             'birth_date' => $this->faker->dateTime(),
             'email_verified_at' => now(),

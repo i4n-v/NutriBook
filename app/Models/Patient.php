@@ -20,7 +20,6 @@ class Patient extends Authenticatable
         'name',
         'CPF',
         'email',
-        'nutri_id',
         'birth_date',
         'password',
     ];
@@ -43,4 +42,9 @@ class Patient extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function nutritionists() {
+        return $this->belongsToMany(Nutritionist::class, 'evaluations', 'patient_id', 'nutritionist_id')->using(Evaluation::class)->as('evaluation')->withPivot('id', 'weight', 'height', 'lean_mass', 'body_fat');
+    }
+
 }
