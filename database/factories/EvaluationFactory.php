@@ -22,10 +22,10 @@ class EvaluationFactory extends Factory
     public function definition()
     {
         return [
-            'weight' => $this->faker->randomFloat(2),
+            'weight' => $this->faker->randomFloat(2, 30, 100),
             'height' => $this->faker->randomFloat(2, 1, 2),
-            'lean_mass' => $this->faker->randomNumber(3, false),
-            'body_fat' => $this->faker->randomNumber(3, false),
+            'lean_mass' => $this->faker->randomNumber(2, false),
+            'body_fat' => $this->faker->randomNumber(2, false),
         ];
     }
 }
