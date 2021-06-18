@@ -22,4 +22,9 @@ class skinFold extends Model
         'lumbar', //lombar
         'evaluation_id'
     ];
+
+    public function evaluation(){
+        return $this->belongsTo(Evaluation::class);
+    }
+
 }
