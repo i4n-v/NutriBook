@@ -22,7 +22,7 @@ class FoodItemFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'weight' => $this->faker->randomNumber(2, false),
         ];
     }
 }
