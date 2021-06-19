@@ -23,4 +23,8 @@ class Food extends Model
         'carbohydrate',
         'energetic value',
     ];
+
+    public function meals() {
+        return $this->belongsToMany(Meal::class, 'food_items','food_id' , 'meal_id')->using(FoodItem::class)->as('fooditem')->withPivot('id', 'weight'); 
+    }
 }
