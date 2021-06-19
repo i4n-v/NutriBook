@@ -19,7 +19,7 @@ class EvaluationSeeder extends Seeder
         for($i = 1; $i <= 5; $i++){
             Evaluation::factory(1)->create([
                 'nutritionist_id' => Nutritionist::find($i), 
-                'patient_id' => Patient::find($i) 
+                'patient_id' => Patient::find($i),
             ]);
         }    
     }
