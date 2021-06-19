@@ -16,10 +16,17 @@ class EatingPlan extends Pivot
         'nutritionist_id',
         'patient_id',
    ];
-   public function nutritionists(){
-    return $this->belongsTo(Nutritionist::class);
+
+   public function nutritionist(){
+        return $this->belongsTo(Nutritionist::class);
     }
-   public function patients(){
-    return $this->belongsTo(Patient::class);
+    
+   public function patient(){
+        return $this->belongsTo(Patient::class);
     }
+
+   public function meals() {
+        return $this->belongsToMany(Meal::class, 'eating_plan_meals', 'eating_plan_id', 'meal_id')->using(EatingPlanMeal::class)->as('eatingPlanMeal')->withPivot('id'); 
+    }
+
 }

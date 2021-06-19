@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             MealSeeder::class,
             FoodItemSeeder::class,
             EatingPlanSeeder::class,
+            EatingPlanMealSeeder::class
             ]);
     }
 }

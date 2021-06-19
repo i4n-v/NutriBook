@@ -21,7 +21,7 @@ class FoodItemSeeder extends Seeder
             for ($j=1; $j <= 3 ; $j++) { 
                 FoodItem::factory(1)->create([
                     'meal_id' => Meal::find($i), 
-                    'food_id' => Food::find($j), 
+                    'food_id' => Food::all()->random(), 
                     ]);
             }
         }    
