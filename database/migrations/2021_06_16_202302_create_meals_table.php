@@ -17,6 +17,7 @@ class CreateMealsTable extends Migration
             $table->id();
             $table->string('day');
             $table->string('day_period');
+            $table->integer('nutritionist_id');
             $table->timestamps();
         });
     }
