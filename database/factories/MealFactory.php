@@ -23,7 +23,7 @@ class MealFactory extends Factory
     {
         return [
             'day'=> $this->faker->dayOfWeek(),
-            'day_period'=> $this->faker->words(),
+            'day_period'=> $this->faker->word(),
         ];
     }
 }
