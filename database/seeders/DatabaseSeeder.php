@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
             BodyMeasurementSeeder::class,
             AnamneseSeeder::class,
             FoodSeeder::class,
-        ]);
+            MealSeeder::class,
+            FoodItemSeeder::class,
+            EatingPlanSeeder::class,
+            ]);
     }
 }
