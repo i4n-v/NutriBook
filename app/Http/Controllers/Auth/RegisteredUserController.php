@@ -39,7 +39,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = Nutritionist::create([
+        $nutricionist = Nutritionist::create([
             'name' => $request->name,
             'CPF' => $request->cpf,
             'CRN' => intval($request->crn),
@@ -47,9 +47,9 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
+        event(new Registered($nutricionist));
 
-        Auth::login($user);
+        Auth::login($nutricionist);
 
         return redirect(RouteServiceProvider::HOME);
     }
