@@ -1,11 +1,10 @@
 <x-guest-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Cadastre-se e utilize todos os recursos que o NutriBook oferece!') }}
+        </h2>
+    </x-slot>
     <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
-
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
         <x-button @click="nutriForm = true; patientForm = false; nutri = true; patient = false">Nutricionista</x-button>
