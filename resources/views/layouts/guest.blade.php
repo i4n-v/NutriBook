@@ -35,5 +35,8 @@
                 {{ $slot }}
             </main>
         </div>
+        @if (isset($header))
+            @include('layouts.footer')
+        @endif
     </body>
 </html>
