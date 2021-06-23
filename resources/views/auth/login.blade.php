@@ -1,4 +1,9 @@
 <x-guest-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-white leading-tight">
+            {{ __('Olá, seja bem-vindo ao sistema de planos alimentares NutriBook!') }}
+        </h2>
+    </x-slot>
     <x-auth-card>
 
         <!-- Session Status -->
