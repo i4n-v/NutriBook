@@ -16,7 +16,7 @@ class NutritionistSeeder extends Seeder
     {
         for($i = 1; $i<=5; $i++){
             Nutritionist::factory(1)->create([
-                'email' => "nutricionista$i@gmail.com"
+                'email' => "nutri$i@gmail.com"
             ]); 
         }
     }
