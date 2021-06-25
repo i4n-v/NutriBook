@@ -1,25 +1,27 @@
 <form method="POST" action="{{ route('patientRegister') }}" x-show="patientForm">
             @csrf
 
+            <legend class="mb-4"><span class="text-white border-b-2 border-white cursor-pointer transition delay-150 hover:border-yellow-300">Cadastrar paciente</span></legend>
+
             <!-- Name -->
             <div>
                 <x-label for="name" :value="__('Nome')" />
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus placeholder="Digite seu nome"/>
             </div>
 
             <!-- Email Address -->
             <div class="mt-4">
                 <x-label for="email" :value="__('E-mail')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required placeholder="Digite seu e-mail"/>
             </div>
 
             <!-- CPF -->
             <div class="mt-4">
                 <x-label for="cpf" :value="__('CPF')" />
 
-                <x-input id="cpf" class="block mt-1 w-full" type="text" name="cpf" :value="old('cpf')" required minlength="11" maxlength="11" />
+                <x-input id="cpf" class="block mt-1 w-full" type="text" name="cpf" :value="old('cpf')" required minlength="11" maxlength="11" placeholder="Digite seu CPF"/>
             </div>
 
             <!-- Password -->
@@ -29,7 +31,8 @@
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
                                 name="password"
-                                required autocomplete="new-password" />
+                                required autocomplete="new-password" 
+                                placeholder="Digite sua senha"/>
             </div>
 
             <!-- Confirm Password -->
@@ -38,11 +41,12 @@
 
                 <x-input id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
-                                name="password_confirmation" required />
+                                name="password_confirmation" required 
+                                placeholder="Confirme sua senha"/>
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                <a class="underline text-sm text-white hover:text-yellow-200" href="{{ route('login') }}">
                     {{ __('Já está cadastrado?') }}
                 </a>
 
