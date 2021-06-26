@@ -18,13 +18,6 @@ Route::get('/register', [RegisteredUserController::class, 'create'])
 Route::post('/register', [RegisteredUserController::class, 'store'])
                 ->middleware('guest');
 
-Route::get('/patientRegister', [PatientController::class, 'create'])
-                ->middleware('guest')
-                ->name('patientRegister');
-
-Route::post('/patientRegister', [PatientController::class, 'store'])
-                ->middleware('guest');
-
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])
                 ->middleware('guest')
                 ->name('login');
