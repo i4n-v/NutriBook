@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Patient;
+use App\Models\User;
 
 class PatientSeeder extends Seeder
 {
@@ -14,10 +15,10 @@ class PatientSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 1; $i<=5; $i++){
-            Patient::factory(1)->create([
-                'email' => "pat$i@gmail.com"
-            ]); 
+        for ($i=6; $i <= 10; $i++) { 
+                Patient::factory(1)->create([
+                    'user_id'=> User::find($i)->id
+                    ]); 
         }
     }
 }

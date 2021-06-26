@@ -24,13 +24,7 @@ class PatientFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'CPF' => $this->faker->unique()->cpf(false),
-            'email' => $this->faker->unique()->safeEmail(),
             'birth_date' => $this->faker->dateTime(),
-            'email_verified_at' => now(),
-            'password' => Hash::make('12345678'), // password
-            'remember_token' => Str::random(10),
         ];
     }
 
@@ -39,13 +33,6 @@ class PatientFactory extends Factory
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
-    public function unverified()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'email_verified_at' => null,
-            ];
-        });
-    }
+    
     
 }
