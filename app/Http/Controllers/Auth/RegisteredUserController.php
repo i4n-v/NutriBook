@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Nutritionist;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -35,21 +35,19 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:nutritionists',
+            'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $nutricionist = Nutritionist::create([
+        $user = User::create([
             'name' => $request->name,
-            'CPF' => $request->cpf,
-            'CRN' => intval($request->crn),
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($nutricionist));
+        event(new Registered($user));
 
-        Auth::login($nutricionist);
+        Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }
