@@ -1,5 +1,6 @@
 <form method="POST" action="{{ route('register') }}" x-show="nutriForm">
             @csrf
+            <input type="hidden" name="type" value="nutritionist">
 
             <legend class="mb-4"><span class="text-white border-b-2 border-white cursor-pointer transition delay-150 hover:border-yellow-300">Cadastre-se como nutricionista</span></legend>
 

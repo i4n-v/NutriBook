@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Patient;
+use App\Models\Nutritionist;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -41,9 +43,21 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'name' => $request->name,
+            'CPF' => $request->cpf,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+        if($request->type == 'patient'){
+            Patient::create([
+                'birth_date'=> $request->birth_date,
+                'user_id'=> $user->id
+            ]);
+        } else if($request->type == 'nutritionist'){
+            Nutritionist::create([
+                'CRN'=> $request->crn,
+                'user_id' => $user->id
+            ]);
+        }
 
         event(new Registered($user));
 
