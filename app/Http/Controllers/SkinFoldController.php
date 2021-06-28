@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\skinFold;
+use App\Models\SkinFold;
 use Illuminate\Http\Request;
 
 class SkinFoldController extends Controller
@@ -41,10 +41,10 @@ class SkinFoldController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\skinFold  $skinFold
+     * @param  \App\Models\SkinFold  $SkinFold
      * @return \Illuminate\Http\Response
      */
-    public function show(skinFold $skinFold)
+    public function show(SkinFold $SkinFold)
     {
         //
     }
@@ -52,10 +52,10 @@ class SkinFoldController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\skinFold  $skinFold
+     * @param  \App\Models\SkinFold  $SkinFold
      * @return \Illuminate\Http\Response
      */
-    public function edit(skinFold $skinFold)
+    public function edit(SkinFold $SkinFold)
     {
         //
     }
@@ -64,10 +64,10 @@ class SkinFoldController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\skinFold  $skinFold
+     * @param  \App\Models\SkinFold  $SkinFold
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, skinFold $skinFold)
+    public function update(Request $request, SkinFold $SkinFold)
     {
         //
     }
@@ -75,10 +75,10 @@ class SkinFoldController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\skinFold  $skinFold
+     * @param  \App\Models\SkinFold  $SkinFold
      * @return \Illuminate\Http\Response
      */
-    public function destroy(skinFold $skinFold)
+    public function destroy(SkinFold $SkinFold)
     {
         //
     }

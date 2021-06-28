@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\skinFold;
+use App\Models\SkinFold;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SkinFoldFactory extends Factory
@@ -12,7 +12,7 @@ class SkinFoldFactory extends Factory
      *
      * @var string
      */
-    protected $model = skinFold::class;
+    protected $model = SkinFold::class;
 
     /**
      * Define the model's default state.

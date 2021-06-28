@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\skinFold;
+use App\Models\SkinFold;
 use App\Models\Evaluation;
 
 class SkinFoldSeeder extends Seeder
@@ -16,7 +16,7 @@ class SkinFoldSeeder extends Seeder
     public function run()
     {
         for ($i=1; $i <= 5; $i++) {           
-            skinFold::factory(1)->create([
+            SkinFold::factory(1)->create([
                 'evaluation_id' => Evaluation::find($i),
             ]);
         }

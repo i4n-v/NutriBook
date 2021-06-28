@@ -30,7 +30,7 @@ class Evaluation extends Pivot
     }
 
     public function skinFold(){
-        return $this->hasOne(skinFold::class, 'evaluation_id');
+        return $this->hasOne(SkinFold::class, 'evaluation_id');
     }
 
     public function bodyMeasurement(){
