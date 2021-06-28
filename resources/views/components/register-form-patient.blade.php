@@ -24,6 +24,13 @@
                 <x-input id="cpf" class="block mt-1 w-full" type="text" name="cpf" :value="old('cpf')" required minlength="11" maxlength="11" placeholder="Digite seu CPF"/>
             </div>
 
+              <!-- Birth date -->
+            <div class="mt-4">
+                <x-label for="birth_date" :value="__('Data de nascimento')" />
+
+                <x-input id="birth_date" class="block mt-1 w-full" type="date" name="birth_date" :value="old('birth_date')" required minlength="11" maxlength="11"/>
+            </div>
+
             <!-- Password -->
             <div class="mt-4">
                 <x-label for="password" :value="__('Senha')" />
