@@ -2,7 +2,11 @@
     <div class="min-h-screen bg-white">
         <x-slot name="header">
             <x-search-bar>
-                <x-slot name="placeholder">{{ _('Pesquisar paciente') }}</x-slot>
+                @if(Auth::user()->isNutritionist())
+                    <x-slot name="placeholder">{{ _('Pesquisar pacientes') }}</x-slot>
+                @else
+                    <x-slot name="placeholder">{{ _('Pesquisar nutricionistas') }}</x-slot>
+                @endif
             </x-search-bar>
         </x-slot>
 
@@ -11,13 +15,17 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-gray-100 border-b border-gray-200">
                         <div class="flex gap-4">
+                            <!-- Nutritionist components for HOME -->
+                            @if(Auth::user()->isNutritionist())
+                                <!-- Filters -->
+                                <x-filters/>
 
-                            <!-- Filters -->
-                            <x-filters/>
+                                <!-- Patients table -->
+                                <x-table-patients/>
+                            @else
+                            <!-- Patient components for HOME -->
 
-                            <!-- Patients table -->
-                            <x-table-patients/>
-                            
+                            @endif    
                         </div>
                     </div>  
                 </div>

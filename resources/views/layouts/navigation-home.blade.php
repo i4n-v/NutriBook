@@ -17,8 +17,8 @@
                 <a class="border-b-2 border-gray-900 transition delay-150 hover:border-yellow-300" href="{{ route('register') }}">Cadastrar-se</a>
             @else
                 <x-nav-link/>
+                <x-dropdown/>
             @endif
         </div>
     </div>
-    <x-dropdown/>
 </nav>
