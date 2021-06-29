@@ -5,7 +5,8 @@
     <div class="cursor-pointer w-full h-1/2" @click="click = !click">
         <span class="transition delay-150 border-b-2 border-white hover:border-yellow-300" x-bind:class="click?'border-yellow-300':''">
             @php            
-                $name = explode(' ', Auth::user()->name, -2);
+                $name = explode(' ', Auth::user()->name);
+                $name = [$name[0], $name[1]];
                 $name = implode(' ', $name);
                 echo $name;
             @endphp 
