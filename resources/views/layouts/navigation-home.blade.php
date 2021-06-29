@@ -1,4 +1,4 @@
-<nav class="bg-gray-900 text-white min-w-screen border-b relative" x-data="{click:false }"> 
+<nav class="bg-gray-900 text-white min-w-screen border-b relative" x-data="{ click:false }"> 
     <div class="flex justify-between w-full h-16 mx-auto px-4 sm:px-6 lg:px-8 static">
         <div div class="flex-initial flex w-1/2 items-center">
             <div>
