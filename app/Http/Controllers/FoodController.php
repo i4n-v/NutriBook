@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Food;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 class FoodController extends Controller
 {
@@ -35,7 +37,28 @@ class FoodController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $uniqueFood = \App\Models\Food::where('food', $request->food)->get();
+
+        if (sizeof($uniqueFood)>0) {
+            return redirect('foods?error=O Alimento já foi criado!');
+        }else{
+            $food = Food::create([
+                'weight'=> $request->weight,
+                'food'=> $request->food,
+                'sodium'=> $request->sodium,
+                'dietary_fiber'=> $request->fiber,
+                'trans_fat'=> $request->trans_fat,
+                'saturated_fat'=> $request->saturated_fat,
+                'total_fat'=> $request->total_fat,
+                'protein'=> $request->protein,
+                'carbohydrate'=> $request->carbohydrate,
+                'energetic_value'=> $request->energetic_value
+                // 'nutritionist_id' => Auth::user()->id
+            ]);
+
+            return redirect('foods?sucess=O alimento foi criado com sucesso!');
+        }
     }
 
     /**
