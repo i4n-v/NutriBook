@@ -21,7 +21,7 @@ class Food extends Model
         'total_fat',
         'protein',
         'carbohydrate',
-        'energetic value',
+        'energetic_value',
     ];
 
     public function meals() {

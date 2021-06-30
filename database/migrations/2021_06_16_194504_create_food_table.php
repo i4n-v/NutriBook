@@ -24,7 +24,7 @@ class CreateFoodTable extends Migration
             $table->Integer('total_fat');//gordura total
             $table->Integer('protein');//proteina
             $table->Integer('carbohydrate');//carboidrato
-            $table->Integer('energetic value');//valor energetico
+            $table->Integer('energetic_value');//valor energetico
             $table->timestamps();
         });
     }

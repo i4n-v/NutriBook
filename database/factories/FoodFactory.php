@@ -31,7 +31,7 @@ class FoodFactory extends Factory
             'total_fat'=> $this->faker->randomNumber(2, false),
             'protein'=> $this->faker->randomNumber(2, false),
             'carbohydrate'=> $this->faker->randomNumber(2, false),
-            'energetic value'=> $this->faker->randomNumber(2, false),
+            'energetic_value'=> $this->faker->randomNumber(2, false),
         ];
     }
 }
