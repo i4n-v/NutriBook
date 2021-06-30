@@ -13,6 +13,7 @@ class EatingPlan extends Pivot
     protected $fillable = [
         'date_start',
         'date_finish',
+        'title',
         'nutritionist_id',
         'patient_id',
    ];

@@ -24,6 +24,7 @@ class EatingPlanFactory extends Factory
         return [
         'date_start' => $this->faker->date(),
         'date_finish'=> $this->faker->date(),
+        'title' => $this->faker->sentence(2),
         ];
     }
 }
