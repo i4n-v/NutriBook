@@ -5,7 +5,7 @@
             <th>Data de término</th>
             <th class="text-center">Ações</th>
         </thead>
-        <tr class="h-10 border-none">
+        <tr class="h-10 hover:bg-gray-100 border-solid border border-gray-200">
             <td class="pl-1">
                 Queimando calorias
             </td>
