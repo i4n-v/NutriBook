@@ -3,6 +3,7 @@
             <th class="pl-1">Título</th>
             <th>Data de início</th>
             <th>Data de término</th>
+            <th class="text-center">Ações</th>
         </thead>
         <tr class="h-10 border-none">
             <td class="pl-1">
@@ -14,19 +15,13 @@
             <td class="text-left">
                 28/06/2021
             </td>
-        </tr>
-        <tr>
-            <td class="text-center pb-3">
+            <td class="text-center">
                 <x-button-delete>
                     {{ ('Apagar') }}
                 </x-button-delete>
-            </td>
-            <td class="text-center pb-3">
-                <x-button>
+                <x-button-edit>
                     {{ ('Editar') }}
-                </x-button>
-            </td>
-            <td class="text-center pb-3">
+                </x-button-edit>
                 <x-button>
                     {{ __('Acessar') }}
                 </x-button>
