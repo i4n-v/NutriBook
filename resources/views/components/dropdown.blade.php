@@ -5,7 +5,7 @@
         <a href="#" class="hover:bg-yellow-400 rounded-md py-1">Perfil</a>
     @else
     <!-- Nutritionist items for dropdawn -->
-        <a href="#" class="hover:bg-yellow-400 rounded-md py-1">Gerenciar alimentos</a>
+        <a href="{{ route('foods') }}" class="hover:bg-yellow-400 rounded-md py-1">Gerenciar alimentos</a>
     @endif
 
     <!-- Logout users -->

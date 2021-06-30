@@ -6,9 +6,9 @@
                     <x-application-logo class="block h-10 w-auto fill-current shadow-2xl" />
                 </a>
             </div>
-             <div class="ml-4 border-b-2 border-white transition delay-150 hover:border-yellow-300 cursor-pointer">
+             <a href="{{ route('login') }}" class="ml-4 border-b-2 border-white transition delay-150 hover:border-yellow-300 cursor-pointer">
                 <span>Seja bem-vindo!</span>
-            </div>
+            </a>
         </div>
 
         <div class="flex-initial w-1/6 flex items-center float-right gap-8">
