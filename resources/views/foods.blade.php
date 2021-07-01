@@ -18,9 +18,9 @@
                             
                             <x-ordering-foods/>
 
-                            <div class="col-span-2 ml-auto w-8/12" x-show="food">
+                            <div class="ml-auto w-8/12" x-show="food">
                                 @if(isset($_GET['sucess'])||isset($_GET['error']))
-                                    <x-message :sucess="$_GET['sucess']??''" :error="$_GET['error']??''"/>
+                                    <x-message :sucess="$_GET['sucess']??''" :error="$_GET['error']??''" x-show="load"/>
                                 @endif
                                 <div class="pb-2 font-bold">
                                     Aqui estão todos os alimentos criados:
@@ -42,5 +42,5 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 </x-guest-layout>
