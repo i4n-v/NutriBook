@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FoodController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,11 +24,17 @@ Route::get('/home', function () {
 })->middleware(['auth'])->name('home');
 
 Route::get('/foods', function () {
-    return view('foods');
+
+    if(Auth::user()->isNutritionist()){
+        return view('foods');
+    }else{
+        return redirect('/login');
+    }
+
 })->middleware(['auth'])->name('foods');
 
 Route::post('/food/create', [FoodController::Class, 'store'])->middleware(['auth'])->name('create_food');
 
-Route::get('/food/remove/{food}', [FoodController::Class, 'destroy'])->middleware(['auth'])->name('remove_food');
+Route::get('/food/remove/{food}', [FoodController::Class, 'destroy'])->middleware(['auth'])->name('food_delete');
 
 require __DIR__.'/auth.php';

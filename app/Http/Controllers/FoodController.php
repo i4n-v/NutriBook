@@ -38,7 +38,7 @@ class FoodController extends Controller
     public function store(Request $request)
     {
 
-        $uniqueFood = \App\Models\Food::where('food', $request->food)->get();
+        $uniqueFood = Food::where('food', $request->food)->get();
 
         if (sizeof($uniqueFood)>0) {
             return redirect('foods?error=O Alimento já foi criado!');
@@ -103,6 +103,7 @@ class FoodController extends Controller
      */
     public function destroy(Food $food)
     {
-        //
+        $food->delete();
+        return redirect('foods?sucess=Alimento deletado com sucesso!');
     }
 }
