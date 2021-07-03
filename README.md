@@ -24,9 +24,9 @@
 ## Equipe :computer:
 * Alice Costa
 * Arthur Lima
-* Bismark Meneses
+* Bismarck Meneses
 * Fábio Moura de Fraga
 * Giovanna Fernandes
 * Heitor Gomes
 * Huanderson Lima
-* Ian Silva
+* Ian Vinícius
