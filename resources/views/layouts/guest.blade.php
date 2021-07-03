@@ -17,7 +17,7 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
-    <body>
+    <body class="relative">
         <div class="bg-gray-100">
             @if (isset($header))
                 @include('layouts.navigation-home')
