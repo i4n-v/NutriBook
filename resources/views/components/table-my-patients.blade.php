@@ -4,12 +4,12 @@ $nutritionist_collection = App\Models\Nutritionist::where('user_id', Auth::user(
 
 @endphp
 
-<table class="w-full bg-white shadow-md border-solid border-2 border-gray-200">
-    <thead class="h-10 bg-gray-200 text-left">
-        <th class="pl-1">Nome</th>
+<table class="w-full bg-white shadow-lg border-solid border-b-2">
+    <thead class="h-10 bg-gray-700 text-white">
+        <th>Nome</th>
         <th>CPF</th>
         <th>Data de vínculo</th>
-        <th class="text-center">Perfil</th>
+        <th>Perfil</th>
     </thead>
 
     @foreach ($nutritionist_collection as $nutritionist)
@@ -19,8 +19,8 @@ $nutritionist_collection = App\Models\Nutritionist::where('user_id', Auth::user(
             @endphp
 
             @foreach ($user_collection as $user) 
-            <tr class="h-10 hover:bg-gray-100 border-solid border border-gray-200">
-                <td class="pl-1">
+            <tr class="border transition delay-150 hover:bg-gray-100 text-left">
+                <td class="pl-2">
                     {{ $user->name }}
                 </td>
                 <td class="text-left">
@@ -29,11 +29,8 @@ $nutritionist_collection = App\Models\Nutritionist::where('user_id', Auth::user(
                 <td class="text-left">
                     28/06/2021 (Em breve)
                 </td>
-                <td class="text-center">
-                    </button>
-                    <x-button>
-                        {{ __('Acessar perfil') }}
-                    </x-button>
+                <td class="text-center w-2/12">
+                    <x-button-visual href="#"/>
                 </td>
             </tr>
             @endforeach

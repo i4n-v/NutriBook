@@ -1,8 +1,7 @@
 <x-guest-layout>
     <div class="min-h-screen bg-white" x-data="{ food:true }">
-        <x-slot name="header">
-            <x-back-button/> 
-            <h2 class="font-semibold text-xl text-white leading-tight">
+        <x-slot name="header"> 
+            <h2 class="font-semibold text-2xl text-gray-900 leading-tight">
                 {{ __('Visualize, crie e reutilize os alimentos implementados por nutricionistas de todo o mundo!') }}
             </h2>
         </x-slot>

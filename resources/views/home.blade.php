@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="min-h-screen bg-white">
-        <x-slot name="header">
+        <x-slot name="header">  
             <x-search-bar>
                 @if(Auth::user()->isNutritionist())
                     <x-slot name="placeholder">{{ _('Pesquisar pacientes') }}</x-slot>
@@ -22,7 +22,7 @@
                             <x-ordering-eating-plans/>
                             @endif
                             
-                            <div class="col-span-2 ml-auto w-8/12">
+                            <div class="w-7/12 ml-auto mr-5">
                                 <div class="pb-2 font-bold">
                                 @if (Auth::user()->isNutritionist())
                                     Aqui estão todos os seus pacientes:

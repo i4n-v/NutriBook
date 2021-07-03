@@ -4,12 +4,12 @@ $patient_collection = App\Models\Patient::where('user_id', Auth::user()->id)->ge
 
 @endphp
 
-<table class="w-full bg-white shadow-md border-solid border-2 border-gray-200">
-        <thead class="h-10 bg-gray-200 text-left">
-            <th class="pl-1">Título</th>
+<table class="w-full bg-white shadow-lg border-solid border-b-2">
+        <thead class="h-10 bg-gray-700 text-white">
+            <th>Título</th>
             <th>Data de início</th>
             <th>Data de término</th>
-            <th class="text-center">Ações</th>
+            <th>Ações</th>
         </thead>
 
         @foreach ($patient_collection as $patient)
@@ -18,26 +18,20 @@ $patient_collection = App\Models\Patient::where('user_id', Auth::user()->id)->ge
             @endphp
 
             @foreach ($eating_plan_collection as $eating_plan)
-            <tr class="h-10 hover:bg-gray-100 border-solid border border-gray-200">
-                <td class="pl-1">
+            <tr class="border transition delay-150 hover:bg-gray-100 text-left">
+                <td class="pl-2">
                     {{ $eating_plan->title }}
                 </td>
-                <td class="text-left">
+                <td>
                     {{ $eating_plan->date_start }}
                 </td>
-                <td class="text-left">
+                <td>
                     {{ $eating_plan->date_finish }}
                 </td>
-                <td class="text-center">
-                    <x-button-delete>
-                        {{ ('Apagar') }}
-                    </x-button-delete>
-                    <x-button-edit>
-                        {{ ('Editar') }}
-                    </x-button-edit>
-                    <x-button>
-                        {{ __('Acessar') }}
-                    </x-button>
+                <td class="flex items-center justify-center gap-4">
+                    <x-button-visual/>
+                    <x-button-edit/>
+                    <x-button-delete/>
                 </td>
             </tr>
             @endforeach
