@@ -1,8 +1,8 @@
 <x-guest-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-white leading-tight">
+        <h2 class="font-semibold text-2xl text-gray-900 leading-tight">     
             {{ __('Olá, seja bem-vindo ao sistema de planos alimentares NutriBook!') }}
-        </h2>
+        <h2 class="font-semibold text-2xl text-gray-900 leading-tight">
     </x-slot>
     <x-login-register-layout>
         <div class="grid grid-cols-2 gap-8">

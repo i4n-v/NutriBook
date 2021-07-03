@@ -18,15 +18,13 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="relative">
-        <div class="bg-gray-100">
+        <div class="bg-white">
             @if (isset($header))
                 @include('layouts.navigation-home')
 
                 <!-- Page Heading -->
-                <header class="bg-gray-800 shadow-lg">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex gap-5">
+                <header class="w-full pl-16 mt-7 -mb-10">
                        {{ $header }}
-                    </div>
                 </header>
             @endif
 

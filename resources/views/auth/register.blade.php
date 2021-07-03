@@ -1,6 +1,6 @@
 <x-guest-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-white leading-tight">
+        <h2 class="font-semibold text-2xl text-gray-900 leading-tight">
             {{ __('Cadastre-se e utilize todos os recursos que o NutriBook oferece!') }}
         </h2>
     </x-slot>

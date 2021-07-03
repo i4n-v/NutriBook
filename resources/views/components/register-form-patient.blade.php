@@ -2,7 +2,7 @@
             @csrf
             <input type="hidden" name="type" value="patient">
 
-            <legend class="mb-4"><span class="text-white border-b-2 border-white cursor-pointer transition delay-150 hover:border-yellow-300">Cadastre-se como paciente</span></legend>
+            <legend class="mb-4"><span class="text-white border-b-2 border-white cursor-default transition delay-150 hover:border-yellow-300">Cadastre-se como paciente</span></legend>
 
             <!-- Name -->
             <div>

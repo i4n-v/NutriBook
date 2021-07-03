@@ -1,5 +1,5 @@
 <footer>
-    <div class="grid grid-rows-3 bg-gray-800 justify-items-center text-white">
+    <div class="grid grid-rows-3 bg-gray-900 justify-items-center text-white">
         <div class="flex flex-wrap gap-8 pt-8">
             <a href="#"><span>Ajuda</span></a>
             <a href="#"><span>Sócios</span></a>
