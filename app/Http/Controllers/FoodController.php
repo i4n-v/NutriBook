@@ -41,7 +41,7 @@ class FoodController extends Controller
         $uniqueFood = Food::where('food', $request->food)->get();
 
         if (sizeof($uniqueFood)>0) {
-            return redirect('foods?error=O Alimento já foi criado!');
+            return redirect('foods?error=O Alimento já existe no sistema!');
         }else{
             $food = Food::create([
                 'weight'=> $request->weight,
@@ -57,7 +57,7 @@ class FoodController extends Controller
                 // 'nutritionist_id' => Auth::user()->id
             ]);
 
-            return redirect('foods?sucess=O alimento foi criado com sucesso!');
+            return redirect('foods?success=O alimento foi criado com sucesso!');
         }
     }
 
@@ -78,9 +78,9 @@ class FoodController extends Controller
      * @param  \App\Models\Food  $food
      * @return \Illuminate\Http\Response
      */
-    public function edit(Food $food)
+    public function edit(Request $request)
     {
-        //
+        return redirect("/foods?edit=$request->id");
     }
 
     /**
@@ -104,6 +104,6 @@ class FoodController extends Controller
     public function destroy(Food $food)
     {
         $food->delete();
-        return redirect('foods?sucess=Alimento deletado com sucesso!');
+        return redirect('foods?success=Alimento deletado com sucesso!');
     }
 }

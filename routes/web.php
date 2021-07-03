@@ -33,8 +33,10 @@ Route::get('/foods', function () {
 
 })->middleware(['auth'])->name('foods');
 
-Route::post('/food/create', [FoodController::Class, 'store'])->middleware(['auth'])->name('create_food');
+Route::post('/foods/create', [FoodController::Class, 'store'])->middleware(['auth'])->name('create_food');
 
-Route::get('/food/remove/{food}', [FoodController::Class, 'destroy'])->middleware(['auth'])->name('food_delete');
+Route::get('/foods/remove/{food}', [FoodController::Class, 'destroy'])->middleware(['auth'])->name('food_delete');
+
+Route::get('/foods/edit/{food}', [FoodController::Class, 'edit'])->middleware(['auth'])->name('food_form_edit');
 
 require __DIR__.'/auth.php';
