@@ -92,7 +92,8 @@ class FoodController extends Controller
      */
     public function update(Request $request, Food $food)
     {
-        //
+        Food::findOrFail($request->id)->update($request->all());
+        return redirect('foods?success=Alimento atualizado com sucesso!');
     }
 
     /**
