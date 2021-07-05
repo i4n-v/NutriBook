@@ -18,7 +18,7 @@ $foods = App\Models\Food::all();
                     <td class="pl-32">{{ $food->weight }}g</td>
                     <td class="flex items-center justify-center gap-4">
                         <x-button-visual @click="modal=true"/>
-                        <x-button-edit href="{{ route('food_form_edit', $food) }}"/>
+                        <x-button-edit href="{{ route('food_redirect_edit', $food) }}"/>
                         <x-button-delete href="{{ route('food_delete', $food) }}"/>
                     </td>
                 </tr>

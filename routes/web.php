@@ -37,6 +37,8 @@ Route::post('/foods/create', [FoodController::Class, 'store'])->middleware(['aut
 
 Route::get('/foods/remove/{food}', [FoodController::Class, 'destroy'])->middleware(['auth'])->name('food_delete');
 
-Route::get('/foods/edit/{food}', [FoodController::Class, 'edit'])->middleware(['auth'])->name('food_form_edit');
+Route::get('/foods/edit/redirect/{food}', [FoodController::Class, 'edit'])->middleware(['auth'])->name('food_redirect_edit');
+
+Route::post('/foods/edit', [FoodController::Class, 'update'])->middleware(['auth'])->name('food_edit');
 
 require __DIR__.'/auth.php';

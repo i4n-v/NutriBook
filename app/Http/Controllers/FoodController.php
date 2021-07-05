@@ -75,12 +75,12 @@ class FoodController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Food  $food
+     * @param  \App\Models\Request  $food
      * @return \Illuminate\Http\Response
      */
     public function edit(Request $request)
     {
-        return redirect("/foods?edit=$request->id");
+        return redirect("/foods?edit=$request->food");
     }
 
     /**
