@@ -6,9 +6,21 @@ $patient_collection = App\Models\Patient::where('user_id', Auth::user()->id)->ge
 
 <table class="w-full bg-white shadow-lg border-solid border-b-2 rounded-sm">
         <thead class="h-10 bg-gray-700 text-white rounded-sm">
-            <th class="rounded-tl-sm">Título</th>
-            <th>Data de início</th>
-            <th>Data de término</th>
+            <th class="rounded-tl-sm">
+                <x-ordering-selector>
+                    {{ __('Título') }}
+                </x-ordering-selector>
+            </th>
+            <th>
+                <x-ordering-selector>
+                    {{ __('Data de início') }}
+                </x-ordering-selector> 
+            </th>
+            <th>
+                <x-ordering-selector>
+                    {{ __('Data de término') }}
+                </x-ordering-selector> 
+            </th>
             <th class="rounded-tr-sm">Ações</th>
         </thead>
 
