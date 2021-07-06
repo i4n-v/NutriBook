@@ -2,7 +2,7 @@
     $food = App\Models\Food::find($_GET['edit']);
 @endphp
 
-<form method="POST" action="{{ route('food_edit',$food->id) }}" class="m-auto">
+<form method="POST" action="{{ route('food_edit',$food->id) }}">
     @csrf
 
     <fieldset>
