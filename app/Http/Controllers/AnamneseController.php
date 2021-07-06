@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Anamnese;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 class AnamneseController extends Controller
 {
@@ -35,7 +37,16 @@ class AnamneseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $anamnese = Anamnese::create([
+        //     'objective' =>$request->objective,
+        //     'pathological_history' =>$request->pathological_history,
+        //     'family_history' =>$request->family_history,
+        //     'used_drugs' =>$request->used_drugs,
+        //     'life_style' =>$request->life_style,
+        //     'allergies' =>$request->allergies,
+        //     'evaluation_id' =>$request->evaluation_id
+        // ]);
+        // return redirect('evaluation?sucess=Anamnese foi criada com sucesso!');
     }
 
     /**
@@ -57,7 +68,7 @@ class AnamneseController extends Controller
      */
     public function edit(Anamnese $anamnese)
     {
-        //
+        //return redirect("/evaluation?edit=$anamnese->id")
     }
 
     /**
@@ -69,7 +80,8 @@ class AnamneseController extends Controller
      */
     public function update(Request $request, Anamnese $anamnese)
     {
-        //
+        //Anamnese::findOrFail($request->id)->update($request->all());
+        //return redirect('evaluation?success=anamnese atualizado com sucesso!');
     }
 
     /**
