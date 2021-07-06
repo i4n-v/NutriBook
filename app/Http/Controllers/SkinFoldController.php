@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\SkinFold;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 class SkinFoldController extends Controller
 {
@@ -35,7 +37,22 @@ class SkinFoldController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $skinfold = SkinFold::create([
+            // 'breastplate' => $request->'breastplate',
+            // 'biceps' => $request->'biceps',
+            // 'triceps' => $request->'triceps',
+            // 'abdominal' => $request->'abdominal',
+            // 'subscapular' => $request->'subscapular',
+            // 'suprailiaco' => $request->'suprailiaco',
+            // 'middle_axillary' => $request->'middle_axillary',
+            // 'thigh' => $request->'thigh',
+            // 'calf' => $request->'calf',
+            // 'Lumbar' => $request->'Lumbar',
+            // 'evaluation_id' => $request->'evaluation_id'
+
+        // ]);
+            // return redirect('evaluation?sucess=Dobras cutâneas criadas com sucesso')
+
     }
 
     /**
@@ -57,7 +74,7 @@ class SkinFoldController extends Controller
      */
     public function edit(SkinFold $SkinFold)
     {
-        //
+        // return redirect("/evaluation?edit=$skinfold->id");
     }
 
     /**
@@ -69,7 +86,8 @@ class SkinFoldController extends Controller
      */
     public function update(Request $request, SkinFold $SkinFold)
     {
-        //
+        // SkinFold::findOrFail($request->id)->update($request->all());
+        // return redirect('evaluetion?success=Dobras cutâneas atualizado com sucesso!');
     }
 
     /**
