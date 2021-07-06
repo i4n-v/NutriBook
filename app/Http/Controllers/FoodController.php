@@ -105,6 +105,6 @@ class FoodController extends Controller
     public function destroy(Food $food)
     {
         $food->delete();
-        return redirect('foods?success=Alimento deletado com sucesso!');
+        return redirect('foods?success=Alimento excluido com sucesso!');
     }
 }
