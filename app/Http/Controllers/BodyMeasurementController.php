@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\BodyMeasurement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 class BodyMeasurementController extends Controller
 {
@@ -35,7 +37,16 @@ class BodyMeasurementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $bodyMeasurement = BodyMeasurement::create([
+        // 'bust' =>$request->bust,
+        // 'thorax' =>$request->thorax,
+        // 'waist' =>$request->waist,
+        // 'hip' =>$request->hip,
+        // 'thigh' =>$request->thigh,
+        // 'calf' =>$request->calf,
+        // 'evaluation_id' =>$request->evaluation_id
+        // ]);
+        // return redirect('evaluation?success=Medidas corporais foram criadas com sucesso!');
     }
 
     /**
@@ -57,7 +68,7 @@ class BodyMeasurementController extends Controller
      */
     public function edit(BodyMeasurement $bodyMeasurement)
     {
-        //
+        //return redirect("/evaluation?edit=$bodyMeasurement->id")
     }
 
     /**
@@ -69,7 +80,8 @@ class BodyMeasurementController extends Controller
      */
     public function update(Request $request, BodyMeasurement $bodyMeasurement)
     {
-        //
+        //BodyMeasurement::findOrFail($request->id)->update($request->all());
+        //return redirect('evaluation?success=Medidas corporais foram atualizadas com sucesso!');
     }
 
     /**
