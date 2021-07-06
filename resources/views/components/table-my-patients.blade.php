@@ -6,9 +6,21 @@ $nutritionist_collection = App\Models\Nutritionist::where('user_id', Auth::user(
 
 <table class="w-full bg-white shadow-lg border-solid border-b-2 rounded-sm">
     <thead class="h-10 bg-gray-700 text-white rounded-sm">
-        <th class="rounded-tl-sm">Nome</th>
-        <th>CPF</th>
-        <th>Data de vínculo</th>
+        <th class="rounded-tl-sm">
+            <x-ordering-selector>
+                {{ __('Nome') }}
+            </x-ordering-selector>
+        </th>
+        <th>
+            <x-ordering-selector>
+                {{ __('CPF') }}
+            </x-ordering-selector>
+        </th>
+        <th>
+            <x-ordering-selector>
+                {{ __('Data de vínculo') }}
+            </x-ordering-selector>
+        </th>
         <th class="rounded-tr-sm">Perfil</th>
     </thead>
 
