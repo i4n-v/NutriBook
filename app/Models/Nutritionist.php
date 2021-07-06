@@ -13,7 +13,7 @@ class Nutritionist extends Model
         'user_id',
     ];
     public function patients() {
-        return $this->belongsToMany(Patient::class, 'evaluations', 'nutritionist_id', 'patient_id')->using(Evaluation::class)->as('evaluation')->withPivot('id', 'weight', 'height', 'lean_mass', 'body_fat'); 
+        return $this->belongsToMany(Patient::class, 'evaluations', 'nutritionist_id', 'patient_id')->using(Evaluation::class)->as('evaluation')->withPivot('id', 'weight', 'height'); 
     }
     public function meals(){
         return $this->hasMany(Meal::class,'nutritionist_id');

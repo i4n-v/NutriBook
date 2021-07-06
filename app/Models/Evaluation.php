@@ -15,8 +15,6 @@ class Evaluation extends Pivot
     protected $fillable = [
         'weight',
         'height',
-        'lean_mass',
-        'body_fat',
         'nutritionist_id',
         'patient_id',
     ];

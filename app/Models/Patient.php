@@ -17,7 +17,7 @@ class Patient extends Model
     ];
 
     public function nutritionists() {
-        return $this->belongsToMany(Nutritionist::class, 'evaluations', 'patient_id', 'nutritionist_id')->using(Evaluation::class)->as('evaluation')->withPivot('id', 'weight', 'height', 'lean_mass', 'body_fat');
+        return $this->belongsToMany(Nutritionist::class, 'evaluations', 'patient_id', 'nutritionist_id')->using(Evaluation::class)->as('evaluation')->withPivot('id', 'weight', 'height');
     }
     public function nutritionist() {
         return $this->belongsToMany(Nutritionist::class, 'eating_plans', 'patient_id', 'nutritionist_id')->using(EatingPlan::class)->as('eatingplans')->withPivot('id', 'date_start','date_finish','title'); 

@@ -35,7 +35,12 @@ class EvaluationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $evaluation = Evaluation::create([
+            'weight' => $request->weight,
+            'height' => $request->height,
+            'nutritionist_id' => Auth::user()->id,
+            'patient_id' => $request->patient_id
+        ]);
     }
 
     /**
@@ -57,7 +62,7 @@ class EvaluationController extends Controller
      */
     public function edit(Evaluation $evaluation)
     {
-        //
+        //return redirect("/evaluetion?edit=$evaluation->id");
     }
 
     /**
@@ -69,7 +74,8 @@ class EvaluationController extends Controller
      */
     public function update(Request $request, Evaluation $evaluation)
     {
-        //
+        // Evaluation::findOrFail($request->id)->update($request->all());
+        // return redirect('evaluation?success=Avaliação atualizada com sucesso!');
     }
 
     /**
