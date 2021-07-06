@@ -3804,9 +3804,12 @@ __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 
 (function () {
   var message = document.getElementById('message');
-  setTimeout(function () {
-    return message.remove();
-  }, 5000);
+
+  if (!!message) {
+    setTimeout(function () {
+      return message.remove();
+    }, 5000);
+  }
 })();
 
 /***/ }),
