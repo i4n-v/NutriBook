@@ -22,6 +22,7 @@ class MealFactory extends Factory
     public function definition()
     {
         return [
+            'name' => $this->faker->word(),
             'day'=> $this->faker->dayOfWeek(),
             'day_period'=> $this->faker->word(),
         ];

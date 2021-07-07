@@ -11,6 +11,7 @@ class Meal extends Model
     use HasFactory;
     
     protected $fillable = [
+        'name',
         'day',
         'day_period',
         'nutritionist_id',
