@@ -34,15 +34,17 @@ Route::get('/foods', function () {
     }else{
         return redirect('/login');
     }
-    Route::get('/evaluation', function () {
-
-        if(Auth::user()->isNutritionist()){
-            return view('evaluation');
-        }else{
-            return redirect('/login');
-        }
-
+    
 })->middleware(['auth'])->name('foods');
+
+Route::get('/evaluation', function () {
+
+    if(Auth::user()->isNutritionist()){
+        return view('evaluation');
+    }else{
+        return redirect('/login');
+    }
+})->middleware(['auth'])->name('evaluation');
 
 Route::post('/foods/create', [FoodController::Class, 'store'])->middleware(['auth'])->name('create_food');
 
@@ -75,6 +77,5 @@ Route::post('/evaluation/create/evaluation', [EvaluationController::Class, 'stor
 Route::get('/evaluation/edit/evaluation/{id}', [EvaluationController::Class, 'edit'])->middleware(['auth'])->name('edit_evaluation');
 
 Route::post('/evaluation/update/evaluation/{id}', [EvaluationController::Class, 'update'])->middleware(['auth'])->name('update_evaluation');
-
 
 require __DIR__.'/auth.php';
