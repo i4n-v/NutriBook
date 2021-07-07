@@ -41,7 +41,7 @@ $patient_collection = App\Models\Patient::where('user_id', Auth::user()->id)->ge
                     {{ $eating_plan->date_finish }}
                 </td>
                 <td class="flex items-center justify-center gap-4 rounded-tr-sm">
-                    <x-button-visual/>
+                    <x-button-visual href="{{ route('view_eating_plan', $eating_plan) }}"/>
                     <x-button-edit/>
                     <x-button-delete/>
                 </td>
