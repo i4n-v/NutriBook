@@ -18,7 +18,7 @@ $foods = App\Models\Food::all();
                     <td class="flex items-center justify-center gap-4 rounded-br-sm">
                         <x-button-visual @click="modal=true"/>
                         <x-button-edit href="{{ route('food_redirect_edit', $food) }}"/>
-                        <x-button-delete href="{{ route('food_delete', $food) }}"/>
+                        <x-button-delete onclick="confirmDelete('/foods/remove/{{$food->id}}');"/>
                         <x-modal>
                             <x-nutritional-table :food="$food"/>
                         </x-modal>
