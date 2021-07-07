@@ -6,6 +6,7 @@ use App\Http\Controllers\AnamneseController;
 use App\Http\Controllers\BodyMeasurementController;
 use App\Http\Controllers\SkinFoldController;
 use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\EatingPlanController;
 
 
 /*
@@ -27,6 +28,7 @@ Route::get('/home', function () {
     return view('home');
 })->middleware(['auth'])->name('home');
 
+// food routes
 Route::get('/foods', function () {
 
     if(Auth::user()->isNutritionist()){
@@ -37,6 +39,15 @@ Route::get('/foods', function () {
     
 })->middleware(['auth'])->name('foods');
 
+Route::post('/foods/create', [FoodController::Class, 'store'])->middleware(['auth'])->name('create_food');
+
+Route::get('/foods/remove/{food}', [FoodController::Class, 'destroy'])->middleware(['auth'])->name('food_delete');
+
+Route::get('/foods/edit/redirect/{food}', [FoodController::Class, 'edit'])->middleware(['auth'])->name('food_redirect_edit');
+
+Route::post('/foods/edit/{id}', [FoodController::Class, 'update'])->middleware(['auth'])->name('food_edit');
+
+// evaluation routes
 Route::get('/evaluation', function () {
 
     if(Auth::user()->isNutritionist()){
@@ -45,14 +56,6 @@ Route::get('/evaluation', function () {
         return redirect('/login');
     }
 })->middleware(['auth'])->name('evaluation');
-
-Route::post('/foods/create', [FoodController::Class, 'store'])->middleware(['auth'])->name('create_food');
-
-Route::get('/foods/remove/{food}', [FoodController::Class, 'destroy'])->middleware(['auth'])->name('food_delete');
-
-Route::get('/foods/edit/redirect/{food}', [FoodController::Class, 'edit'])->middleware(['auth'])->name('food_redirect_edit');
-
-Route::post('/foods/edit/{id}', [FoodController::Class, 'update'])->middleware(['auth'])->name('food_edit');
 
 Route::post('/evaluation/create/anamnese', [AnamneseController::Class, 'store'])->middleware(['auth'])->name('create_anamnese');
 
@@ -77,5 +80,8 @@ Route::post('/evaluation/create/evaluation', [EvaluationController::Class, 'stor
 Route::get('/evaluation/edit/evaluation/{id}', [EvaluationController::Class, 'edit'])->middleware(['auth'])->name('edit_evaluation');
 
 Route::post('/evaluation/update/evaluation/{id}', [EvaluationController::Class, 'update'])->middleware(['auth'])->name('update_evaluation');
+
+// eating plan routes
+Route::get('/eatingPlan/{id}', [EatingPlanController::Class, 'show'])->middleware(['auth'])->name('view_eating_plan');
 
 require __DIR__.'/auth.php';

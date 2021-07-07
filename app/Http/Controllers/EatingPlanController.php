@@ -44,9 +44,9 @@ class EatingPlanController extends Controller
      * @param  \App\Models\EatingPlan  $eatingPlan
      * @return \Illuminate\Http\Response
      */
-    public function show(EatingPlan $eatingPlan)
+    public function show(Request $request)
     {
-        //
+        return redirect("/home?eating_plan=$request->id");
     }
 
     /**
