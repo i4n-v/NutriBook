@@ -28,6 +28,10 @@ Route::get('/home', function () {
     return view('home');
 })->middleware(['auth'])->name('home');
 
+Route::get('/evaluation', function () {
+    return view('evaluation');
+})->middleware(['auth'])->name('evaluation');
+
 // food routes
 Route::get('/foods', function () {
 
@@ -84,4 +88,5 @@ Route::post('/evaluation/update/evaluation/{id}', [EvaluationController::Class, 
 // eating plan routes
 Route::get('/eatingPlan/{id}', [EatingPlanController::Class, 'show'])->middleware(['auth'])->name('view_eating_plan');
 
+Route::get('/home/eatingplan/remove/{eatingplan}', [EatingPlanController::Class, 'destroy'])->middleware(['auth'])->name('eatingplan_delete');
 require __DIR__.'/auth.php';

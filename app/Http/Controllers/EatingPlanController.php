@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\EatingPlan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 class EatingPlanController extends Controller
 {
@@ -78,8 +80,10 @@ class EatingPlanController extends Controller
      * @param  \App\Models\EatingPlan  $eatingPlan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EatingPlan $eatingPlan)
+    public function destroy(EatingPlan $eatingplan)
     {
-        //
+       
+         $eatingplan->delete();
+         return redirect('/home?success=Plano alimentar excluido com sucesso!');
     }
 }

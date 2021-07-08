@@ -27,10 +27,12 @@ $patient_collection = App\Models\Patient::where('user_id', Auth::user()->id)->ge
         @foreach ($patient_collection as $patient)
             @php
             $eating_plan_collection = App\Models\EatingPlan::where('patient_id', $patient->id)->get();
+            
             @endphp
 
             @foreach ($eating_plan_collection as $eating_plan)
             <tr class="border transition delay-150 hover:bg-gray-100 text-left">
+           
                 <td class="pl-2 rounded-tl-sm">
                     {{ $eating_plan->title }}
                 </td>
@@ -43,11 +45,11 @@ $patient_collection = App\Models\Patient::where('user_id', Auth::user()->id)->ge
                 <td class="flex items-center justify-center gap-4 rounded-tr-sm">
                     <x-button-visual href="{{ route('view_eating_plan', $eating_plan) }}"/>
                     <x-button-edit/>
-                    <x-button-delete/>
+                    <x-button-delete href="{{ route('eatingplan_delete', $eating_plan->id) }}"/>
                 </td>
             </tr>
             @endforeach
 
         @endforeach
-
+        
  </table>
