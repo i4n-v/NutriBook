@@ -16,6 +16,9 @@ class Patient extends Model
         'user_id',
     ];
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
     public function nutritionists() {
         return $this->belongsToMany(Nutritionist::class, 'evaluations', 'patient_id', 'nutritionist_id')->using(Evaluation::class)->as('evaluation')->withPivot('id', 'weight', 'height');
     }

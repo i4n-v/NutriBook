@@ -12,6 +12,10 @@ class Nutritionist extends Model
         'CRN',  
         'user_id',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
     public function patients() {
         return $this->belongsToMany(Patient::class, 'evaluations', 'nutritionist_id', 'patient_id')->using(Evaluation::class)->as('evaluation')->withPivot('id', 'weight', 'height'); 
     }
