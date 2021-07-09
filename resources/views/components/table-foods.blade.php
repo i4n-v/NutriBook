@@ -10,20 +10,29 @@ $foods = App\Models\Food::all();
         <th>Peso</th>
         <th class="rounded-tr-sm">Ações</th>
     </thead>
-    <thead>
-        @foreach ($foods as $food)         
-                <tr class="border transition delay-150 hover:bg-gray-100 text-left rounded-sm" x-data="{ modal:false }">
-                    <td class="pl-2 rounded-bl-sm">{{ $food->food }}</td>
-                    <td class="pl-32">{{ $food->weight }}g</td>
-                    <td class="flex items-center justify-center gap-4 rounded-br-sm">
-                        <x-button-visual @click="modal=true"/>
-                        <x-button-edit href="{{ route('food_redirect_edit', $food) }}"/>
-                        <x-button-delete onclick="confirmDelete('/foods/remove/{{$food->id}}');"/>
-                        <x-modal>
-                            <x-nutritional-table :food="$food"/>
-                        </x-modal>
-                    </td>
-                </tr>
+    <tbody>
+        @foreach ($foods as $food)
+        <tr class="border transition delay-150 hover:bg-gray-100 text-left rounded-sm" x-data="{ modal:false, confirm:false }">
+            <td class="pl-2 rounded-bl-sm">{{ $food->food }}</td>
+            <td class="pl-32">{{ $food->weight }}g</td>
+            <td class="flex items-center justify-center gap-4 rounded-br-sm">
+                <x-button-visual @click="modal=true" />
+                <x-button-edit href="{{ route('food_redirect_edit', $food) }}" />
+                <x-button-delete @click="confirm=true" />
+                <template x-if="confirm">
+                    <x-modal>
+                        <x-confirm-template>
+                            <x-confirm-button class="px-5" href="{{ route('food_delete', $food) }}">Sim</x-confirm-button>
+                        </x-confirm-template>
+                    </x-modal>
+                </template>
+                <template x-if="modal">
+                    <x-modal>
+                        <x-nutritional-table :food="$food" />
+                    </x-modal>
+                </template>
+            </td>
+        </tr>
         @endforeach
-    </thead>
+    </tbody>
 </table>
