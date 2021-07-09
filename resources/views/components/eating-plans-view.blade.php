@@ -14,37 +14,182 @@
         <div>Domingo</div>
     </div>
     <div class="w-10/12 grid grid-cols-3 grid-rows-8 gap-x-2 gap-y-5 text-white mb-0">
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">
-            @foreach($meals->where('day', 'Monday')->get() as $meal)
-                <li class="list-decimal">{{ $meal->name }}</li>
-            @endforeach
+
+        <!-- Segunda -->
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+           <ul>
+                <li>Torrada integral</li>
+                <li>Frutas cortadas</li>
+                <li>Suco frutas</li>
+           </ul>
         </div>
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+            <ul>
+                <li>Feijão com arroz</li>
+                <li>Frango</li>
+                <li>Salada</li>
+                <li>Suco de frutas</li>
+           </ul>
+        </div>
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+             <ul>
+                <li>Creme de cenoura</li>
+                <li>Pescada no forno</li>
+                <li>Batata cozida</li>
+                <li>suco de frutas</li>
+           </ul>
+        </div>
 
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
+        <!-- Terça -->
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+            <ul>
+                <li>Torrada integral</li>
+                <li>Frutas cortadas</li>
+                <li>Suco frutas</li>
+           </ul>
+        </div>
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+             <ul>
+                <li>Feijão com arroz</li>
+                <li>Frango</li>
+                <li>Salada</li>
+                <li>Suco de frutas</li>
+           </ul>
+        </div>
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+            <ul>
+                <li>Creme de cenoura</li>
+                <li>Pescada no forno</li>
+                <li>Batata cozida</li>
+                <li>suco de frutas</li>
+           </ul>
+        </div>
 
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
+        <!-- Quarta -->
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+            <ul>
+                <li>Torrada integral</li>
+                <li>Frutas cortadas</li>
+                <li>Suco frutas</li>
+           </ul>
+        </div>
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+             <ul>
+                <li>Feijão com arroz</li>
+                <li>Frango</li>
+                <li>Salada</li>
+                <li>Suco de frutas</li>
+           </ul>
+        </div>
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+            <ul>
+                <li>Creme de cenoura</li>
+                <li>Pescada no forno</li>
+                <li>Batata cozida</li>
+                <li>suco de frutas</li>
+           </ul>
+        </div>
 
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
+        <!-- Quinta -->
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+            <ul>
+                <li>Torrada integral</li>
+                <li>Frutas cortadas</li>
+                <li>Suco frutas</li>
+           </ul>
+        </div>
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+             <ul>
+                <li>Feijão com arroz</li>
+                <li>Frango</li>
+                <li>Salada</li>
+                <li>Suco de frutas</li>
+           </ul>
+        </div>
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+            <ul>
+                <li>Creme de cenoura</li>
+                <li>Pescada no forno</li>
+                <li>Batata cozida</li>
+                <li>suco de frutas</li>
+           </ul>
+        </div>
 
 
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
+        <!-- Sexta -->
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+            <ul>
+                <li>Torrada integral</li>
+                <li>Frutas cortadas</li>
+                <li>Suco frutas</li>
+           </ul>
+        </div>
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+             <ul>
+                <li>Feijão com arroz</li>
+                <li>Frango</li>
+                <li>Salada</li>
+                <li>Suco de frutas</li>
+           </ul>
+        </div>
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+            <ul>
+                <li>Creme de cenoura</li>
+                <li>Pescada no forno</li>
+                <li>Batata cozida</li>
+                <li>suco de frutas</li>
+           </ul>
+        </div>
 
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
+        <!-- Sábado -->
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+            <ul>
+                <li>Torrada integral</li>
+                <li>Frutas cortadas</li>
+                <li>Suco frutas</li>
+           </ul>
+        </div>
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+             <ul>
+                <li>Feijão com arroz</li>
+                <li>Frango</li>
+                <li>Salada</li>
+                <li>Suco de frutas</li>
+           </ul>
+        </div>
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+            <ul>
+                <li>Creme de cenoura</li>
+                <li>Pescada no forno</li>
+                <li>Batata cozida</li>
+                <li>suco de frutas</li>
+           </ul>
+        </div>
 
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
-        <div class="bg-gray-900 shadow-md rounded-md pl-1">kkk</div>
+        <!-- Domingo -->
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+            <ul>
+                <li>Torrada integral</li>
+                <li>Frutas cortadas</li>
+                <li>Suco frutas</li>
+           </ul>
+        </div>
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+             <ul>
+                <li>Feijão com arroz</li>
+                <li>Frango</li>
+                <li>Salada</li>
+                <li>Suco de frutas</li>
+           </ul>
+        </div>
+        <div class="bg-gray-900 shadow-md rounded-md p-2">
+            <ul>
+                <li>Creme de cenoura</li>
+                <li>Pescada no forno</li>
+                <li>Batata cozida</li>
+                <li>suco de frutas</li>
+           </ul>
+        </div>
+
     </div>
 </div>
