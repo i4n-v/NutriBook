@@ -1,63 +1,49 @@
-<form method="POST" action="{{ route('create_bodymeasurement')}}">
-	@csrf
-	<fieldset>
-		<legend class="text-white text-2xl border-b-2 mb-5">Medidas Corporais</legend>
-	
-            
-          <!--  bust -->
+<form method="POST" action="{{ route('create_bodymeasurement')}}" x-show="med">
+    @csrf
+    <fieldset>
+        <legend class="text-white text-2xl border-b-2 mb-5">Medidas Corporais</legend>
 
-             <div>
-            <x-label for="bust" :value="__('Busto')"/>
-            <x-input id="bust" class="block mt-1 w-full" type="text" name="bust" required autofocus placeholder="Digite o tamanho de Busto do paciente"/>
-           </div>
+        <!--  bust -->
 
-     <!-- thorax -->
-    
-             <div>
-            <x-label for="thorax" :value="__('Tórax')"/>
-            <x-input id="thorax" class="block mt-1 w-full" type="text" name="thorax" required autofocus placeholder="Digite o tamanho de Tórax do paciente"/>
-           </div>
+        <div>
+            <x-label for="bust" :value="__('Busto')" />
+            <x-input id="bust" class="block mt-1 w-full" type="number" name="bust" required autofocus placeholder="Medida do Busto" />
+        </div>
 
+        <!-- thorax -->
 
-        
-      <!-- waist -->
+        <div>
+            <x-label for="thorax" :value="__('Tórax')" />
+            <x-input id="thorax" class="block mt-1 w-full" type="number" name="thorax" required autofocus placeholder=" Medida do Tórax " />
+        </div>
 
-             <div>
-            <x-label for="waist" :value="__('Cintura')"/>
-            <x-input id="waist" class="block mt-1 w-full" type="text" name="waist" required autofocus placeholder="Digite o tamanho de Cintura do paciente"/>
-           </div>
+        <!-- waist -->
 
+        <div>
+            <x-label for="waist" :value="__('Cintura')" />
+            <x-input id="waist" class="block mt-1 w-full" type="number" name="waist" required autofocus placeholder="Medida da Cintura" />
+        </div>
 
+        <!-- thigh -->
 
-      <!-- thigh -->
+        <div>
+            <x-label for="thigh" :value="__('Coxa')" />
+            <x-input id="thigh" class="block mt-1 w-full" type="number" name="thigh" required autofocus placeholder="Medida da Coxa" />
+        </div>
 
-             <div>
-            <x-label for="thigh" :value="__('Coxa')"/>
-            <x-input id="thigh" class="block mt-1 w-full" type="text" name="thigh" required autofocus placeholder="Digite o tamanho de Coxa do paciente"/>
-           </div>
+        <!-- calf -->
 
+        <div>
+            <x-label for="calf" :value="__('Panturrilha')" />
+            <x-input id="calf" class="block mt-1 w-full" type="number" name="calf" required autofocus placeholder="Medida da panturrilha" />
+        </div>
 
+    </fieldset>
 
-      <!-- calf -->
+    <div class="flex items-center justify-end mt-4">
+        <x-button class="ml-4">
+            {{ __('Salvar') }}
+        </x-button>
+    </div>
 
-             <div>
-            <x-label for="calf" :value="__('Panturrilha')"/>
-            <x-input id="calf" class="block mt-1 w-full" type="text" name="calf" required autofocus placeholder="Digite o tamanho da Panturrilha do paciente"/>
-           </div>
-
-
-
-          <div class="flex items-center justify-end mt-4">
-                <x-cancel-button>
-                    Cancelar
-                </x-cancel-button>
-
-                <x-button class="ml-4">
-                    {{ __('Criar') }}
-                </x-button>
-
-             </div>
-
-
-	</fieldset>
 </form>
