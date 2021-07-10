@@ -38,7 +38,7 @@ Route::get('/foods', function () {
     if(Auth::user()->isNutritionist()){
         return view('foods');
     }else{
-        return redirect('/login');
+        return redirect()->route('login');
     }
     
 })->middleware(['auth'])->name('foods');
@@ -52,14 +52,23 @@ Route::get('/foods/edit/redirect/{food}', [FoodController::Class, 'edit'])->midd
 Route::post('/foods/edit/{id}', [FoodController::Class, 'update'])->middleware(['auth'])->name('food_edit');
 
 // evaluation routes
-Route::get('/evaluation', function () {
+Route::get('/evaluation', function () {  
+    return view('evaluation');
+})->middleware(['auth'])->name('evaluation');
 
-    if(Auth::user()->isNutritionist()){
-        return view('evaluation');
+Route::get('/evaluation/form', function () {
+    $id = App\Models\Evaluation::find($_GET['evaluation'])->nutritionist->user->id;
+    if(Auth::user()->id == $id){
+        return view('components/create-evaluation');
     }else{
-        return redirect('/login');
+        return redirect()->route('login');
     }
 })->middleware(['auth'])->name('evaluation');
+
+
+Route::get('/evaluation/edit/{evaluation}', [EvaluationController::Class, 'edit'])->middleware(['auth'])->name('edit_evaluation');
+
+Route::post('/evaluation/update/evaluation/{id}', [EvaluationController::Class, 'update'])->middleware(['auth'])->name('update_evaluation');
 
 Route::post('/evaluation/create/anamnese', [AnamneseController::Class, 'store'])->middleware(['auth'])->name('create_anamnese');
 
@@ -75,15 +84,12 @@ Route::post('/evaluation/update/skinfold/{id}', [SkinFoldController::Class, 'upd
 
 Route::post('/evaluation/create/bodymeasurement', [BodyMeasurementController::Class, 'store'])->middleware(['auth'])->name('create_bodymeasurement');
 
+
 Route::get('/evaluation/edit/bodymeasurement/{id}', [BodyMeasurementController::Class, 'edit'])->middleware(['auth'])->name('edit_bodymeasurement');
 
 Route::post('/evaluation/update/bodymeasurement/{id}', [BodyMeasurementController::Class, 'update'])->middleware(['auth'])->name('update_bodymeasurement');
 
 Route::post('/evaluation/create/evaluation', [EvaluationController::Class, 'store'])->middleware(['auth'])->name('create_evaluation');
-
-Route::get('/evaluation/edit/evaluation/{id}', [EvaluationController::Class, 'edit'])->middleware(['auth'])->name('edit_evaluation');
-
-Route::post('/evaluation/update/evaluation/{id}', [EvaluationController::Class, 'update'])->middleware(['auth'])->name('update_evaluation');
 
 // eating plan routes
 Route::get('/eatingPlan/{id}', [EatingPlanController::Class, 'show'])->middleware(['auth'])->name('view_eating_plan');

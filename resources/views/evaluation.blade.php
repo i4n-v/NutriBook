@@ -1,28 +1,38 @@
+@php
+    if(Auth::user()->isPatient()){
+        $name = explode(' ', Auth::user()->name)[0];
+    }else{
+        $name = explode(' ', App\Models\User::find($_GET['patient'])->name)[0];
+    }
+@endphp
 <x-guest-layout>
     <div class="min-h-screen bg-white">
         <x-slot name="header">
             <h2 class="font-semibold text-2xl text-gray-900 leading-tight">
-                <span class="ml-2 text-gray-600 font-bold text-sm">Home > Perfil do paciente > Avaliações</span>
+                Avaliações
             </h2>
+            <div class="ml-2 text-gray-600 font-bold text-sm mt-2">
+                <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Home</a> > 
+                <a href="#" class="transition delay-150 hover:text-gray-900">{{ $name }}</a> 
+            </div>
         </x-slot>
-        @if(!isset($_GET['evaluation']))
+        @if(!isset($_GET['evaluation']) && Auth::user()->isNutritionist())
         <div class="float-right mt-5 mr-5" @click="evaluation = false" x-show="evaluation">
-            <x-confirm-button href="{{ route('create_evaluation') }}">
+            <x-add-button href="{{ route('create_evaluation') }}">
                 {{ __('Adicionar') }}
-            </x-confirm-button>
+            </x-add-button>
         </div>
         @endif
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-5">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    @if(!isset($_GET['evaluation']))
                     <div class="p-6 bg-gray-100 border-b border-gray-200">
                         <div class="flex gap-4 w-full h-full" x-data="{ ava:true, med:false, dob:false, ana:false }">
 
                             <!-- ordering evaluations -->
                             <x-ordering-evaluations />
 
-                            <div class="w-8/12 ml-auto mr-5" x-show="food">
+                            <div class="w-7/12 ml-auto mr-5" x-show="food">
 
                                 <!-- message div -->
                                 @if(isset($_GET['success'])||isset($_GET['error']))
@@ -36,12 +46,6 @@
                                 <!-- evaluation tables -->
                                 <x-table-evaluations/>
                             </div>  
-                            @else
-                            <div class="bg-gray-800 w-10/12 rounded-lg m-auto p-1">
-                                <div class="flex flex-wrap gap-4 w-full h-full" x-data="{ ava:true, med:false, dob:false, ana:false }">
-
-                                    <x-create-evaluation />
-                            @endif
                         </div>
                     </div>
                 </div>
