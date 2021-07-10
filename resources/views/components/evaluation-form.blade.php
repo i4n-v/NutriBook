@@ -1,3 +1,5 @@
+@props(['evaluation'])
+
 <form method="POST" action="{{ route('create_evaluation')}}" x-show="ava">
     @csrf
     <fieldset>
@@ -5,14 +7,14 @@
 
         <!-- 'weight' -->
         <div>
-            <x-label for="weight" :value="__('Peso do Paciente')" />
-            <x-input id="weight" class="block mt-1 w-full" type="number" name="weight" required autofocus placeholder="Peso do Paciente " />
+            <x-label for="weight" :value="__('Peso do Paciente (g)')" />
+            <x-input id="weight" class="block mt-1 w-full" type="number" name="weight" :value="$evaluation->weight" required autofocus placeholder="Peso do Paciente " />
         </div>
 
         <!-- 'height' -->
         <div>
-            <x-label for="height" :value="__('Altura do Paciente')" />
-            <x-input id="height" class="block mt-1 w-full" type="number" name="height" required autofocus placeholder="Altura do Paciente " />
+            <x-label for="height" :value="__('Altura do Paciente (m)')" />
+            <x-input id="height" class="block mt-1 w-full" type="number" name="height" :value="$evaluation->height" required autofocus placeholder="Altura do Paciente " />
         </div>
 
     </fieldset>
@@ -22,5 +24,4 @@
             {{ __('Salvar') }}
         </x-button>
     </div>
-
 </form>
