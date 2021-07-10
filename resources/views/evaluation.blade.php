@@ -32,7 +32,7 @@
                             <!-- ordering evaluations -->
                             <x-ordering-evaluations />
 
-                            <div class="w-7/12 ml-auto mr-5" x-show="food">
+                            <div class="w-6/12 ml-auto mr-5" x-show="food">
 
                                 <!-- message div -->
                                 @if(isset($_GET['success'])||isset($_GET['error']))
