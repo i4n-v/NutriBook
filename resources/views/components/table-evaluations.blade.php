@@ -32,7 +32,7 @@
                 {{ explode(' ', $evaluation->updated_at)[0] }}
             </td>
             <td class="flex items-center justify-center gap-4 rounded-tr-sm">
-                <x-button-visual />
+                <x-button-visual href="/evaluation/view?evaluation={{$evaluation->id}}"/>
                 @if(Auth::user()->isNutritionist())
                     <x-button-edit href="{{ route('edit_evaluation', $evaluation) }}"/>
                     <x-button-delete @click="confirm=true" />

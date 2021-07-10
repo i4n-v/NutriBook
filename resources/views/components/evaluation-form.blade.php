@@ -7,14 +7,14 @@
 
         <!-- 'weight' -->
         <div>
-            <x-label for="weight" :value="__('Peso do Paciente (g)')" />
-            <x-input id="weight" class="block mt-1 w-full" type="number" name="weight" :value="$evaluation->weight" required autofocus placeholder="Peso do Paciente " />
+            <x-label for="weight" :value="__('Peso do paciente (g)')" />
+            <x-input id="weight" class="block mt-1 w-full" type="number" name="weight" :value="$evaluation->weight" required autofocus placeholder="Peso do paciente " />
         </div>
 
         <!-- 'height' -->
         <div>
-            <x-label for="height" :value="__('Altura do Paciente (m)')" />
-            <x-input id="height" class="block mt-1 w-full" type="number" name="height" :value="$evaluation->height" required autofocus placeholder="Altura do Paciente " />
+            <x-label for="height" :value="__('Altura do paciente (m)')" />
+            <x-input id="height" class="block mt-1 w-full" type="number" name="height" :value="$evaluation->height" required autofocus placeholder="Altura do paciente " />
         </div>
 
     </fieldset>

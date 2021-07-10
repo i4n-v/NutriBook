@@ -1,5 +1,5 @@
 @php
-    $name = explode(' ', App\Models\Evaluation::find($_GET['evaluation'])->patient->user->name)[1];
+    $name = explode(' ', App\Models\Evaluation::find($_GET['evaluation'])->patient->user->name)[0];
     $id = App\Models\Evaluation::find($_GET['evaluation'])->patient->user->id
 @endphp
 <x-guest-layout>
