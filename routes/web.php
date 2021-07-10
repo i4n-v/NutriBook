@@ -63,6 +63,16 @@ Route::get('/evaluation/form', function () {
     }else{
         return redirect()->route('login');
     }
+})->middleware(['auth'])->name('evaluation_form');
+
+Route::get('/evaluation/view', function () {
+    $id = App\Models\Evaluation::find($_GET['evaluation'])->nutritionist->user->id;
+    $id2 = App\Models\Evaluation::find($_GET['evaluation'])->patient->user->id;   
+    if(Auth::user()->id == $id || Auth::user()->id == $id2){
+        return view('components/evaluation-view');
+    }else{
+        return redirect()->route('login');
+    }
 })->middleware(['auth'])->name('evaluation');
 
 
