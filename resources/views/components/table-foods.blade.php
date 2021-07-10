@@ -22,7 +22,10 @@ $foods = App\Models\Food::all();
                 <template x-if="confirm">
                     <x-modal>
                         <x-confirm-template>
-                            <x-confirm-button class="px-5" href="{{ route('food_delete', $food) }}">Sim</x-confirm-button>
+                            <x-confirm-button class="px-9" href="{{ route('food_delete', $food) }}">
+                                Sim
+                            </x-confirm-button>
+                            <x-slot name="text">Você realmente deseja excluir este alimento?</x-slot>
                         </x-confirm-template>
                     </x-modal>
                 </template>

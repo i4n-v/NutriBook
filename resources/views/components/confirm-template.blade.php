@@ -1,7 +1,7 @@
-<div>
-    <span class="d-block font-bold text-gray-900 text-md">Você realmente deseja excluir o alimento?</span>
-    <div class="flex items-end justify-end gap-5 mt-10">
+<div class="text-center">
+    <span class="d-block font-bold text-gray-900 text-md">{{ $text }}</span>
+    <div class="flex items-center justify-center gap-32 mt-10">
         {{ $slot }}
-        <x-cancel-button @click="confirm=false">Não</x-cancel-button>
+        <x-confirm-button class="px-8" @click="confirm=false" @click.away="confirm=false">Não</x-confirm-button>
     </div>
 </div>

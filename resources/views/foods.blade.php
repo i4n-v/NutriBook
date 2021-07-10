@@ -1,7 +1,12 @@
 <x-guest-layout>
     <div class="min-h-screen bg-white" x-data="{ food:true }">
         <x-slot name="header">
-            <span class="ml-2 text-gray-600 font-bold text-sm">Home > Alimentos</span>
+        <h2 class="font-semibold text-2xl text-gray-900 leading-tight">
+                Alimentos
+            </h2>
+            <div class="ml-2 text-gray-600 font-bold text-sm mt-2">
+                <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Home</a>
+            </div>
         </x-slot>
         @if(!isset($_GET['edit']))
         <div class="float-right mt-5 mr-5" @click="food = false" x-show="food">

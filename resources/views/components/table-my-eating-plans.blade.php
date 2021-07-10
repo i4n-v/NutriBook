@@ -49,7 +49,8 @@ $patient_collection = App\Models\Patient::where('user_id', Auth::user()->id)->ge
             <template x-if="confirm">
                 <x-modal>
                     <x-confirm-template>
-                        <x-confirm-button class="px-5" href="{{ route('eatingplan_delete', $eating_plan->id) }}">Sim</x-confirm-button>
+                        <x-confirm-button class="px-9" href="{{ route('eatingplan_delete', $eating_plan->id) }}">Sim</x-confirm-button>
+                        <x-slot name="text">Você realmente deseja excluir este plano alimentar?</x-slot>
                     </x-confirm-template>
                 </x-modal>
             </template>
