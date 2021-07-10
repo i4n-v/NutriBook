@@ -60,9 +60,16 @@ class EvaluationController extends Controller
      * @param  \App\Models\Evaluation  $evaluation
      * @return \Illuminate\Http\Response
      */
-    public function edit(Evaluation $evaluation)
+    public function edit(Request $request, Evaluation $evaluation)
     {
-        //return redirect("/evaluetion?edit=$evaluation->id");
+
+        $id = $evaluation->nutritionist->user->id;
+       
+        if($id == auth()->user()->id){
+            return redirect("/evaluation/form?evaluation=$evaluation->id");
+       }else{
+           return redirect()->route('login');
+       }
     }
 
     /**

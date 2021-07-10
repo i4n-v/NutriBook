@@ -24,7 +24,7 @@ class CreateSkinFoldsTable extends Migration
             $table->integer('middle_axillary'); //axilar médio
             $table->integer('thigh'); //coxa
             $table->integer('calf'); //panturilha
-            $table->integer('Lumbar');
+            $table->integer('lumbar');
             $table->integer('evaluation_id');
             $table->timestamps();
         });
