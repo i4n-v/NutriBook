@@ -15,8 +15,8 @@ class CreateEvaluationsTable extends Migration
     {
         Schema::create('evaluations', function (Blueprint $table) {
             $table->id();
-            $table->float('weight', 9, 2);
-            $table->float('height', 9, 2);
+            $table->float('weight', 9, 2)->nullable();
+            $table->float('height', 9, 2)->nullable();
             $table->integer('nutritionist_id');
             $table->integer('patient_id');
             $table->timestamps();

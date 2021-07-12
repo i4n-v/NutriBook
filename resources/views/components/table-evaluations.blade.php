@@ -6,6 +6,7 @@
         $evaluations = App\Models\Evaluation::where('nutritionist_id', Auth::user()->profile()->id)->where('patient_id', App\Models\User::find($_GET['patient'])->profile()->id)->get();
         $id = App\Models\User::find($_GET['patient'])->profile()->id;
     }
+   
 @endphp
 
 <table class="w-full bg-white shadow-lg border-solid border-b-2 rounded-sm">
@@ -40,7 +41,7 @@
                 <template x-if="confirm">
                     <x-modal>
                         <x-confirm-template>
-                            <x-confirm-button class="px-9">Sim</x-confirm-button>
+                            <x-confirm-button class="px-9" href="{{ route('evaluation_delete', $evaluation) }}">Sim</x-confirm-button>
                             <x-slot name="text">{{ 'Você realmente deseja excluir a avaliação de '.explode(' ',$evaluation->patient->name)[0].'?' }}</x-slot>
                         </x-confirm-template>
                     </x-modal>

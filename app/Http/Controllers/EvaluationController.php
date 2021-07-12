@@ -1,9 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Anamnese;
+use App\Models\SkinFold;
+use App\Models\BodyMeasurement;
 use App\Models\Evaluation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 class EvaluationController extends Controller
 {
@@ -36,11 +40,49 @@ class EvaluationController extends Controller
     public function store(Request $request)
     {
         $evaluation = Evaluation::create([
-            'weight' => $request->weight,
-            'height' => $request->height,
-            'nutritionist_id' => Auth::user()->id,
-            'patient_id' => $request->patient_id
-        ]);
+            'weight' => null,
+            'height' => null,
+            'nutritionist_id' => Auth::user()->nutritionistProfile->id,
+            'patient_id' => $request->id,
+            ]);
+            
+        //      echo($evaluation);
+             
+        //     $anamnese = Anamnese::create([
+        //     'objective' =>null,
+        //     'pathological_history' =>null,
+        //     'family_history' =>null,
+        //     'used_drugs' =>null,
+        //     'life_style' =>null,
+        //     'allergies' =>null,
+        //     'evaluation_id' => $evaluation->id
+        // ]);
+        
+        // $SkinFold = SkinFold::create([
+        //     'breastplate' => null,
+        //     'biceps' => null,
+        //     'triceps' => null,
+        //     'abdominal' => null,
+        //     'subscapular' => null,
+        //     'suprailiaco' => null,
+        //     'middle_axillary' => null,
+        //     'thigh' => null,
+        //     'calf' => null,
+        //     'lumbar' => null,
+        //     'evaluation_id' => $evaluation->id
+        // ]);
+        // $bodyMeasurement = BodyMeasurement::create([
+        // 'bust' =>null,
+        // 'thorax' =>null,
+        // 'waist' =>null,
+        // 'hip' =>null,
+        // 'thigh' =>null,
+        // 'calf' =>null,
+        // 'evaluation_id' =>$evaluation->id
+        // ]);
+        $idpatient = $evaluation->patient->user->id;
+        return redirect("/evaluation?patient=$idpatient&success=Avaliação excluido com sucesso!");
+
     }
 
     /**
@@ -81,8 +123,9 @@ class EvaluationController extends Controller
      */
     public function update(Request $request, Evaluation $evaluation)
     {
-        // Evaluation::findOrFail($request->id)->update($request->all());
-        // return redirect('evaluation?success=Avaliação atualizada com sucesso!');
+        $patid = Evaluation::find($request->id)->patient->user->id;
+        Evaluation::findOrFail($request->id)->update($request->all());
+        return redirect("evaluation?patient=$patid&success=Avaliação atualizada com sucesso!");
     }
 
     /**
@@ -93,6 +136,8 @@ class EvaluationController extends Controller
      */
     public function destroy(Evaluation $evaluation)
     {
-        //
+        $idpatient = $evaluation->patient->user->id;
+        $evaluation->delete();
+        return redirect("/evaluation?patient=$idpatient&success=Avaliação excluido com sucesso!");
     }
 }

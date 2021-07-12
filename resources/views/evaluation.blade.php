@@ -4,6 +4,7 @@
     }else{
         $name = explode(' ', App\Models\User::find($_GET['patient'])->name)[0];
     }
+   $idpatient = App\Models\User::find($_GET['patient'])->profile()->id
 @endphp
 <x-guest-layout>
     <div class="min-h-screen bg-white">
@@ -18,7 +19,7 @@
         </x-slot>
         @if(!isset($_GET['evaluation']) && Auth::user()->isNutritionist())
         <div class="float-right mt-5 mr-5" @click="evaluation = false" x-show="evaluation">
-            <x-add-button href="{{ route('create_evaluation') }}">
+            <x-add-button href="{{ route('create_evaluation', $idpatient) }}">
                 {{ __('Adicionar') }}
             </x-add-button>
         </div>

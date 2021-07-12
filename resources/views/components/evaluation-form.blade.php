@@ -1,6 +1,6 @@
 @props(['evaluation'])
 
-<form method="POST" action="{{ route('create_evaluation')}}" x-show="ava">
+<form method="POST" action="{{ route('update_evaluation', $evaluetionid = $_GET['evaluation'])}}" x-show="ava">
     @csrf
     <fieldset>
         <legend class="text-white text-2xl border-b-2 mb-5">Avaliação</legend>

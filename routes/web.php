@@ -76,30 +76,33 @@ Route::get('/evaluation/view', function () {
 })->middleware(['auth'])->name('evaluation');
 
 
-Route::get('/evaluation/edit/{evaluation}', [EvaluationController::Class, 'edit'])->middleware(['auth'])->name('edit_evaluation');
 
-Route::post('/evaluation/update/evaluation/{id}', [EvaluationController::Class, 'update'])->middleware(['auth'])->name('update_evaluation');
 
-Route::post('/evaluation/create/anamnese', [AnamneseController::Class, 'store'])->middleware(['auth'])->name('create_anamnese');
+
 
 Route::get('/evaluation/edit/anamnese/{id}', [AnamneseController::Class, 'edit'])->middleware(['auth'])->name('edit_anamnese');
 
 Route::post('/evaluation/update/anamnese/{id}', [AnamneseController::Class, 'update'])->middleware(['auth'])->name('update_anamnese');
 
-Route::post('/evaluation/create/skinfold', [SkinFoldController::Class, 'store'])->middleware(['auth'])->name('create_skinfold');
+
 
 Route::get('/evaluation/edit/skinfold/{id}', [SkinFoldController::Class, 'edit'])->middleware(['auth'])->name('edit_skinfold');
 
 Route::post('/evaluation/update/skinfold/{id}', [SkinFoldController::Class, 'update'])->middleware(['auth'])->name('update_skinfold');
 
-Route::post('/evaluation/create/bodymeasurement', [BodyMeasurementController::Class, 'store'])->middleware(['auth'])->name('create_bodymeasurement');
 
 
 Route::get('/evaluation/edit/bodymeasurement/{id}', [BodyMeasurementController::Class, 'edit'])->middleware(['auth'])->name('edit_bodymeasurement');
 
 Route::post('/evaluation/update/bodymeasurement/{id}', [BodyMeasurementController::Class, 'update'])->middleware(['auth'])->name('update_bodymeasurement');
 
-Route::post('/evaluation/create/evaluation', [EvaluationController::Class, 'store'])->middleware(['auth'])->name('create_evaluation');
+Route::get('/evaluation/create/{id}', [EvaluationController::Class, 'store'])->middleware(['auth'])->name('create_evaluation');
+
+Route::get('/evaluation/delete/{evaluation}', [EvaluationController::Class, 'destroy'])->middleware(['auth'])->name('evaluation_delete');
+
+Route::get('/evaluation/edit/{evaluation}', [EvaluationController::Class, 'edit'])->middleware(['auth'])->name('edit_evaluation');
+
+Route::post('/evaluation/update/{id}', [EvaluationController::Class, 'update'])->middleware(['auth'])->name('update_evaluation');
 
 // eating plan routes
 Route::get('/eatingPlan/{id}', [EatingPlanController::Class, 'show'])->middleware(['auth'])->name('view_eating_plan');
