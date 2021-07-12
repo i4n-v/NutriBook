@@ -79,9 +79,10 @@ class BodyMeasurementController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, BodyMeasurement $bodyMeasurement)
-    {
-        //BodyMeasurement::findOrFail($request->id)->update($request->all());
-        //return redirect('evaluation?success=Medidas corporais foram atualizadas com sucesso!');
+    {       
+        $patid = BodyMeasurement::find($request->id)->evaluation->patient->user->id;
+        BodyMeasurement::findOrFail($request->id)->update($request->all());
+        return redirect("evaluation?patient=$patid&success=Medidas corporais foram atualizadas com sucesso!");
     }
 
     /**
