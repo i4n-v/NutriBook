@@ -6,6 +6,7 @@ use App\Models\Anamnese;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Evaluation;
 
 class AnamneseController extends Controller
 {
@@ -80,8 +81,9 @@ class AnamneseController extends Controller
      */
     public function update(Request $request, Anamnese $anamnese)
     {
-        //Anamnese::findOrFail($request->id)->update($request->all());
-        //return redirect('evaluation?success=anamnese atualizado com sucesso!');
+        $patid = Anamnese::find($request->id)->evaluation->patient->user->id;
+        Anamnese::findOrFail($request->id)->update($request->all());
+        return redirect("evaluation/?patient=$patid&success=anamnese atualizado com sucesso!");
     }
 
     /**

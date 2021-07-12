@@ -1,6 +1,6 @@
 @props(['anamnese'])
 
-<form method="POST" action="{{ route('create_anamnese')}}" x-show="ana">
+<form method="POST" action="{{ route('update_anamnese', $evaluetionid = $_GET['evaluation'])}}" x-show="ana">
     @csrf
     <fieldset>
         <legend class="text-white text-2xl border-b-2 mb-5">Anamnese</legend>
