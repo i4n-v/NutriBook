@@ -15,16 +15,16 @@ class CreateSkinFoldsTable extends Migration
     {
         Schema::create('skin_folds', function (Blueprint $table) {
             $table->id();
-            $table->integer('breastplate'); //peitoral
-            $table->integer('biceps');
-            $table->integer('triceps');
-            $table->integer('abdominal');
-            $table->integer('subscapular');
-            $table->integer('suprailiaco');
-            $table->integer('middle_axillary'); //axilar médio
-            $table->integer('thigh'); //coxa
-            $table->integer('calf'); //panturilha
-            $table->integer('lumbar');
+            $table->integer('breastplate')->nullable(); //peitoral
+            $table->integer('biceps')->nullable();
+            $table->integer('triceps')->nullable();
+            $table->integer('abdominal')->nullable();
+            $table->integer('subscapular')->nullable();
+            $table->integer('suprailiaco')->nullable();
+            $table->integer('middle_axillary')->nullable(); //axilar médio
+            $table->integer('thigh')->nullable(); //coxa
+            $table->integer('calf')->nullable(); //panturilha
+            $table->integer('lumbar')->nullable();
             $table->integer('evaluation_id');
             $table->timestamps();
         });

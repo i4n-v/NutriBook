@@ -1,6 +1,6 @@
 @props(['skinFold'])
 
-<form method="POST" action="{{ route('create_skinfold')}}" x-show="dob">
+<form method="POST" action="{{ route('update_skinfold', $evaluetionid = $_GET['evaluation'])}}" x-show="dob">
 	@csrf
 	<fieldset>
 		<legend class="text-white text-2xl border-b-2 mb-5">Dobras Cutâneas</legend>
