@@ -37,7 +37,7 @@ class EvaluationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Evaluation $evaluation, Request $request)
     {
         $evaluation = Evaluation::create([
             'weight' => null,
@@ -45,43 +45,44 @@ class EvaluationController extends Controller
             'nutritionist_id' => Auth::user()->nutritionistProfile->id,
             'patient_id' => $request->id,
             ]);
-            
-        //      echo($evaluation);
+            // echo($evaluation->created_at);
+            $evid = Evaluation::where('created_at', $evaluation->created_at)->get()[0]->id;
+            //  var_dump($eva);
              
-        //     $anamnese = Anamnese::create([
-        //     'objective' =>null,
-        //     'pathological_history' =>null,
-        //     'family_history' =>null,
-        //     'used_drugs' =>null,
-        //     'life_style' =>null,
-        //     'allergies' =>null,
-        //     'evaluation_id' => $evaluation->id
-        // ]);
+            $anamnese = Anamnese::create([
+            'objective' =>null,
+            'pathological_history' =>null,
+            'family_history' =>null,
+            'used_drugs' =>null,
+            'life_style' =>null,
+            'allergies' =>null,
+            'evaluation_id' => $evid
+        ]);
         
-        // $SkinFold = SkinFold::create([
-        //     'breastplate' => null,
-        //     'biceps' => null,
-        //     'triceps' => null,
-        //     'abdominal' => null,
-        //     'subscapular' => null,
-        //     'suprailiaco' => null,
-        //     'middle_axillary' => null,
-        //     'thigh' => null,
-        //     'calf' => null,
-        //     'lumbar' => null,
-        //     'evaluation_id' => $evaluation->id
-        // ]);
-        // $bodyMeasurement = BodyMeasurement::create([
-        // 'bust' =>null,
-        // 'thorax' =>null,
-        // 'waist' =>null,
-        // 'hip' =>null,
-        // 'thigh' =>null,
-        // 'calf' =>null,
-        // 'evaluation_id' =>$evaluation->id
-        // ]);
+        $SkinFold = SkinFold::create([
+            'breastplate' => null,
+            'biceps' => null,
+            'triceps' => null,
+            'abdominal' => null,
+            'subscapular' => null,
+            'suprailiaco' => null,
+            'middle_axillary' => null,
+            'thigh' => null,
+            'calf' => null,
+            'lumbar' => null,
+            'evaluation_id' => $evid
+        ]);
+        $bodyMeasurement = BodyMeasurement::create([
+        'bust' =>null,
+        'thorax' =>null,
+        'waist' =>null,
+        'hip' =>null,
+        'thigh' =>null,
+        'calf' =>null,
+        'evaluation_id' => $evid
+        ]);
         $idpatient = $evaluation->patient->user->id;
-        return redirect("/evaluation?patient=$idpatient&success=Avaliação excluido com sucesso!");
+        return redirect("/evaluation?patient=$idpatient&success=Avaliação criada com sucesso!");
 
     }
 
