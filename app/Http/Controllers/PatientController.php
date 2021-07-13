@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
-
+namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Patient;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -43,24 +43,7 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:patients',
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
-        $patient = Patient::create([
-            'name' => $request->name,
-            'CPF' => $request->cpf,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        event(new Registered($patient));
-
-        Auth::login($patient);
-
-        return redirect(RouteServiceProvider::HOME);
+        //
     }
 
     /**
@@ -80,9 +63,27 @@ class PatientController extends Controller
      * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function edit(Patient $patient)
+    public function edit(Request $request)
     {
-        //
+        $user = User::find(auth()->user()->id);
+
+        if(! Hash::check($request->current_password, $user->password)){
+
+            return redirect("/profile?error=A senha atual não coincide!");
+
+        }else if($request->new_password != $request->password_confirmation){
+
+            return redirect("/profile?error=As senhas informadas não coincidem!");
+
+        }else if($request->current_password != $request->new_password){
+
+            $user->password =  Hash::make($request->new_password);
+            $user->save();
+            return redirect("/profile?success=Senha redefinida com sucesso!");
+
+        }else{
+            return redirect("/profile?error=A nova senha não pode ser igual a senha atual!");
+        }
     }
 
     /**
@@ -94,7 +95,18 @@ class PatientController extends Controller
      */
     public function update(Request $request, Patient $patient)
     {
-        //
+
+        $user = User::find(auth()->user()->id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+
+        $patient = Patient::find($user->patientProfile->id);
+        $patient->birth_date = $request->birth_date;
+        $patient->save();
+
+        return redirect("/profile?success=Dados atualizados com sucesso!");
+
     }
 
     /**

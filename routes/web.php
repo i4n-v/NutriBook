@@ -8,6 +8,8 @@ use App\Http\Controllers\SkinFoldController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\EatingPlanController;
 use App\Http\Controllers\OrderingSelectorController;
+use App\Http\Controllers\PatientController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,13 +30,18 @@ Route::get('/home', function () {
     return view('home');
 })->middleware(['auth'])->name('home');
 
-Route::get('/evaluation', function () {
-    return view('evaluation');
-})->middleware(['auth'])->name('evaluation');
+// profile routes
+Route::get('/profile', function(){
+    return view('profile');
+})->middleware(['auth'])->name('profile');
+
+Route::post('/profile/patient/update', [PatientController::Class, 'update'])->middleware(['auth'])->name('update_patient_profile');
+
+Route::post('/profile/patient/update/password', [PatientController::Class, 'edit'])->middleware(['auth'])->name('update_patient_password');
 
 // food routes
 Route::get('/foods', function () {
-
+    
     if(Auth::user()->isNutritionist()){
         return view('foods');
     }else{
@@ -52,6 +59,10 @@ Route::get('/foods/edit/redirect/{food}', [FoodController::Class, 'edit'])->midd
 Route::post('/foods/edit/{id}', [FoodController::Class, 'update'])->middleware(['auth'])->name('food_edit');
 
 // evaluation routes
+Route::get('/evaluation', function () {
+    return view('evaluation');
+})->middleware(['auth'])->name('evaluation');
+
 Route::get('/evaluation', function () {  
     return view('evaluation');
 })->middleware(['auth'])->name('evaluation');
@@ -73,7 +84,7 @@ Route::get('/evaluation/view', function () {
     }else{
         return redirect()->route('login');
     }
-})->middleware(['auth'])->name('evaluation');
+})->middleware(['auth'])->name('evaluation_view');
 
 Route::get('/evaluation/edit/anamnese/{id}', [AnamneseController::Class, 'edit'])->middleware(['auth'])->name('edit_anamnese');
 
