@@ -1,9 +1,11 @@
 @props(['column', 'value'])
 
 @php
-
-$patient_collection = App\Models\Patient::where('user_id', Auth::user()->id)->get();
-
+    if(Auth::user()->isNutritionist()){
+        $patient_collection = App\Models\Patient::where('user_id', $_GET['patient'])->get();
+    }else{
+        $patient_collection = App\Models\Patient::where('user_id', Auth::user()->id)->get();
+    }
 @endphp
 
 <table class="w-full bg-white shadow-lg border-solid border-b-2 rounded-sm">
@@ -44,10 +46,18 @@ $patient_collection = App\Models\Patient::where('user_id', Auth::user()->id)->ge
     @foreach ($patient_collection as $patient)
         
         @php
-        if ($column == '' || $value == '') {
-            $eating_plan_collection = App\Models\EatingPlan::where('patient_id', $patient->id)->orderBy('title', 'asc')->get();
-        } else {
-            $eating_plan_collection = App\Models\EatingPlan::where('patient_id', $patient->id)->orderBy($column, $value)->get();
+        if(Auth::user()->isNutritionist()){
+            if ($column == '' || $value == '') {
+                $eating_plan_collection = App\Models\EatingPlan::where('patient_id', $patient->id)->where('nutritionist_id', Auth::user()->id)->orderBy('title', 'asc')->get();
+            } else {
+                $eating_plan_collection = App\Models\EatingPlan::where('patient_id', $patient->id)->orderBy($column, $value)->get();
+            }
+        }else{    
+            if ($column == '' || $value == '') {
+                $eating_plan_collection = App\Models\EatingPlan::where('patient_id', $patient->id)->orderBy('title', 'asc')->get();
+            } else {
+                $eating_plan_collection = App\Models\EatingPlan::where('patient_id', $patient->id)->orderBy($column, $value)->get();
+            }
         }
         @endphp
 

@@ -1,10 +1,11 @@
 @php
     if(Auth::user()->isPatient()){
         $name = explode(' ', Auth::user()->name)[0];
+        $idpatient = Auth::user()->id;
     }else{
         $name = explode(' ', App\Models\User::find($_GET['patient'])->name)[0];
+        $idpatient = App\Models\User::find($_GET['patient'])->id;
     }
-   $idpatient = App\Models\User::find($_GET['patient'])->profile()->id
 @endphp
 <x-guest-layout>
     <div class="min-h-screen bg-white">
@@ -14,7 +15,11 @@
             </h2>
             <div class="ml-2 text-gray-600 font-bold text-sm mt-2">
                 <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Home</a> > 
-                <a href="#" class="transition delay-150 hover:text-gray-900">{{ $name }}</a> 
+                @if(Auth::user()->isNutritionist())
+                    <a href="/profile?patient={{ $idpatient }}" class="transition delay-150 hover:text-gray-900">{{ $name }}</a>
+                @else
+                    <a href="{{ route('profile') }}" class="transition delay-150 hover:text-gray-900">{{ $name }}</a>
+                @endif
             </div>
         </x-slot>
         @if(!isset($_GET['evaluation']) && Auth::user()->isNutritionist())

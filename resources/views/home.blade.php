@@ -1,9 +1,21 @@
+@php
+    if(isset($_GET['patient'])){
+        $name = explode(' ', App\Models\User::find($_GET['patient'])->name)[0];
+        $idpatient = App\Models\User::find($_GET['patient'])->id;
+    }
+@endphp
 <x-guest-layout>
     <div class="min-h-screen bg-white">
         <x-slot name="header">
             @if(isset($_GET['eating_plan']))
             <h2 class="text-gray-900 text-2xl font-bold">Plano Alimentar</h2>
             @endif
+            <div class="ml-2 text-gray-600 font-bold text-sm mt-2">
+                @if(Auth::user()->isNutritionist() && isset($_GET['patient']))
+                    <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Home</a> > 
+                    <a href="/profile?patient={{ $idpatient }}" class="transition delay-150 hover:text-gray-900">{{ $name }}</a>
+                @endif
+            </div>
         </x-slot>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -20,10 +32,11 @@
 
                             @if(isset($_GET['eating_plan']))
                             <x-eating-plans-view />
-                            @else
-                            @if (Auth::user()->isNutritionist())
+                            @endif
+
+                            @if (Auth::user()->isNutritionist() && !isset($_GET['patient']))
                             <x-ordering-patients />
-                            @elseif (Auth::user()->isPatient())
+                            @elseif (Auth::user()->isPatient() || isset($_GET['patient']))
                             <x-ordering-eating-plans />
                             @endif
 
@@ -35,20 +48,19 @@
                                 @endif
 
                                 <div class="pb-2 font-bold">
-                                    @if (Auth::user()->isNutritionist())
+                                    @if (Auth::user()->isNutritionist() && !isset($_GET['patient']))
                                     Aqui estão todos os seus pacientes:
-                                    @elseif (Auth::user()->isPatient())
+                                    @elseif (Auth::user()->isPatient() || isset($_GET['patient']))
                                     Aqui estão todos os seus planos alimentares:
                                     @endif
                                 </div>
-
-                                @if (Auth::user()->isNutritionist())
+                                
+                                @if (Auth::user()->isNutritionist() && !isset($_GET['patient']))
                                 <x-table-my-patients :column="$column ?? ''" :value="$value ?? ''"/>
-                                @elseif (Auth::user()->isPatient())
+                                @elseif (Auth::user()->isPatient() || isset($_GET['patient']))
                                 <x-table-my-eating-plans :column="$column ?? ''" :value="$value ?? ''"/>
                                 @endif
                             </div>
-                            @endif
                         </div>
                     </div>
                 </div>
