@@ -11,3 +11,14 @@ require('alpinejs');
     }
 
 })();
+
+window.desabilitar = () => {
+    
+    let form = document.querySelectorAll(".disable").length;
+
+    for(let i = 0; i < form; i++){
+      let input = document.querySelectorAll(".disable")[i];
+      input.disabled = !input.disabled == true;
+    }
+
+  }
