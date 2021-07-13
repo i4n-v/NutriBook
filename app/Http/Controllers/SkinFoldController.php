@@ -86,8 +86,9 @@ class SkinFoldController extends Controller
      */
     public function update(Request $request, SkinFold $SkinFold)
     {
-        $patid = SkinFold::find($request->id)->evaluation->patient->user->id;
-        SkinFold::findOrFail($request->id)->update($request->all());
+        $e= SkinFold::where('evaluation_id',$request->id)->get()[0]->id;
+        $patid = SkinFold::find($e)->evaluation->patient->user->id;
+        SkinFold::findOrFail($e)->update($request->all());
         return redirect("evaluation?patient=$patid&success=Dobras cutâneas atualizado com sucesso!");
     }
 
