@@ -2,7 +2,7 @@
 
     <!-- Patient items for dropdawn -->  
     @if(Auth::user()->isPatient())
-        <a href="#" class="hover:bg-yellow-400 rounded-md py-1">Perfil</a>
+        <a href="{{ route('profile') }}" class="hover:bg-yellow-400 rounded-md py-1">Perfil</a>
     @else
     <!-- Nutritionist items for dropdawn -->
         <a href="#" class="hover:bg-yellow-400 rounded-md py-1">Perfil</a>
