@@ -27,7 +27,7 @@
                             <x-ordering-eating-plans />
                             @endif
 
-                            <div class="w-7/12 ml-auto mr-5">
+                            <div class="w-8/12 ml-auto mr-5">
 
                                 <!-- message div -->
                                 @if(isset($_GET['success'])||isset($_GET['error']))
@@ -41,10 +41,11 @@
                                     Aqui estão todos os seus planos alimentares:
                                     @endif
                                 </div>
+
                                 @if (Auth::user()->isNutritionist())
-                                <x-table-my-patients />
+                                <x-table-my-patients :column="$column ?? ''" :value="$value ?? ''"/>
                                 @elseif (Auth::user()->isPatient())
-                                <x-table-my-eating-plans />
+                                <x-table-my-eating-plans :column="$column ?? ''" :value="$value ?? ''"/>
                                 @endif
                             </div>
                             @endif
