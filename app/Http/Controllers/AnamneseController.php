@@ -81,8 +81,9 @@ class AnamneseController extends Controller
      */
     public function update(Request $request, Anamnese $anamnese)
     {
-        $patid = Anamnese::find($request->id)->evaluation->patient->user->id;
-        Anamnese::findOrFail($request->id)->update($request->all());
+        $e= Anamnese::where('evaluation_id',$request->id)->get()[0]->id;
+        $patid = Anamnese::find($e)->evaluation->patient->user->id;
+        Anamnese::findOrFail($e)->update($request->all());
         return redirect("evaluation/?patient=$patid&success=anamnese atualizado com sucesso!");
     }
 
