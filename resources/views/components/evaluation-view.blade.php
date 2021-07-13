@@ -9,9 +9,14 @@
                 Avaliação
             </h2>
             <div class="ml-2 text-gray-600 font-bold text-sm mt-2">
-                <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Home</a> > 
-                <a href="#" class="transition delay-150 hover:text-gray-900">{{ $name }}</a> >
-                <a href="/evaluation?patient={{ $id }}" class="transition delay-150 hover:text-gray-900">Avaliações</a>
+                <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Home</a> >
+                @if(Auth::user()->isNutritionist()) 
+                    <a href="/profile?patient={{ $id }}" class="transition delay-150 hover:text-gray-900">{{ $name }}</a> >
+                    <a href="/evaluation?patient={{ $id }}" class="transition delay-150 hover:text-gray-900">Avaliações</a>
+                @else
+                    <a href="{{ route('profile') }}" class="transition delay-150 hover:text-gray-900">{{ $name }}</a> >
+                    <a href="{{ route('evaluation') }}" class="transition delay-150 hover:text-gray-900">Avaliações</a>
+                @endif
             </div>
         </x-slot>
         <div class="py-12">
