@@ -80,7 +80,7 @@ $users_patients = array();
             28/06/2021 (Em breve)
         </td>
         <td class="text-center w-2/12 rounded-tr-sm">
-            <x-button-visual href="#"/>
+            <x-button-visual href="/profile?patient={{$user->id}}"/>
         </td>
     </tr>    
     @endforeach
