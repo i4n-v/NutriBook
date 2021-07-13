@@ -7,7 +7,7 @@ use App\Http\Controllers\BodyMeasurementController;
 use App\Http\Controllers\SkinFoldController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\EatingPlanController;
-
+use App\Http\Controllers\OrderingSelectorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,22 +75,13 @@ Route::get('/evaluation/view', function () {
     }
 })->middleware(['auth'])->name('evaluation');
 
-
-
-
-
-
 Route::get('/evaluation/edit/anamnese/{id}', [AnamneseController::Class, 'edit'])->middleware(['auth'])->name('edit_anamnese');
 
 Route::post('/evaluation/update/anamnese/{id}', [AnamneseController::Class, 'update'])->middleware(['auth'])->name('update_anamnese');
 
-
-
 Route::get('/evaluation/edit/skinfold/{id}', [SkinFoldController::Class, 'edit'])->middleware(['auth'])->name('edit_skinfold');
 
 Route::post('/evaluation/update/skinfold/{id}', [SkinFoldController::Class, 'update'])->middleware(['auth'])->name('update_skinfold');
-
-
 
 Route::get('/evaluation/edit/bodymeasurement/{id}', [BodyMeasurementController::Class, 'edit'])->middleware(['auth'])->name('edit_bodymeasurement');
 
@@ -108,4 +99,9 @@ Route::post('/evaluation/update/{id}', [EvaluationController::Class, 'update'])-
 Route::get('/eatingPlan/{id}', [EatingPlanController::Class, 'show'])->middleware(['auth'])->name('view_eating_plan');
 
 Route::get('/home/eatingplan/remove/{eatingplan}', [EatingPlanController::Class, 'destroy'])->middleware(['auth'])->name('eatingplan_delete');
+
+Route::get('home/ordering', [OrderingSelectorController::class, 'ordering'])
+    ->middleware(['auth'])
+    ->name('ordering');
+
 require __DIR__.'/auth.php';
