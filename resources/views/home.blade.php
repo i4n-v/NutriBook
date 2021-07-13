@@ -3,14 +3,6 @@
         <x-slot name="header">
             @if(isset($_GET['eating_plan']))
             <h2 class="text-gray-900 text-2xl font-bold">Plano Alimentar</h2>
-            @else
-            <x-search-bar>
-                @if(Auth::user()->isNutritionist())
-                <x-slot name="placeholder">{{ _('Pesquisar pacientes') }}</x-slot>
-                @else
-                <x-slot name="placeholder">{{ _('Pesquisar nutricionistas') }}</x-slot>
-                @endif
-            </x-search-bar>
             @endif
         </x-slot>
         <div class="py-12">
