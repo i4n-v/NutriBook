@@ -74,7 +74,7 @@ $users_patients = array();
             {{ $user->name }}
         </td>
         <td class="text-center">
-            {{ $user->CPF }}
+            {{ cpf_display($user->CPF) }}
         </td>
         <td class="text-center">
             28/06/2021 (Em breve)
@@ -86,3 +86,29 @@ $users_patients = array();
     @endforeach
 
 </table>
+
+@php
+
+function cpf_display($string) {
+    $arr = str_split($string, 3);
+    $save = array();
+    for ($i = 0; $i < sizeof($arr); $i++) {     
+        if ($i == 0 || $i == 1) {
+            array_push($save, $arr[$i]);
+            array_push($save, '.');
+        } elseif ($i == 2) {
+            array_push($save, $arr[$i]);
+            array_push($save, '-');
+        } else {
+            array_push($save, $arr[$i]);
+        }
+    }
+    $cpf_final = $save[0];
+
+    for ($i = 1; $i < sizeof($save); $i++) {    
+        $cpf_final = $cpf_final . "$save[$i]";
+    }
+    return $cpf_final;
+}
+
+@endphp
