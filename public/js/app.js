@@ -3811,16 +3811,6 @@ __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
     }, 5000);
   }
 })();
-
-window.desabilitar = function () {
-  var form = document.querySelectorAll(".disable").length;
-
-  for (var i = 0; i < form; i++) {
-    var input = document.querySelectorAll(".disable")[i];
-    input.disabled = !input.disabled == true;
-  }
-};
-
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
