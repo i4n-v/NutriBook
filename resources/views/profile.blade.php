@@ -4,6 +4,11 @@
     }else{
         $patient = App\Models\User::find($_GET['patient']);
     }
+    if(isset($_GET['patient'])){
+        $desc = 'Dados do paciente';
+    }else{
+        $desc = 'Meus dados';
+    }
 @endphp
 <x-guest-layout>
     <div class="min-h-screen bg-white">
@@ -15,44 +20,34 @@
                 <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Home</a>
             </div>
         </x-slot>
-        <div class="flex gap-4 float-right text-gray-900 font-semibold mr-8">
-            @if(Auth::user()->isNutritionist())
-                <a href="/evaluation?patient={{ $patient->id }}" class="bg-yellow-400 rounded-md px-2 py-1 transition delay-150 hover:bg-yellow-500 shadow-md">Avaliações</a>
-                <a href="/home?patient={{  $patient->id }}" class="bg-yellow-400 rounded-md px-2 py-1 transition delay-150 hover:bg-yellow-500 shadow-md">Planos alimentares</a>
-            @else
-                <a href="{{ route('evaluation') }}" class="bg-yellow-400 rounded-md px-2 py-1 transition delay-150 hover:bg-yellow-500 shadow-md">Avaliações</a>
-                <a href="{{ route('home') }}" class="bg-yellow-400 rounded-md px-2 py-1 transition delay-150 hover:bg-yellow-500 shadow-md">Planos alimentares</a>
-            @endif
-        </div>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-5">
-                <div class="bg-white w-7/12 mx-auto overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-gray-100 border-b border-gray-200">
-                        <div class="w-full h-full">
-                            <div x-data="{ edit:false }">
+                <div class="bg-gray-100 w-10/12 rounded-lg m-auto p-1">
+                    <div class="bg-gray-100 border-b border-gray-200">
+                        <div class="flex flex-wrap gap-4 w-full h-full" x-data="{ profile:true, password:false, evaluation:false, plans:false }">
+                            
+                            <!-- aside menu -->
+                            <x-aside-menu-patient :patient="$patient" :desc="$desc"/>
 
-                                @if(Auth::user()->isPatient())
-                                    <div class="flex gap-4 float-right text-white font-semibold">
-                                        <a class="bg-gray-900 rounded-md p-2 transition delay-150 hover:text-gray-900 shadow-md cursor-pointer" @click="edit = !edit" x-bind:class="edit?'bg-red-400 text-gray-900 hover:bg-red-500':'hover:bg-yellow-500'" x-text="edit?'Cancelar':'Editar'" onclick="desabilitar()"></a>
-                                    </div>
-                                @endif
-                                
-                                <h2 class="text-lg font-bold text-gray-900 mb-5">Meus dados</h2>
-                                
-                                <!-- message div -->
-                                @if(isset($_GET['success'])||isset($_GET['error']))
-                                <x-message :success="$_GET['success']??''" :error="$_GET['error']??''" x-show="load" />
-                                @endif
-                                
-                                @if(Auth::user()->isPatient() || isset($_GET['patient']))
-                                    <x-patient-profile :patient="$patient" />
-                                    @if(Auth::user()->isPatient())
-                                        <x-patient-password-form/>
+                            <div class="ml-auto w-9/12">
+                                <div class="mx-auto w-7/12 my-5">
+                                    <h2 class="text-lg font-bold text-gray-900 mb-5" x-show="profile">{{$desc}}</h2>
+                                    <h2 class="text-lg font-bold text-gray-900 mb-5" x-show="password">Redefinir senha</h2>
+                                    
+                                    <!-- message div -->
+                                    @if(isset($_GET['success'])||isset($_GET['error']))
+                                    <x-message :success="$_GET['success']??''" :error="$_GET['error']??''" x-show="load" />
                                     @endif
-                                @else
+                                    
+                                    @if(Auth::user()->isPatient() || isset($_GET['patient']))
+                                        <x-patient-profile :patient="$patient"/>
+                                        <x-patient-password-form/>
+                                    @else  
 
-                                @endif
+                                    @endif
+                                </div>
                             </div>
+                      
                         </div>
                     </div>
                 </div>

@@ -98,7 +98,6 @@ class PatientController extends Controller
 
         $user = User::find(auth()->user()->id);
         $user->name = $request->name;
-        $user->email = $request->email;
         $user->save();
 
         $patient = Patient::find($user->patientProfile->id);

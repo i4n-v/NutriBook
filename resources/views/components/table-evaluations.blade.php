@@ -12,14 +12,24 @@
 <table class="w-full bg-white shadow-lg border-solid border-b-2 rounded-sm">
     <thead class="h-10 bg-gray-700 text-white rounded-sm">
         <th>
-            <x-ordering-selector>
-                {{ __('Data da avaliação') }}
-            </x-ordering-selector>
+            <div class="grid grid-cols-12">  
+                <div class="col-start-1 col-end-12 m-auto">
+                    Data da avaliação
+                </div>
+                <div class="col-start-12 col-end-12">
+                    <x-ordering-selector :asc="'dateStartAsc'" :desc="'dateStartDesc'"/>
+                </div>
+            </div>
         </th>
         <th>
-            <x-ordering-selector>
-                {{ __('Data de atualização') }}
-            </x-ordering-selector>
+            <div class="grid grid-cols-12">
+                <div class="col-start-1 col-end-12 m-auto">
+                    Data de atualização
+                </div>
+                <div class="col-start-12 col-end-12">
+                    <x-ordering-selector :asc="'dateStartAsc'" :desc="'dateStartDesc'"/>
+                </div>
+            </div>
         </th>
         <th class="rounded-tr-sm">Ações</th>
     </thead>

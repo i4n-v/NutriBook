@@ -40,7 +40,7 @@
                             <x-ordering-eating-plans />
                             @endif
 
-                            <div class="w-8/12 ml-auto mr-5">
+                            <div class="w-7/12 ml-auto mr-5">
 
                                 <!-- message div -->
                                 @if(isset($_GET['success'])||isset($_GET['error']))
