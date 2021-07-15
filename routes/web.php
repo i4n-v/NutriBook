@@ -31,23 +31,25 @@ Route::get('/home', function () {
 })->middleware(['auth'])->name('home');
 
 // profile routes
-Route::get('/profile', function(){
-    return view('profile');
-})->middleware(['auth'])->name('profile');
+// Route::get('/profile', function(){
+//     return view('profile');
+// })->middleware(['auth'])->name('profile');
 
 Route::post('/profile/patient/update', [PatientController::Class, 'update'])->middleware(['auth'])->name('update_patient_profile');
 
 Route::post('/profile/patient/update/password', [PatientController::Class, 'edit'])->middleware(['auth'])->name('update_patient_password');
 
+Route::get('/profile/{patient}', [PatientController::class, 'show'])->middleware(['auth'])->name('profile');
+
 // food routes
 Route::get('/foods', function () {
-    
+
     if(Auth::user()->isNutritionist()){
         return view('foods');
     }else{
         return redirect()->route('login');
     }
-    
+
 })->middleware(['auth'])->name('foods');
 
 Route::post('/foods/create', [FoodController::Class, 'store'])->middleware(['auth'])->name('create_food');

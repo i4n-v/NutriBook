@@ -16,11 +16,14 @@ class EatingPlanSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=1; $i <= 5 ; $i++) { 
-            EatingPlan::factory(1)->create([
-                'nutritionist_id' => Nutritionist::find($i),    
-                'patient_id' => Patient::find($i),    
-            ]);
+        for ($i=1; $i <= 5 ; $i++) {
+            $patients = Patient::all()->random(3);
+            foreach($patients as $patient) {
+                EatingPlan::factory(1)->create([
+                    'nutritionist_id' => Nutritionist::find($i),
+                    'patient_id' => Patient::find($patient->id),
+                ]);
+            }
         }
     }
 }

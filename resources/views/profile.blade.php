@@ -1,15 +1,20 @@
 @php
-    if(Auth::user()->isPatient()){
-        $patient = Auth::user();
-    }else{
-        $patient = App\Models\User::find($_GET['patient']);
-    }
-    if(isset($_GET['patient'])){
-        $desc = 'Dados do paciente';
-    }else{
+    // if(Auth::user()->isPatient()){
+    //     $patient = Auth::user();
+    // }else{
+    //     $patient = App\Models\User::find($_GET['patient']);
+    // }
+    // if(isset($_GET['patient'])){
+    //     $desc = 'Dados do paciente';
+    // }else{
+    //     $desc = 'Meus dados';
+    // }
+    $desc = 'Dados do paciente';
+    if ($patient->id == Auth::user()->id) {
         $desc = 'Meus dados';
     }
 @endphp
+
 <x-guest-layout>
     <div class="min-h-screen bg-white">
         <x-slot name="header">
@@ -33,21 +38,21 @@
                                 <div class="mx-auto w-7/12 my-5">
                                     <h2 class="text-lg font-bold text-gray-900 mb-5" x-show="profile">{{$desc}}</h2>
                                     <h2 class="text-lg font-bold text-gray-900 mb-5" x-show="password">Redefinir senha</h2>
-                                    
+
                                     <!-- message div -->
-                                    @if(isset($_GET['success'])||isset($_GET['error']))
-                                    <x-message :success="$_GET['success']??''" :error="$_GET['error']??''" x-show="load" />
+                                    @if(session('success') || session('error'))
+                                        <x-message :success="session('success')??''" :error="session('error')??''" x-show="load" />
                                     @endif
-                                    
-                                    @if(Auth::user()->isPatient() || isset($_GET['patient']))
-                                        <x-patient-profile :patient="$patient"/>
+
+                                    <x-patient-profile :patient="$patient"/>
+                                    @if(Auth::user()->isPatient())
                                         <x-patient-password-form/>
-                                    @else  
+                                    @else
 
                                     @endif
                                 </div>
                             </div>
-                      
+
                         </div>
                     </div>
                 </div>

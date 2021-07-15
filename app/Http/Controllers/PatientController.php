@@ -55,6 +55,7 @@ class PatientController extends Controller
     public function show(Patient $patient)
     {
         //
+        return view('profile', ['patient' => $patient->user]);
     }
 
     /**
@@ -104,7 +105,11 @@ class PatientController extends Controller
         $patient->birth_date = $request->birth_date;
         $patient->save();
 
-        return redirect("/profile?success=Dados atualizados com sucesso!");
+        // return redirect("/profile?success=Dados atualizados com sucesso!");
+        // $request->session()->flash('success', 'Dados atualizados com sucesso!');
+        return redirect()
+            ->route('profile', ['patient' => $patient])
+            ->with('success', 'Dados atualizados com sucesso!');
 
     }
 

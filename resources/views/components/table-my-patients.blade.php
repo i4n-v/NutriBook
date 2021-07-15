@@ -2,8 +2,9 @@
 
 @php
 
-$nutritionist = App\Models\Nutritionist::where('user_id', Auth::user()->id)->get();
-$nutritionist_id = $nutritionist[0]->id;
+// $nutritionist = App\Models\Nutritionist::where('user_id', Auth::user()->id)->get();
+$nutritionist = Auth::user()->nutritionistProfile;
+$nutritionist_id = $nutritionist->id;
 $eating_plans_patients = array();
 $users_patients = array();
 
@@ -46,19 +47,27 @@ $users_patients = array();
 
     @php
 
-    foreach (App\Models\EatingPlan::where('nutritionist_id', $nutritionist_id)->get() as $register) {
-        array_push($eating_plans_patients, $register->patient_id);
-    }
+    // CERTO, CONSIDERANDO APENAS O PHP
 
-    $my_patients = array_unique($eating_plans_patients);
+    // foreach (App\Models\EatingPlan::where('nutritionist_id', $nutritionist_id)->get() as $register) {
+    //     array_push($eating_plans_patients, $register->patient_id);
+    // }
 
-    foreach ($my_patients as $patient_id) {
-        foreach (App\Models\Patient::where('id', $patient_id)->get() as $patient) {
-            foreach (App\Models\User::where('id', $patient->user_id)->get() as $users) {
-                array_push($users_patients, $users->id);
-            }
-        }
-    }
+    // $my_patients = array_unique($eating_plans_patients);
+
+    // foreach ($my_patients as $patient_id) {
+    //     App\Models\Patient::find($patient_id);
+    //     foreach (App\Models\Patient::where('id', $patient_id)->get() as $patient) {
+    //         foreach (App\Models\User::where('id', $patient->user_id)->get() as $users) {
+    //             array_push($users_patients, $users->id);
+    //         }
+    //     }
+    // }
+
+    // IDIOMÁTICO DENTRO DO LARAVEL
+    $users_patients = $nutritionist->eatingPlans->map(function($ep) {
+        return $ep->patient->user->id;
+    });
 
     if ($column == '' || $value == '') {
         $patient_query = App\Models\User::whereIn('id', $users_patients)->orderBy('name', 'asc')->get();
@@ -80,7 +89,8 @@ $users_patients = array();
             28/06/2021 (Em breve)
         </td>
         <td class="text-center w-2/12 rounded-tr-sm">
-            <x-button-visual href="/profile?patient={{$user->id}}"/>
+            <!-- <x-button-visual href="/profile?patient={{$user->id}}"/> -->
+            <x-button-visual href="{{route('profile', $user->patientProfile)}}"/>
         </td>
     </tr>    
     @endforeach
