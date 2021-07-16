@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
-class PatientController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -52,10 +52,9 @@ class PatientController extends Controller
      * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function show(Patient $patient)
+    public function show(User $user)
     {
-        //
-        return view('profile', ['patient' => $patient->user]);
+        return view('profile', ['user' => $user]);
     }
 
     /**
@@ -64,26 +63,34 @@ class PatientController extends Controller
      * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Request $request, User $user)
     {
-        $user = User::find(auth()->user()->id);
 
         if(! Hash::check($request->current_password, $user->password)){
 
-            return redirect("/profile?error=A senha atual não coincide!");
+           return redirect()
+            ->route('profile', ['user' => $user])
+            ->with('error', 'A senha atual não coincide!');
 
         }else if($request->new_password != $request->password_confirmation){
 
-            return redirect("/profile?error=As senhas informadas não coincidem!");
+            return redirect()
+            ->route('profile', ['user' => $user])
+            ->with('error', 'As senhas informadas não coincidem!');
 
         }else if($request->current_password != $request->new_password){
 
             $user->password =  Hash::make($request->new_password);
             $user->save();
-            return redirect("/profile?success=Senha redefinida com sucesso!");
+
+            return redirect()
+            ->route('profile', ['user' => $user])
+            ->with('success', 'Senha redefinida com sucesso!');
 
         }else{
-            return redirect("/profile?error=A nova senha não pode ser igual a senha atual!");
+            return redirect()
+            ->route('profile', ['user' => $user])
+            ->with('error', 'A nova senha não pode ser idêntica a atual!');
         }
     }
 
@@ -94,21 +101,23 @@ class PatientController extends Controller
      * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Patient $patient)
+    public function update(Request $request, User $user)
     {
 
-        $user = User::find(auth()->user()->id);
         $user->name = $request->name;
         $user->save();
 
-        $patient = Patient::find($user->patientProfile->id);
-        $patient->birth_date = $request->birth_date;
-        $patient->save();
+        if($user->isPatient()){
+            $patient = $user->patientProfile;
+            $patient->birth_date = $request->birth_date;
+            $patient->save();
+        }else{
+            $user->nutritionistProfile->CRN = $request->crn;
+            $user->save();
+        }
 
-        // return redirect("/profile?success=Dados atualizados com sucesso!");
-        // $request->session()->flash('success', 'Dados atualizados com sucesso!');
         return redirect()
-            ->route('profile', ['patient' => $patient])
+            ->route('profile', ['user' => $user])
             ->with('success', 'Dados atualizados com sucesso!');
 
     }
