@@ -1,10 +1,8 @@
 @php
     if(Auth::user()->isPatient()){
         $name = explode(' ', Auth::user()->name)[0];
-        $idpatient = Auth::user()->id;
     }else{
-        $name = explode(' ', App\Models\User::find($_GET['patient'])->name)[0];
-        $idpatient = App\Models\User::find($_GET['patient'])->id;
+        $name =explode(' ', $patient->name)[0];;
     }
 @endphp
 <x-guest-layout>
@@ -14,17 +12,17 @@
                 Avaliações
             </h2>
             <div class="ml-2 text-gray-600 font-bold text-sm mt-2">
-                <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Home</a> > 
+                <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Home</a> >
                 @if(Auth::user()->isNutritionist())
-                    <a href="/profile?patient={{ $idpatient }}" class="transition delay-150 hover:text-gray-900">{{ $name }}</a>
+                    <a href="{{ route('profile', $patient) }}" class="transition delay-150 hover:text-gray-900">{{ $name }}</a>
                 @else
                     <a href="{{ route('profile') }}" class="transition delay-150 hover:text-gray-900">{{ $name }}</a>
                 @endif
             </div>
         </x-slot>
-        @if(!isset($_GET['evaluation']) && Auth::user()->isNutritionist())
+        @if(Auth::user()->isNutritionist())
         <div class="float-right mt-5 mr-5" @click="evaluation = false" x-show="evaluation">
-            <x-add-button href="{{ route('create_evaluation', $idpatient) }}">
+            <x-add-button href="{{ route('create_evaluation', $patient) }}">
                 {{ __('Adicionar') }}
             </x-add-button>
         </div>
@@ -41,8 +39,8 @@
                             <div class="w-6/12 ml-auto mr-5" x-show="food">
 
                                 <!-- message div -->
-                                @if(isset($_GET['success'])||isset($_GET['error']))
-                                <x-message :success="$_GET['success']??''" :error="$_GET['error']??''" x-show="load" />
+                                @if(session('success') || session('error'))
+                                <x-message :success="session('success')??''" :error="session('error')??''" x-show="load" />
                                 @endif
 
                                 <div class="mb-5 font-bold">
@@ -50,8 +48,8 @@
                                 </div>
 
                                 <!-- evaluation tables -->
-                                <x-table-evaluations/>
-                            </div>  
+                                <x-table-evaluations :patient="$patient ?? Auth::user()"/>
+                            </div>
                         </div>
                     </div>
                 </div>

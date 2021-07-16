@@ -1,18 +1,20 @@
+@props(['patient'])
+
 @php
     if(Auth::user()->isPatient()){
         $evaluations = App\Models\Evaluation::where('patient_id', Auth::user()->profile()->id)->get();
         $id = Auth::user()->profile()->id;
     }else{
-        $evaluations = App\Models\Evaluation::where('nutritionist_id', Auth::user()->profile()->id)->where('patient_id', App\Models\User::find($_GET['patient'])->profile()->id)->get();
-        $id = App\Models\User::find($_GET['patient'])->profile()->id;
+        $evaluations = App\Models\Evaluation::where('nutritionist_id', Auth::user()->profile()->id)->where('patient_id', $patient->patientProfile->id)->get();
+        $id = $patient->patientProfile->id;
     }
-   
+
 @endphp
 
 <table class="w-full bg-white shadow-lg border-solid border-b-2 rounded-sm">
     <thead class="h-10 bg-gray-700 text-white rounded-sm">
         <th>
-            <div class="grid grid-cols-12">  
+            <div class="grid grid-cols-12">
                 <div class="col-start-1 col-end-12 m-auto">
                     Data da avaliação
                 </div>
@@ -43,7 +45,7 @@
                 {{ explode(' ', $evaluation->updated_at)[0] }}
             </td>
             <td class="flex items-center justify-center gap-4 rounded-tr-sm">
-                <x-button-visual href="/evaluation/view?evaluation={{$evaluation->id}}"/>
+                <x-button-visual href="{{ route('evaluation_view', $evaluation) }}"/>
                 @if(Auth::user()->isNutritionist())
                     <x-button-edit href="{{ route('edit_evaluation', $evaluation) }}"/>
                     <x-button-delete @click="confirm=true" />
@@ -52,7 +54,7 @@
                     <x-modal>
                         <x-confirm-template>
                             <x-confirm-button class="px-9" href="{{ route('evaluation_delete', $evaluation) }}">Sim</x-confirm-button>
-                            <x-slot name="text">{{ 'Você realmente deseja excluir a avaliação de '.explode(' ',$evaluation->patient->name)[0].'?' }}</x-slot>
+                            <x-slot name="text">{{ 'Você realmente deseja excluir a avaliação de '.explode(' ',$patient->name)[0].'?' }}</x-slot>
                         </x-confirm-template>
                     </x-modal>
                 </template>
