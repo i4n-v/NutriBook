@@ -1,6 +1,6 @@
 @props(['bodyMeasurement'])
 
-<form method="POST" action="{{ route('update_bodymeasurement', $evaluetionid = $_GET['evaluation'])}}, $evaluetionid" x-show="med">
+<form method="POST" action="{{ route('update_bodymeasurement', $bodyMeasurement)}}, $evaluetionid" x-show="med">
     @csrf
     <fieldset>
         <legend class="text-white text-2xl border-b-2 mb-5">Medidas Corporais</legend>
