@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\EatingPlan;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
@@ -46,9 +47,9 @@ class EatingPlanController extends Controller
      * @param  \App\Models\EatingPlan  $eatingPlan
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show(Request $request, User $user)
     {
-        return redirect("/home?eating_plan=$request->id");
+        return redirect()->route('home', ['patient' => $user->patientProfile]);
     }
 
     /**
@@ -82,8 +83,13 @@ class EatingPlanController extends Controller
      */
     public function destroy(EatingPlan $eatingplan)
     {
-       
-         $eatingplan->delete();
-         return redirect('/home?success=Plano alimentar excluido com sucesso!');
+
+        $patient = $eatingplan->patient;
+        $eatingplan->delete();
+
+         return redirect()
+         ->route('home', ['patient' => $patient])
+         ->with('success', 'Avaliação atualizada com sucesso!');
+
     }
 }

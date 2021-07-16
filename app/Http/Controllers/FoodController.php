@@ -57,7 +57,10 @@ class FoodController extends Controller
                 // 'nutritionist_id' => Auth::user()->id
             ]);
 
-            return redirect('foods?success=O alimento foi criado com sucesso!');
+            $food->update($request->all());
+            return redirect()
+            ->route('foods')
+            ->with('success', 'Alimento criado com sucesso!');
         }
     }
 
@@ -69,7 +72,11 @@ class FoodController extends Controller
      */
     public function show(Food $food)
     {
-        //
+        if(auth()->user()->isNutritionist()){
+            return view('foods');
+        }else{
+            return redirect()->route('login');
+        }
     }
 
     /**
@@ -78,9 +85,9 @@ class FoodController extends Controller
      * @param  \App\Models\Request  $food
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Food $food)
     {
-        return redirect("/foods?edit=$request->food");
+        return view('components/food-edit', ['food' => $food]);
     }
 
     /**
@@ -92,8 +99,11 @@ class FoodController extends Controller
      */
     public function update(Request $request, Food $food)
     {
-        Food::findOrFail($request->id)->update($request->all());
-        return redirect('foods?success=Alimento atualizado com sucesso!');
+        $food->update($request->all());
+
+        return redirect()
+        ->route('foods')
+        ->with('success', 'Dados do alimento atualizados com sucesso!');
     }
 
     /**
@@ -105,6 +115,9 @@ class FoodController extends Controller
     public function destroy(Food $food)
     {
         $food->delete();
-        return redirect('foods?success=Alimento excluido com sucesso!');
+
+        return redirect()
+        ->route('foods')
+        ->with('success', 'Alimento excluido com sucesso!');
     }
 }
