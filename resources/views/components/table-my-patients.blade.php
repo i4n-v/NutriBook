@@ -42,29 +42,11 @@ $users_patients = array();
                 </div>
             </div>
         </th>
-        <th class="rounded-tr-sm">Perfil</th>
+        <th class="rounded-tr-sm">Ações</th>
     </thead>
 
     @php
 
-    // CERTO, CONSIDERANDO APENAS O PHP
-
-    // foreach (App\Models\EatingPlan::where('nutritionist_id', $nutritionist_id)->get() as $register) {
-    //     array_push($eating_plans_patients, $register->patient_id);
-    // }
-
-    // $my_patients = array_unique($eating_plans_patients);
-
-    // foreach ($my_patients as $patient_id) {
-    //     App\Models\Patient::find($patient_id);
-    //     foreach (App\Models\Patient::where('id', $patient_id)->get() as $patient) {
-    //         foreach (App\Models\User::where('id', $patient->user_id)->get() as $users) {
-    //             array_push($users_patients, $users->id);
-    //         }
-    //     }
-    // }
-
-    // IDIOMÁTICO DENTRO DO LARAVEL
     $users_patients = $nutritionist->eatingPlans->map(function($ep) {
         return $ep->patient->user->id;
     });
@@ -77,7 +59,7 @@ $users_patients = array();
 
     @endphp
 
-    @foreach ($patient_query as $user) 
+    @foreach ($patient_query as $user)
     <tr class="border transition delay-150 hover:bg-gray-100 text-left">
         <td class="pl-2 rounded-tl-sm">
             {{ $user->name }}
@@ -88,11 +70,12 @@ $users_patients = array();
         <td class="text-center">
             28/06/2021 (Em breve)
         </td>
-        <td class="text-center w-2/12 rounded-tr-sm">
-            <!-- <x-button-visual href="/profile?patient={{$user->id}}"/> -->
-            <x-button-visual href="{{route('profile', $user->patientProfile)}}"/>
+        <td class="flex items-center justify-center gap-2 rounded-tr-sm pl-2">
+            <x-button-visual href="{{route('profile', $user)}}"/>
+            <x-evaluation-button href="{{route('evaluation', $user->patientProfile)}}"/>
+            <x-eating-plan-button href="{{route('view_eating_plan', $user)}}"/>
         </td>
-    </tr>    
+    </tr>
     @endforeach
 
 </table>
@@ -102,7 +85,7 @@ $users_patients = array();
 function cpf_display($string) {
     $arr = str_split($string, 3);
     $save = array();
-    for ($i = 0; $i < sizeof($arr); $i++) {     
+    for ($i = 0; $i < sizeof($arr); $i++) {
         if ($i == 0 || $i == 1) {
             array_push($save, $arr[$i]);
             array_push($save, '.');
@@ -115,7 +98,7 @@ function cpf_display($string) {
     }
     $cpf_final = $save[0];
 
-    for ($i = 1; $i < sizeof($save); $i++) {    
+    for ($i = 1; $i < sizeof($save); $i++) {
         $cpf_final = $cpf_final . "$save[$i]";
     }
     return $cpf_final;

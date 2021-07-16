@@ -44,7 +44,7 @@
     </thead>
 
     @foreach ($patient_collection as $patient)
-        
+
         @php
         if(Auth::user()->isNutritionist()){
             if ($column == '' || $value == '') {
@@ -52,7 +52,7 @@
             } else {
                 $eating_plan_collection = App\Models\EatingPlan::where('patient_id', $patient->id)->orderBy($column, $value)->get();
             }
-        }else{    
+        }else{
             if ($column == '' || $value == '') {
                 $eating_plan_collection = App\Models\EatingPlan::where('patient_id', $patient->id)->orderBy('title', 'asc')->get();
             } else {
@@ -63,7 +63,7 @@
 
         @foreach ($eating_plan_collection as $eating_plan)
         <tr class="border transition delay-150 hover:bg-gray-100 text-left" x-data="{ confirm:false }">
-    
+
             <td class="pl-2 rounded-tl-sm">
                 {{ $eating_plan->title }}
             <td class="text-center">
@@ -74,8 +74,10 @@
             </td>
             <td class="flex items-center justify-center gap-4 rounded-tr-sm">
                 <x-button-visual href="{{ route('view_eating_plan', $eating_plan) }}" />
-                <x-button-edit />
-                <x-button-delete @click="confirm=true" />
+                @if(Auth::user()->isNutritionist())
+                    <x-button-edit />
+                    <x-button-delete @click="confirm=true" />
+                @endif
                 <template x-if="confirm">
                     <x-modal>
                         <x-confirm-template>
