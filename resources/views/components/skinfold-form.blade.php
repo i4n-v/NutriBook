@@ -1,12 +1,12 @@
 @props(['skinFold'])
 
-<form method="POST" action="{{ route('update_skinfold', $evaluetionid = $_GET['evaluation'])}}" x-show="dob">
+<form method="POST" action="{{ route('update_skinfold', $skinFold)}}" x-show="dob">
 	@csrf
 	<fieldset>
 		<legend class="text-white text-2xl border-b-2 mb-5">Dobras Cutâneas</legend>
-	
 
-        <div class="grid grid-cols-2 gap-5 w-full">    
+
+        <div class="grid grid-cols-2 gap-5 w-full">
             <!-- breastplate -->
 
             <div>
@@ -15,7 +15,7 @@
             </div>
 
             <!-- biceps -->
-        
+
             <div>
                 <x-label for="biceps" :value="__('Bíceps (mm)')"/>
                 <x-input id="biceps" class="block mt-1 w-full" type="number" name="biceps" :value="$skinFold->biceps" required autofocus placeholder="Medida dos bíceps"/>
@@ -79,7 +79,7 @@
             </div>
         </div>
 	</fieldset>
-    
+
         <div class="flex items-center justify-end mt-4">
             <x-button class="ml-4">
                 {{ __('Salvar') }}
