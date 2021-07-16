@@ -4,12 +4,12 @@
     </div>
     <div class="cursor-pointer w-full h-1/2" @click="click = !click" @click.away="click = false">
         <span class="transition delay-150 border-b-2 border-white hover:border-yellow-300" x-bind:class="click?'border-yellow-300':''">
-            @php            
+            @php
                 $name = explode(' ', Auth::user()->name);
-                $name = [$name[0], $name[1]];
+                $name = [$name[0], $name[1] ?? ''];
                 $name = implode(' ', $name);
                 echo $name;
-            @endphp 
+            @endphp
         </span>
     </div>
 </div>

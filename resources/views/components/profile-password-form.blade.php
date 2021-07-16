@@ -1,4 +1,6 @@
-<form method="POST" action="{{ route('update_patient_password') }}" class="mt-3 w-10/12" x-show="password">
+@props(['user'])
+
+<form method="POST" action="{{ route('update_password', $user) }}" class="mt-3 w-10/12" x-show="password">
 
     @csrf
 
