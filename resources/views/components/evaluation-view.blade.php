@@ -1,6 +1,5 @@
 @php
-    $name = explode(' ', App\Models\Evaluation::find($_GET['evaluation'])->patient->user->name)[0];
-    $id = App\Models\Evaluation::find($_GET['evaluation'])->patient->user->id
+    $name = explode(' ', $evaluation->patient->user->name)[0];
 @endphp
 <x-guest-layout>
     <div class="min-h-screen bg-white">
@@ -10,9 +9,9 @@
             </h2>
             <div class="ml-2 text-gray-600 font-bold text-sm mt-2">
                 <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Home</a> >
-                @if(Auth::user()->isNutritionist()) 
-                    <a href="/profile?patient={{ $id }}" class="transition delay-150 hover:text-gray-900">{{ $name }}</a> >
-                    <a href="/evaluation?patient={{ $id }}" class="transition delay-150 hover:text-gray-900">Avaliações</a>
+                @if(Auth::user()->isNutritionist())
+                    <a href="{{ route('profile', $evaluation->patient->user) }}" class="transition delay-150 hover:text-gray-900">{{ $name }}</a> >
+                    <a href="{{ route('evaluation', $evaluation->patient) }}" class="transition delay-150 hover:text-gray-900">Avaliações</a>
                 @else
                     <a href="{{ route('profile') }}" class="transition delay-150 hover:text-gray-900">{{ $name }}</a> >
                     <a href="{{ route('evaluation') }}" class="transition delay-150 hover:text-gray-900">Avaliações</a>
@@ -35,7 +34,6 @@
                             <div class="ml-auto w-9/12">
                                 <div class="mx-auto w-9/12 p-5">
                                 @php
-                                    $evaluation = App\Models\Evaluation::find($_GET['evaluation']);
                                     $body_measurement = $evaluation->bodyMeasurement;
                                     $skin_fold = $evaluation->skinFold;
                                     $anamnese = $evaluation->anamnese;
@@ -44,8 +42,8 @@
                                     <x-body-measurement-view-table :bodyMeasurement="$body_measurement"/>
                                     <x-skinfold-view-table :skinFold="$skin_fold"/>
                                     <x-anamnese-view-table :anamnese="$anamnese"/>
-                                </div>   
-                            </div>                         
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

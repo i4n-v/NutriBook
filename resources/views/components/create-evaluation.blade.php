@@ -1,7 +1,3 @@
-@php
-    $name = explode(' ', App\Models\Evaluation::find($_GET['evaluation'])->patient->user->name)[0];
-    $id = App\Models\Evaluation::find($_GET['evaluation'])->patient->user->id
-@endphp
 <x-guest-layout>
     <div class="min-h-screen bg-white">
         <x-slot name="header">
@@ -10,8 +6,7 @@
             </h2>
             <div class="ml-2 text-gray-600 font-bold text-sm mt-2">
                 <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Home</a> >
-                <a href="#" class="transition delay-150 hover:text-gray-900">{{ $name }}</a> >
-                <a href="/evaluation?patient={{$id}}" class="transition delay-150 hover:text-gray-900">Avaliações</a>
+                <a href="{{ route('evaluation', $evaluation->patient) }}" class="transition delay-150 hover:text-gray-900">Avaliações</a>
             </div>
         </x-slot>
         <div class="py-12">
@@ -31,7 +26,6 @@
                             <div class="ml-auto w-9/12">
                                 <div class="mx-auto w-7/12 p-5">
                                 @php
-                                    $evaluation = App\Models\Evaluation::find($_GET['evaluation']);
                                     $body_measurement = $evaluation->bodyMeasurement;
                                     $skin_fold = $evaluation->skinFold;
                                     $anamnese = $evaluation->anamnese;
