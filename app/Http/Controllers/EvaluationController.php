@@ -5,6 +5,7 @@ use App\Models\Anamnese;
 use App\Models\SkinFold;
 use App\Models\BodyMeasurement;
 use App\Models\Evaluation;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +17,17 @@ class EvaluationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Patient $patient)
     {
-        //
+        //$myPatient = auth()->user()->nutritionistProfile->patients->find($patient->id);
+
+        if(auth()->user()->isNutritionist()){
+            return view('evaluation', ['patient' => $patient->user]);
+        }else if(auth()->user()->isPatient()){
+            return view('evaluation');
+        }else{
+            return redirect()->route('login');
+        }
     }
 
     /**
@@ -37,18 +46,18 @@ class EvaluationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Evaluation $evaluation, Request $request)
+    public function store(Request $request, Patient $patient)
     {
         $evaluation = Evaluation::create([
             'weight' => null,
             'height' => null,
             'nutritionist_id' => Auth::user()->nutritionistProfile->id,
-            'patient_id' => $request->id,
+            'patient_id' => $patient->id,
             ]);
             // echo($evaluation->created_at);
             $evid = Evaluation::where('created_at', $evaluation->created_at)->get()[0]->id;
             //  var_dump($eva);
-             
+
             $anamnese = Anamnese::create([
             'objective' =>null,
             'pathological_history' =>null,
@@ -58,7 +67,7 @@ class EvaluationController extends Controller
             'allergies' =>null,
             'evaluation_id' => $evid
         ]);
-        
+
         $SkinFold = SkinFold::create([
             'breastplate' => null,
             'biceps' => null,
@@ -81,8 +90,8 @@ class EvaluationController extends Controller
         'calf' =>null,
         'evaluation_id' => $evid
         ]);
-        $idpatient = $evaluation->patient->user->id;
-        return redirect("/evaluation?patient=$idpatient&success=Avaliação criada com sucesso!");
+
+        return redirect()->route('evaluation', ['patient' => $evaluation->patient->user]);
 
     }
 
@@ -94,7 +103,15 @@ class EvaluationController extends Controller
      */
     public function show(Evaluation $evaluation)
     {
-        //
+        $myPatient = auth()->user()->nutritionistProfile->patients->find($evaluation->patient->id);
+
+        if(isset($myPatient)){
+            return view('components/evaluation-view', ['evaluation' => $evaluation]);
+        }else if(auth()->user()->isPatient()){
+            return view('components/evaluation-view', ['evaluation' => $evaluation]);
+        }else{
+            return redirect()->route('login');
+        }
     }
 
     /**
@@ -103,13 +120,10 @@ class EvaluationController extends Controller
      * @param  \App\Models\Evaluation  $evaluation
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Evaluation $evaluation)
+    public function edit(Evaluation $evaluation)
     {
-
-        $id = $evaluation->nutritionist->user->id;
-       
-        if($id == auth()->user()->id){
-            return redirect("/evaluation/form?evaluation=$evaluation->id");
+        if(auth()->user()->id == $evaluation->nutritionist->user->id){
+            return view('components/create-evaluation', ['evaluation' => $evaluation]);
        }else{
            return redirect()->route('login');
        }
@@ -124,9 +138,12 @@ class EvaluationController extends Controller
      */
     public function update(Request $request, Evaluation $evaluation)
     {
-        $patid = Evaluation::find($request->id)->patient->user->id;
-        Evaluation::findOrFail($request->id)->update($request->all());
-        return redirect("evaluation?patient=$patid&success=Avaliação atualizada com sucesso!");
+        $patient = $evaluation->patient;
+        $evaluation->update($request->all());
+
+        return redirect()
+            ->route('evaluation', ['patient' => $patient])
+            ->with('success', 'Avaliação atualizada com sucesso!');
     }
 
     /**
@@ -137,8 +154,11 @@ class EvaluationController extends Controller
      */
     public function destroy(Evaluation $evaluation)
     {
-        $idpatient = $evaluation->patient->user->id;
+        $patient = $evaluation->patient;
         $evaluation->delete();
-        return redirect("/evaluation?patient=$idpatient&success=Avaliação excluido com sucesso!");
+
+        return redirect()
+            ->route('evaluation', ['patient' => $patient])
+            ->with('success', 'Avaliação excluida com sucesso!');
     }
 }
