@@ -12,12 +12,7 @@
                 Avaliações
             </h2>
             <div class="ml-2 text-gray-600 font-bold text-sm mt-2">
-                <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Home</a> >
-                @if(Auth::user()->isNutritionist())
-                    <a href="{{ route('profile', $patient) }}" class="transition delay-150 hover:text-gray-900">{{ $name }}</a>
-                @else
-                    <a href="{{ route('profile') }}" class="transition delay-150 hover:text-gray-900">{{ $name }}</a>
-                @endif
+                <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Home</a>
             </div>
         </x-slot>
         @if(Auth::user()->isNutritionist())

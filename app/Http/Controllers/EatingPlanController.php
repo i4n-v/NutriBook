@@ -49,7 +49,7 @@ class EatingPlanController extends Controller
      */
     public function show(Request $request, User $user)
     {
-        return redirect()->route('home', ['patient' => $user->patientProfile]);
+        return view('home', ['patient' => $user->patientProfile]);
     }
 
     /**
@@ -88,8 +88,8 @@ class EatingPlanController extends Controller
         $eatingplan->delete();
 
          return redirect()
-         ->route('home', ['patient' => $patient])
-         ->with('success', 'Avaliação atualizada com sucesso!');
+         ->route('view_eating_plan', $patient->user)
+         ->with('success', 'Plano alimentar excluido com sucesso!');
 
     }
 }

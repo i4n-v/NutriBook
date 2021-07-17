@@ -1,7 +1,19 @@
 <x-guest-layout>
-    
+
     <div class="min-h-screen bg-white">
         <x-slot name="header">
+            <h2 class="font-semibold text-2xl text-gray-900 leading-tight">
+                @if(isset($patient))
+                    Planos Alimentares
+                @else
+                    Home
+                @endif
+            </h2>
+            @if(isset($patient))
+                <div class="ml-2 text-gray-600 font-bold text-sm mt-2">
+                    <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Home</a>
+                </div>
+            @endif
         </x-slot>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -15,20 +27,23 @@
                             @endif
 
                             <div class="w-7/12 ml-auto mr-5">
-                            <!-- message div -->
+                                <!-- message div -->
+                                @if(session('success') || session('error'))
+                                    <x-message :success="session('success')??''" :error="session('error')??''" x-show="load" />
+                                @endif
 
                             <div class="pb-2 font-bold">
-                                @if (Auth::user()->isNutritionist())
-                                Aqui estão todos os seus pacientes:
-                                @elseif (Auth::user()->isPatient())
-                                Aqui estão todos os seus planos alimentares:
+                                @if (Auth::user()->isNutritionist() && !isset($patient))
+                                    Aqui estão todos os seus pacientes:
+                                @elseif (Auth::user()->isPatient() || isset($patient))
+                                    Aqui estão todos os seus planos alimentares:
                                 @endif
                             </div>
 
                             @if (Auth::user()->isNutritionist() && !isset($patient))
                                 <x-table-my-patients :column="$column ?? ''" :value="$value ?? ''"/>
                                 @elseif (Auth::user()->isPatient() || isset($patient))
-                                <x-table-my-eating-plans :column="$column ?? ''" :value="$value ?? ''"/>
+                                <x-table-my-eating-plans :column="$column ?? ''" :value="$value ?? ''" :patient="$patient ?? ''"/>
                                 @endif
                             </div>
                         </div>

@@ -1,8 +1,8 @@
-@props(['column', 'value'])
+@props(['column', 'value', 'patient'])
 
 @php
     if(Auth::user()->isNutritionist()){
-        $patient_collection = App\Models\Patient::where('user_id', $_GET['patient'])->get();
+        $patient_collection = App\Models\Patient::where('user_id', $patient->user->id)->get();
     }else{
         $patient_collection = App\Models\Patient::where('user_id', Auth::user()->id)->get();
     }
