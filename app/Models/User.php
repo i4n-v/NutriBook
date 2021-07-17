@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -21,6 +21,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'CPF',
+        'phone',
+        'location',
         'email',
         'password',
     ];

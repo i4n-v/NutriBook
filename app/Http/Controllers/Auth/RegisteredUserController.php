@@ -45,6 +45,8 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'CPF' => $request->cpf,
             'email' => $request->email,
+            'phone' => null,
+            'location'=> null,
             'password' => Hash::make($request->password),
         ]);
         if($request->type == 'patient'){
