@@ -11,7 +11,7 @@ class Evaluation extends Pivot
     use HasFactory;
 
     protected $table = 'evaluations';
-
+    public $incrementing = true;
     protected $fillable = [
         'weight',
         'height',
@@ -39,4 +39,5 @@ class Evaluation extends Pivot
         return $this->hasOne(Anamnese::class, 'evaluation_id');
     }
 
+    
 }

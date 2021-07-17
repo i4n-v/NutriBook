@@ -22,7 +22,7 @@
         </x-slot>
         @if(Auth::user()->isNutritionist())
         <div class="float-right mt-5 mr-5" @click="evaluation = false" x-show="evaluation">
-            <x-add-button href="{{ route('create_evaluation', $patient) }}">
+            <x-add-button href="{{ route('create_evaluation', $patient->patientProfile->id) }}">
                 {{ __('Adicionar') }}
             </x-add-button>
         </div>

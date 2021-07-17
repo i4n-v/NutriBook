@@ -55,7 +55,7 @@ class EvaluationController extends Controller
             'patient_id' => $patient->id,
             ]);
             // echo($evaluation->created_at);
-            $evid = Evaluation::where('created_at', $evaluation->created_at)->get()[0]->id;
+            // $evid = Evaluation::where('created_at', $evaluation->created_at)->get()[0]->id;
             //  var_dump($eva);
 
             $anamnese = Anamnese::create([
@@ -65,7 +65,7 @@ class EvaluationController extends Controller
             'used_drugs' =>null,
             'life_style' =>null,
             'allergies' =>null,
-            'evaluation_id' => $evid
+            'evaluation_id' => $evaluation->id
         ]);
 
         $SkinFold = SkinFold::create([
@@ -79,7 +79,7 @@ class EvaluationController extends Controller
             'thigh' => null,
             'calf' => null,
             'lumbar' => null,
-            'evaluation_id' => $evid
+            'evaluation_id' => $evaluation->id
         ]);
         $bodyMeasurement = BodyMeasurement::create([
         'bust' =>null,
@@ -88,11 +88,13 @@ class EvaluationController extends Controller
         'hip' =>null,
         'thigh' =>null,
         'calf' =>null,
-        'evaluation_id' => $evid
+        'evaluation_id' => $evaluation->id
         ]);
 
-        return redirect()->route('evaluation', ['patient' => $evaluation->patient->user]);
-
+        // return redirect()->route('evaluation', ['patient' => $evaluation->patient->user-]);
+        return redirect()
+        ->route('evaluation', ['patient' => $patient])
+        ->with('success', 'Avaliação criada com sucesso!');
     }
 
     /**
