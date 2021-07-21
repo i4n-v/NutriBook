@@ -43,7 +43,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 Route::get('/', function () {
     return redirect('/login');
-});    
+});
 
 // Route::middleware([])
 
@@ -97,9 +97,13 @@ Route::get('/evaluation/edit/bodymeasurement/{id}', [BodyMeasurementController::
 Route::post('/evaluation/update/bodymeasurement/{bodyMeasurement}', [BodyMeasurementController::Class, 'update'])->middleware(['auth'])->name('update_bodymeasurement');
 
 // eating plan routes
-Route::get('/eatingPlan/{user}', [EatingPlanController::Class, 'show'])->middleware(['auth'])->name('view_eating_plan');
+Route::get('/eatingPlan/{user}', [EatingPlanController::Class, 'show'])->middleware(['auth'])->name('eating_plan');
 
 Route::get('/home/eatingplan/remove/{eatingplan}', [EatingPlanController::Class, 'destroy'])->middleware(['auth'])->name('eatingplan_delete');
+
+Route::get('/home/eatingplan/forms/{patient}', [EatingPlanController::Class, 'index'])->middleware(['auth'])->name('action_eatingplan');
+
+Route::get('/home/eatingplan/create/{patient}', [EatingPlanController::Class, 'store'])->middleware(['auth'])->name('eatingplan_create');
 
 Route::get('home/ordering', [OrderingSelectorController::class, 'ordering'])
     ->middleware(['auth'])

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EatingPlan;
 use App\Models\User;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
@@ -15,9 +16,9 @@ class EatingPlanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( Patient $patient)
     {
-        //
+        return view('components/eating-plan-action', ['patient' => $patient]);
     }
 
     /**
