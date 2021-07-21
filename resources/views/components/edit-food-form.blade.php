@@ -3,9 +3,9 @@
 <form method="POST" action="{{ route('food_update', $food) }}">
     @csrf
 
-    <fieldset>
+    <fieldset class="mt-10">
 
-        <legend class="text-white text-2xl border-b-2 mb-5">Alimento</legend>
+        <legend class="text-white text-xl border-b-2 mb-5">Alimento</legend>
 
         <!-- Food name -->
         <div>
@@ -24,7 +24,7 @@
 
     <fieldset class="mt-6">
 
-        <legend class="text-white text-2xl border-b-2 mt-8 mb-2">Tabela nutricional do alimento</legend>
+        <legend class="text-white text-xl border-b-2 mt-8 mb-2">Tabela nutricional do alimento</legend>
 
         <!-- Sodium -->
         <div class="mt-4">
@@ -88,8 +88,8 @@
             Cancelar
         </x-cancel-button>
 
-        <x-button class="ml-4">
-            {{ __('Editar') }}
+        <x-button class="ml-4 px-8">
+            {{ __('Salvar') }}
         </x-button>
     </div>
 </form>

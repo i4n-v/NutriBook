@@ -21,9 +21,9 @@
             </fieldset>
 
             <fieldset class="mt-6">
-            
+
                 <legend class="text-white text-2xl border-b-2 mt-8 mb-2">Tabela nutricional do alimento</legend>
-            
+
                 <!-- Sodium -->
                 <div class="mt-4">
                     <x-label for="sodium" :value="__('Sódio(mg)')" />
@@ -80,13 +80,13 @@
                     <x-input id="energetic_value" class="block mt-1 w-full" type="number" name="energetic_value" :value="old('energetic_value')" required placeholder="Digite o valor energético"/>
                 </div>
             </fieldset>
-           
+
             <div class="flex items-center justify-end mt-4">
                 <x-cancel-button @click="food = true">
                     Cancelar
                 </x-cancel-button>
 
-                <x-button class="ml-4">
+                <x-button class="ml-4 px-8">
                     {{ __('Criar') }}
                 </x-button>
             </div>

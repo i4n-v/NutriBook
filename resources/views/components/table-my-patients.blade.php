@@ -73,7 +73,7 @@ $users_patients = array();
         <td class="flex items-center justify-center gap-2 rounded-tr-sm pl-2">
             <x-button-visual href="{{route('profile', $user)}}"/>
             <x-evaluation-button href="{{route('evaluation', $user->patientProfile)}}"/>
-            <x-eating-plan-button href="{{route('view_eating_plan', $user)}}"/>
+            <x-eating-plan-button href="{{route('eating_plan', $user)}}"/>
         </td>
     </tr>
     @endforeach

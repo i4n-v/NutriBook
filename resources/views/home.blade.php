@@ -15,11 +15,18 @@
                 </div>
             @endif
         </x-slot>
+        @if(Auth::user()->isNutritionist() && isset($patient))
+            <div class="float-right mt-5 mr-5" @click="plan = false" x-show="plan">
+                <x-add-button href="{{ route('action_eatingplan', $patient) }}">
+                    {{ __('Adicionar') }}
+                </x-add-button>
+            </div>
+        @endif
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-5">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-gray-100 border-b border-gray-200">
-                        <div class="flex gap-4">
+                        <div class="flex gap-4" x-show="plan">
                             @if (Auth::user()->isNutritionist() && !isset($patient))
                             <x-ordering-patients />
                             @elseif (Auth::user()->isPatient() || isset($patient))
@@ -32,15 +39,15 @@
                                     <x-message :success="session('success')??''" :error="session('error')??''" x-show="load" />
                                 @endif
 
-                            <div class="pb-2 font-bold">
-                                @if (Auth::user()->isNutritionist() && !isset($patient))
-                                    Aqui estão todos os seus pacientes:
-                                @elseif (Auth::user()->isPatient() || isset($patient))
-                                    Aqui estão todos os seus planos alimentares:
-                                @endif
-                            </div>
+                                <div class="mb-5 font-bold">
+                                    @if (Auth::user()->isNutritionist() && !isset($patient))
+                                        Aqui estão todos os seus pacientes:
+                                    @elseif (Auth::user()->isPatient() || isset($patient))
+                                        Aqui estão todos os seus planos alimentares:
+                                    @endif
+                                </div>
 
-                            @if (Auth::user()->isNutritionist() && !isset($patient))
+                                @if (Auth::user()->isNutritionist() && !isset($patient))
                                 <x-table-my-patients :column="$column ?? ''" :value="$value ?? ''"/>
                                 @elseif (Auth::user()->isPatient() || isset($patient))
                                 <x-table-my-eating-plans :column="$column ?? ''" :value="$value ?? ''" :patient="$patient ?? ''"/>

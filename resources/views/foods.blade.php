@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="min-h-screen bg-white" x-data="{ food:true }">
         <x-slot name="header">
-        <h2 class="font-semibold text-2xl text-gray-900 leading-tight">
+            <h2 class="font-semibold text-2xl text-gray-900 leading-tight">
                 Alimentos
             </h2>
             <div class="ml-2 text-gray-600 font-bold text-sm mt-2">
