@@ -30,6 +30,16 @@
             <x-input id="crn" class="block mt-1 w-full disable" type="text" name="crn" :value="$user->nutritionistProfile->CRN" :disabled="true" required autofocus />
         @endif
     </div>
+    <div>
+        <x-label for="location" class="text-gray-900 font-bold" :value="__('Localização')" />
+
+        <x-input id="location" class="block mt-1 w-full disable" type="text" name="location" :value="$user->location" :disabled="$user->id != Auth::user()->id" required autofocus />
+    </div>
+    <div>
+        <x-label for="phone" class="text-gray-900 font-bold" :value="__('Telefone')" />
+
+        <x-input id="phone" class="block mt-1 w-full disable" type="tel" name="phone" :value="$user->phone" minlength="11" maxlength="13" :disabled="$user->id != Auth::user()->id" required autofocus />
+    </div>
     @if($user->id == Auth::user()->id)
         <div class="flex items-center justify-center mt-4">
             <x-button class="px-10" class="disable">
