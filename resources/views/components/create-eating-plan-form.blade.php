@@ -32,13 +32,40 @@
     <fieldset class="mt-6">
         <legend class="text-white text-xl border-b-2 mb-5">Refeições</legend>
 
-         <!-- Meals 1 -->
-         <div class="mt-4">
-            <x-label for="meal-1" :value="__('Alimento(Proteína)')" />
+        <!-- Meals 1 -->
+        <div class="mt-4">
 
-            <select id="meal-1" class="block mt-1 w-full rounded-md focus:border-yellow-300 focus:shadow-lg focus:ring-1 focus:ring-yellow-300" name="meal-1" required autofocus>
-                <option value="volvo">Volvo</option>
-            </select>
+            <h3 class="text-white text-md mb-2">Refeição 1</h3>
+
+            <div class="grid grid-cols-3 gap-5">
+                <div>
+                    <x-label for="meal-1" :value="__('Carboidrato')" />
+
+                    <select id="meal-1" class="block mt-1 w-full rounded-md focus:border-yellow-300 focus:shadow-lg focus:ring-1 focus:ring-yellow-300" name="meal-1" required autofocus>
+                        <option value="volvo">Volvo</option>
+                    </select>
+                </div>
+
+                <div>
+                    <x-label for="meal-1" :value="__('Proteína')" />
+
+                    <select id="meal-1" class="block mt-1 w-full rounded-md focus:border-yellow-300 focus:shadow-lg focus:ring-1 focus:ring-yellow-300" name="meal-1" required autofocus>
+                        <option value="volvo">Volvo</option>
+                    </select>
+                </div>
+
+                <div>
+                    <x-label for="meal-1" :value="__('Gordura')" />
+
+                    <select id="meal-1" class="block mt-1 w-full rounded-md focus:border-yellow-300 focus:shadow-lg focus:ring-1 focus:ring-yellow-300" name="meal-1" required autofocus>
+                        <option value="volvo">Volvo</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-yellow-400 rounded-md text-center mt-5 transition delay-150 hover:bg-yellow-500 cursor-pointer shadow-md">
+            <span class="w-full text-gray-900 font-bold">Adicionar refeição</span>
         </div>
 
     </fieldset>
