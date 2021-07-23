@@ -8,7 +8,7 @@
             </div>
             
             @if (Auth::user()!=null)
-            <div class="w-8/12 mt-2 ml-2">
+            <div class="w-10 mt-2 ml-2 focus-within:w-6/12 duration-300">
                     <x-search-bar>
                         @if (Auth::user()->isNutritionist())
                         <x-slot name="placeholder">{{ _('Pesquisar pacientes') }}</x-slot>
