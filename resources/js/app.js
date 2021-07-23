@@ -5,7 +5,7 @@ require('./bootstrap');
 require('alpinejs');
 
 (function(){
-
+    
     let message = document.getElementById('message');
 
     if(!!message){
@@ -32,5 +32,13 @@ window.eatingPlan = {
         for (let r of this.refeicoes) {
             console.log(`salvar os dados: ${r.nome} ${r.carbo}`) // axios.post
         }
+    }
+}
+
+window.nutriPatients = {
+    patients: [],
+    async loadPatients() {
+        let response = await axios.get('/nutri-patients')
+        this.patients = response.data
     }
 }

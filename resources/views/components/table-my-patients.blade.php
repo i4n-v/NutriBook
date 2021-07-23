@@ -2,15 +2,12 @@
 
 @php
 
-// $nutritionist = App\Models\Nutritionist::where('user_id', Auth::user()->id)->get();
 $nutritionist = Auth::user()->nutritionistProfile;
-$nutritionist_id = $nutritionist->id;
-$eating_plans_patients = array();
 $users_patients = array();
 
 @endphp
 
-<table class="w-full bg-white shadow-lg border-solid border-b-2 rounded-sm">
+<table class="w-full bg-white shadow-lg border-solid border-b-2 rounded-sm" x-data="nutriPatients" x-init="loadPatients">
     <thead class="h-10 bg-gray-700 text-white rounded-sm">
         <th class="rounded-tl-sm">
             <div class="grid grid-cols-12">
@@ -59,49 +56,19 @@ $users_patients = array();
 
     @endphp
 
-    @foreach ($patient_query as $user)
-    <tr class="border transition delay-150 hover:bg-gray-100 text-left">
-        <td class="pl-2 rounded-tl-sm">
-            {{ $user->name }}
-        </td>
-        <td class="text-center">
-            {{ cpf_display($user->CPF) }}
-        </td>
-        <td class="text-center">
-            28/06/2021 (Em breve)
-        </td>
-        <td class="flex items-center justify-center gap-2 rounded-tr-sm pl-2">
-            <x-button-visual href="{{route('profile', $user)}}"/>
-            <x-evaluation-button href="{{route('evaluation', $user->patientProfile)}}"/>
-            <x-eating-plan-button href="{{route('eating_plan', $user)}}"/>
-        </td>
-    </tr>
-    @endforeach
-
+    <template x-for="patient in patients">
+        <tr class="border transition delay-150 hover:bg-gray-100 text-left">
+            <td class="pl-2 rounded-tl-sm" x-text="patient.name"></td>
+            <td class="text-center" x-text="patient.formattedCPF"></td>
+            <td class="text-center">
+                28/06/2021 (Em breve)
+            </td>
+            <td class="flex items-center justify-center gap-2 rounded-tr-sm pl-2">
+                <x-button-visual x-bind:href="'/profile/' + patient.id"/>
+                <x-evaluation-button x-bind:href="'/evaluation/' + patient.patient_profile.id"/>
+                <x-eating-plan-button x-bind:href="'/eatingPlan/' + patient.id"/>
+            </td>
+        </tr>
+    </template>
+   
 </table>
-
-@php
-
-function cpf_display($string) {
-    $arr = str_split($string, 3);
-    $save = array();
-    for ($i = 0; $i < sizeof($arr); $i++) {
-        if ($i == 0 || $i == 1) {
-            array_push($save, $arr[$i]);
-            array_push($save, '.');
-        } elseif ($i == 2) {
-            array_push($save, $arr[$i]);
-            array_push($save, '-');
-        } else {
-            array_push($save, $arr[$i]);
-        }
-    }
-    $cpf_final = $save[0];
-
-    for ($i = 1; $i < sizeof($save); $i++) {
-        $cpf_final = $cpf_final . "$save[$i]";
-    }
-    return $cpf_final;
-}
-
-@endphp

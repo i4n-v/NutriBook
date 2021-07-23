@@ -46,6 +46,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = [
+        'formatted_cpf'
+    ];
+
     public function profile(){
         return $this->isNutritionist() ? $this->nutritionistProfile : $this->patientProfile;
     }
@@ -63,6 +67,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function nutritionistProfile(){
         return $this->hasOne(Nutritionist::class, 'user_id');
-    }    
+    }
 
+    public function getFormattedCPFAttribute() {
+        $cpf = $this->CPF;
+        $cpf_parts = str_split($cpf, 3);
+        $last = array_pop($cpf_parts);
+        return implode('.', $cpf_parts) . '-' . $last;
+    }
 }
