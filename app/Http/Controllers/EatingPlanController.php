@@ -40,6 +40,7 @@ class EatingPlanController extends Controller
     public function store(Request $request)
     {
         //
+        return 'Saving';
     }
 
     /**

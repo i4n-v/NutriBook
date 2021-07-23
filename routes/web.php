@@ -103,7 +103,7 @@ Route::get('/home/eatingplan/remove/{eatingplan}', [EatingPlanController::Class,
 
 Route::get('/home/eatingplan/forms/{patient}', [EatingPlanController::Class, 'index'])->middleware(['auth'])->name('action_eatingplan');
 
-Route::get('/home/eatingplan/create/{patient}', [EatingPlanController::Class, 'store'])->middleware(['auth'])->name('eatingplan_create');
+Route::post('/home/eatingplan/create/{patient}', [EatingPlanController::Class, 'store'])->middleware(['auth'])->name('eatingplan_create');
 
 Route::get('home/ordering', [OrderingSelectorController::class, 'ordering'])
     ->middleware(['auth'])
