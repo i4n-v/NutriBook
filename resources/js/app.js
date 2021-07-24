@@ -37,9 +37,20 @@ window.eatingPlan = {
 
 window.nutriPatients = {
     patients: [],
+    filterNamePatient: [],
+    filterCPFPatient: [],
     async loadPatients() {
         let response = await axios.get('/nutri-patients')
         this.patients = response.data
+        for (let patient of this.patients) {
+            patient.show = true
+        }
+        this.$watch('filterNamePatient', () => {
+            this.patients.map(p => p.show = p.name.toLowerCase().includes(this.filterNamePatient.toLowerCase()))
+        })
+        this.$watch('filterCPFPatient', () => {
+            this.patients.map(p => p.show = p.CPF.includes(this.filterCPFPatient))
+        })
     },
     orderBy(col) {
         this.patients = this.patients.sort((p1, p2) => p1[col].localeCompare(p2[col]))
