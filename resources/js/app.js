@@ -40,5 +40,11 @@ window.nutriPatients = {
     async loadPatients() {
         let response = await axios.get('/nutri-patients')
         this.patients = response.data
+    },
+    orderBy(col) {
+        this.patients = this.patients.sort((p1, p2) => p1[col].localeCompare(p2[col]))
+    },
+    reverseOrderBy(col) {
+        this.patients = this.patients.sort((p1, p2) => p2[col].localeCompare(p1[col]))
     }
 }

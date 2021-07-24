@@ -7,7 +7,6 @@ use App\Http\Controllers\BodyMeasurementController;
 use App\Http\Controllers\SkinFoldController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\EatingPlanController;
-use App\Http\Controllers\OrderingSelectorController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PatientController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -105,10 +104,6 @@ Route::get('/home/eatingplan/remove/{eatingplan}', [EatingPlanController::Class,
 Route::get('/home/eatingplan/forms/{patient}', [EatingPlanController::Class, 'index'])->middleware(['auth'])->name('action_eatingplan');
 
 Route::post('/home/eatingplan/create/{patient}', [EatingPlanController::Class, 'store'])->middleware(['auth'])->name('eatingplan_create');
-
-Route::get('home/ordering', [OrderingSelectorController::class, 'ordering'])
-    ->middleware(['auth'])
-    ->name('ordering');
 
 Route::get('/nutri-patients', [PatientController::class, 'nutriPatients'])->middleware(['auth']);
 

@@ -1,5 +1,3 @@
-@props(['column', 'value'])
-
 @php
 
 $nutritionist = Auth::user()->nutritionistProfile;
@@ -15,7 +13,7 @@ $users_patients = array();
                     Nome
                 </div>
                 <div class="col-start-12 col-end-12">
-                    <x-ordering-selector :asc="'nameAsc'" :desc="'nameDesc'"/>
+                    <x-ordering-selector :col="'name'"/>
                 </div>
             </div>
         </th>
@@ -25,7 +23,7 @@ $users_patients = array();
                     CPF
                 </div>
                 <div class="col-start-12 col-end-12">
-                    <x-ordering-selector :asc="'cpfAsc'" :desc="'cpfDesc'"/>
+                    <x-ordering-selector :col="'CPF'"/>
                 </div>
             </div>
         </th>
@@ -35,26 +33,12 @@ $users_patients = array();
                     Data de vínculo
                 </div>
                 <div class="col-start-12 col-end-12">
-                    <x-ordering-selector :asc="''" :desc="''"/>
+                    <x-ordering-selector :col="''"/>
                 </div>
             </div>
         </th>
         <th class="rounded-tr-sm">Ações</th>
     </thead>
-
-    @php
-
-    $users_patients = $nutritionist->eatingPlans->map(function($ep) {
-        return $ep->patient->user->id;
-    });
-
-    if ($column == '' || $value == '') {
-        $patient_query = App\Models\User::whereIn('id', $users_patients)->orderBy('name', 'asc')->get();
-    } else {
-        $patient_query = App\Models\User::whereIn('id', $users_patients)->orderBy($column, $value)->get();
-    }
-
-    @endphp
 
     <template x-for="patient in patients">
         <tr class="border transition delay-150 hover:bg-gray-100 text-left">
