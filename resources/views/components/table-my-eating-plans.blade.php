@@ -1,5 +1,3 @@
-@props(['column', 'value', 'patient'])
-
 @php
     if(Auth::user()->isNutritionist()){
         $patient_collection = App\Models\Patient::where('user_id', $patient->user->id)->get();
@@ -16,7 +14,7 @@
                     Título
                 </div>
                 <div class="col-start-12 col-end-12">
-                    <x-ordering-selector :asc="'titleAsc'" :desc="'titleDesc'"/>
+                    <x-ordering-selector :col="''"/>
                 </div>
             </div>
         </th>
@@ -26,7 +24,7 @@
                     Data de início
                 </div>
                 <div class="col-start-12 col-end-12">
-                    <x-ordering-selector :asc="'dateStartAsc'" :desc="'dateStartDesc'"/>
+                    <x-ordering-selector :col="''"/>
                 </div>
             </div>
         </th>
@@ -36,7 +34,7 @@
                     Data de término
                 </div>
                 <div class="col-start-12 col-end-12">
-                    <x-ordering-selector :asc="'dateFinishAsc'" :desc="'dateFinishDesc'"/>
+                    <x-ordering-selector :col="''"/>
                 </div>
             </div>
         </th>
