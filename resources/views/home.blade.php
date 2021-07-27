@@ -37,11 +37,7 @@
                                     Aqui estão todos os seus planos alimentares:
                                 @endif
                             </div>
-
-                            @if (Auth::user()->isPatient() || isset($patient))
-                            <x-ordering-eating-plans/>
-                            @endif
-
+                            
                             @if (Auth::user()->isNutritionist() && !isset($patient))
                             <x-table-my-patients/>
                             @elseif (Auth::user()->isPatient() || isset($patient))
