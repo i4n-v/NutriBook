@@ -45,7 +45,7 @@
                             @if (Auth::user()->isNutritionist() && !isset($patient))
                             <x-table-my-patients/>
                             @elseif (Auth::user()->isPatient() || isset($patient))
-                            <x-table-my-eating-plans :patient="$patient ?? ''"/>
+                            <x-table-my-eating-plans/>
                             @endif
                         </div>
                     </div>
