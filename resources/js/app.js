@@ -73,5 +73,11 @@ window.eatingPlansTable = {
             return ''
         })())
         this.eatingPlans = response.data
+    },
+    orderBy(col) {
+        this.eatingPlans = this.eatingPlans.sort((p1, p2) => p1[col].localeCompare(p2[col]))
+    },
+    reverseOrderBy(col) {
+        this.eatingPlans = this.eatingPlans.sort((p1, p2) => p2[col].localeCompare(p1[col]))
     }
 }

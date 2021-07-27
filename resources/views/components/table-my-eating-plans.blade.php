@@ -6,7 +6,7 @@
                     Título
                 </div>
                 <div class="col-start-12 col-end-12">
-                    <x-ordering-selector :col="''"/>
+                    <x-ordering-selector :col="'title'"/>
                 </div>
             </div>
         </th>
@@ -16,7 +16,7 @@
                     Data de início
                 </div>
                 <div class="col-start-12 col-end-12">
-                    <x-ordering-selector :col="''"/>
+                    <x-ordering-selector :col="'date_start'"/>
                 </div>
             </div>
         </th>
@@ -26,7 +26,7 @@
                     Data de término
                 </div>
                 <div class="col-start-12 col-end-12">
-                    <x-ordering-selector :col="''"/>
+                    <x-ordering-selector :col="'date_finish'"/>
                 </div>
             </div>
         </th>
