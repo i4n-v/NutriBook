@@ -1,4 +1,4 @@
-<div  x-data="nutriPatients" x-init="loadPatients">
+<div x-data="nutriPatients" x-init="loadPatients">
 
     <div class="w-full pb-6"> 
         <x-filters-patients/>
@@ -40,17 +40,17 @@
                 <th class="rounded-tr-sm">Ações</th>
             </thead>
             
-            <template x-for="patient in patients">
-                <tr class="border transition delay-150 hover:bg-gray-100 text-left" x-show="patient.show">
-                    <td class="w-2/4 pl-2 rounded-tl-sm" x-text="patient.name"></td>
-                    <td class="w-1/4 text-center" x-text="patient.formattedCPF"></td>
+            <template x-for="user in patients">
+                <tr class="border transition delay-150 hover:bg-gray-100 text-left" x-show="user.show">
+                    <td class="w-2/4 pl-2 rounded-tl-sm" x-text="user.name"></td>
+                    <td class="w-1/4 text-center" x-text="user.formattedCPF"></td>
                     <td class="w-1/4 text-center">
                         20/08/2021
                     </td>
                     <td class="flex items-center justify-center gap-2 rounded-tr-sm pl-2">
-                        <x-button-visual x-bind:href="'/profile/' + patient.id"/>
-                        <x-evaluation-button x-bind:href="'/evaluation/' + patient.patient_profile.id"/>
-                        <x-eating-plan-button x-bind:href="'/eatingPlan/' + patient.id"/>
+                        <x-button-visual x-bind:href="'/profile/' + user.id"/>
+                        <x-evaluation-button x-bind:href="'/evaluation/' + user.patient_profile.id"/>
+                        <x-eating-plan-button x-bind:href="'/eatingPlan/' + user.id"/>
                     </td>
                 </tr>
             </template>
