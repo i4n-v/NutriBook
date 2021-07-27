@@ -64,6 +64,7 @@ window.nutriPatients = {
 window.eatingPlansTable = {
     eatingPlans: [],
     confirm: false,
+    filter: false,
     async loadEatingPlans() {
         let response = await axios.get('/eating-plans/' + (function() {
             let idUserEatingPlan = Number.parseInt(window.location.href.split('/').pop())
