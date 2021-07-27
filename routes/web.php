@@ -110,3 +110,8 @@ Route::get('/nutri-patients', [PatientController::class, 'nutriPatients'])->midd
 Route::get('/eating-plans/{user?}', [EatingPlanController::class, 'eatingPlansData'])->middleware(['auth']);
 
 require __DIR__.'/auth.php';
+// Route::get('/mailable', function () {
+//     $user = App\Models\User::find(1);
+
+//     return (new Illuminate\Auth\Notifications\VerifyEmail())->toMail($user);
+// });
