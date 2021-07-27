@@ -54,6 +54,16 @@ class EatingPlanController extends Controller
         return view('home', ['patient' => $user->patientProfile]);
     }
 
+    public function eatingPlansData(Request $request, User $user)
+    {
+        if (Auth::user()->isPatient()) {
+            $eating_plan_collection = EatingPlan::where('patient_id', Auth::user()->patientProfile->id)->orderBy('title', 'asc')->get();
+        } else {
+            $eating_plan_collection = EatingPlan::where('patient_id', $user->patientProfile->id)->where('nutritionist_id', Auth::user()->nutritionistProfile->id)->orderBy('title', 'asc')->get();
+        }
+        return $eating_plan_collection->toJson();
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

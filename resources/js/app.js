@@ -60,3 +60,18 @@ window.nutriPatients = {
         this.patients = this.patients.sort((p1, p2) => p2[col].localeCompare(p1[col]))
     }
 }
+
+window.eatingPlansTable = {
+    eatingPlans: [],
+    confirm: false,
+    async loadEatingPlans() {
+        let response = await axios.get('/eating-plans/' + (function() {
+            let idUserEatingPlan = Number.parseInt(window.location.href.split('/').pop())
+            if (Number.isInteger(idUserEatingPlan)) {
+                return idUserEatingPlan
+            }
+            return ''
+        })())
+        this.eatingPlans = response.data
+    }
+}

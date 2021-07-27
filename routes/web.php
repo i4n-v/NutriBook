@@ -107,4 +107,6 @@ Route::post('/home/eatingplan/create/{patient}', [EatingPlanController::Class, '
 
 Route::get('/nutri-patients', [PatientController::class, 'nutriPatients'])->middleware(['auth']);
 
+Route::get('/eating-plans/{user?}', [EatingPlanController::class, 'eatingPlansData'])->middleware(['auth']);
+
 require __DIR__.'/auth.php';
