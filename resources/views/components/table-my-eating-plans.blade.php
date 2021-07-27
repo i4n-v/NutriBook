@@ -1,4 +1,6 @@
-<div x-data="eatingPlansTable" x-init="loadEatingPlans">
+@props(['id'])
+
+<div x-data="eatingPlansTable" x-init="loadEatingPlans({{ $id }})">
 
     <div class="w-full pb-6">
         <x-filters-eating-plans/>
@@ -41,11 +43,11 @@
             </thead>
 
             <template x-for="eatingPlan in eatingPlans">
-                <tr class="border transition delay-150 hover:bg-gray-100 text-left">
+                <tr class="border transition delay-150 hover:bg-gray-100 text-left" x-show="eatingPlan.show">
                     <td class="pl-2 rounded-tl-sm" x-text="eatingPlan.title">
-                    <td class="text-center" x-text="eatingPlan.date_start">
+                    <td class="text-center" x-text="eatingPlan.formatted_date_start">
                     </td>
-                    <td class="text-center"x-text="eatingPlan.date_finish" >
+                    <td class="text-center"x-text="eatingPlan.formatted_date_finish" >
                     </td>
                     <td class="flex items-center justify-center gap-4 rounded-tr-sm">
                         <x-button-visual href="#"/>

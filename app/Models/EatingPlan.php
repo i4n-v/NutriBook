@@ -18,6 +18,11 @@ class EatingPlan extends Pivot
         'patient_id',
    ];
 
+    protected $appends = [
+        'formatted_date_start',
+        'formatted_date_finish',
+    ];
+
    public function nutritionist(){
         return $this->belongsTo(Nutritionist::class);
     }
@@ -30,4 +35,17 @@ class EatingPlan extends Pivot
         return $this->belongsToMany(Meal::class, 'eating_plan_meals', 'eating_plan_id', 'meal_id')->using(EatingPlanMeal::class)->as('eatingPlanMeal')->withPivot('id'); 
     }
 
+    public function getFormattedDateStartAttribute() {
+        $date_start = $this->date_start;
+        $date_start_parts = explode('-', $date_start);
+        $date_start_reverse = array_reverse($date_start_parts);
+        return implode('/', $date_start_reverse);
+    }
+
+    public function getFormattedDateFinishAttribute() {
+        $date_finish = $this->date_finish;
+        $date_finish_parts = explode('-', $date_finish);
+        $date_finish_reverse = array_reverse($date_finish_parts);
+        return implode('/', $date_finish_reverse);
+    }
 }

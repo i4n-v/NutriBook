@@ -65,15 +65,24 @@ window.eatingPlansTable = {
     eatingPlans: [],
     confirm: false,
     filter: false,
-    async loadEatingPlans() {
-        let response = await axios.get('/eating-plans/' + (function() {
-            let idUserEatingPlan = Number.parseInt(window.location.href.split('/').pop())
-            if (Number.isInteger(idUserEatingPlan)) {
-                return idUserEatingPlan
-            }
-            return ''
-        })())
+    filterTitleEatingPlan: [],
+    filterDateStartEatingPlan: [],
+    filterDateFinishEatingPlan: [],
+    async loadEatingPlans(UserIdPatient) {
+        let response = await axios.get('/eating-plans/' + UserIdPatient)
         this.eatingPlans = response.data
+        for (let eP of this.eatingPlans) {
+            eP.show = true
+        }
+        this.$watch('filterTitleEatingPlan', () => {
+            this.eatingPlans.map(p => p.show = p.title.toLowerCase().includes(this.filterTitleEatingPlan.toLowerCase()))
+        })
+        this.$watch('filterDateStartEatingPlan', () => {
+            this.eatingPlans.map(p => p.show = p.formatted_date_start.includes(this.filterDateStartEatingPlan))
+        })
+        this.$watch('filterDateFinishEatingPlan', () => {
+            this.eatingPlans.map(p => p.show = p.formatted_date_finish.includes(this.filterDateFinishEatingPlan))
+        })
     },
     orderBy(col) {
         this.eatingPlans = this.eatingPlans.sort((p1, p2) => p1[col].localeCompare(p2[col]))

@@ -37,11 +37,10 @@
                                     Aqui estão todos os seus planos alimentares:
                                 @endif
                             </div>
-                            
                             @if (Auth::user()->isNutritionist() && !isset($patient))
                             <x-table-my-patients/>
                             @elseif (Auth::user()->isPatient() || isset($patient))
-                            <x-table-my-eating-plans/>
+                            <x-table-my-eating-plans :id="$patient->user->id"/>
                             @endif
                         </div>
                     </div>
