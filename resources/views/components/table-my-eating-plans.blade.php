@@ -42,7 +42,7 @@
                 <th class="rounded-tr-sm">Ações</th>
             </thead>
 
-            <template x-for="eatingPlan in eatingPlans">
+            <template x-for="(eatingPlan, i) in eatingPlans">
                 <tr class="border transition delay-150 hover:bg-gray-100 text-left" x-show="eatingPlan.show">
                     <td class="pl-2 rounded-tl-sm" x-text="eatingPlan.title">
                     <td class="text-center" x-text="eatingPlan.formatted_date_start">
@@ -58,7 +58,7 @@
                         <template x-if="confirm">
                             <x-modal>
                                 <x-confirm-template>
-                                <x-confirm-button class="px-9" href="">Sim</x-confirm-button>
+                                <x-confirm-button class="px-9" x-on:click="deletePlan(eatingPlan.id)">Sim</x-confirm-button>
                                     <x-slot name="text">
                                         Você realmente deseja excluir este plano alimentar?
                                     </x-slot>
@@ -70,6 +70,6 @@
             </template>
 
         </table>
-        
+
     </div>
 </div>
