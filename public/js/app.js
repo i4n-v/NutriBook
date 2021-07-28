@@ -3843,7 +3843,8 @@ __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 })();
 
 window.eatingPlan = {
-  refeicoes: [],
+  meals: [],
+  plan: {},
   savePlan: function savePlan(route) {
     var _this = this;
 
@@ -3861,9 +3862,9 @@ window.eatingPlan = {
 
             case 5:
               response = _context.sent;
-              console.log(response);
+              _this.plan = response.data;
 
-              _this.addRefeicao();
+              _this.addMeal();
 
             case 8:
             case "end":
@@ -3873,28 +3874,228 @@ window.eatingPlan = {
       }, _callee);
     }))();
   },
-  addRefeicao: function addRefeicao() {
-    this.refeicoes.push({
-      nome: '',
+  addMeal: function addMeal() {
+    this.meals.push({
+      desc: '',
       carbo: '',
+      carboWeight: '',
       protein: '',
-      fat: ''
+      proteinWeight: '',
+      fat: '',
+      fatWeight: ''
     });
   },
-  saveRefeicoes: function saveRefeicoes() {
-    var _iterator = _createForOfIteratorHelper(this.refeicoes),
-        _step;
-
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var r = _step.value;
-        console.log("salvar os dados: ".concat(r.nome, " ").concat(r.carbo)); // axios.post
-      }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
+  removeMeal: function removeMeal(i) {
+    if (this.meals.length > 1) {
+      this.meals.splice(i, 1);
     }
+  },
+  saveMeals: function saveMeals() {
+    var _this2 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var _iterator, _step, meal, response;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _iterator = _createForOfIteratorHelper(_this2.meals);
+              _context2.prev = 1;
+
+              _iterator.s();
+
+            case 3:
+              if ((_step = _iterator.n()).done) {
+                _context2.next = 11;
+                break;
+              }
+
+              meal = _step.value;
+              meal['_token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+              _context2.next = 8;
+              return axios.post("/home/eatingplan/create/meal/".concat(_this2.plan.id), meal, {
+                headers: {
+                  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+              });
+
+            case 8:
+              response = _context2.sent;
+
+            case 9:
+              _context2.next = 3;
+              break;
+
+            case 11:
+              _context2.next = 16;
+              break;
+
+            case 13:
+              _context2.prev = 13;
+              _context2.t0 = _context2["catch"](1);
+
+              _iterator.e(_context2.t0);
+
+            case 16:
+              _context2.prev = 16;
+
+              _iterator.f();
+
+              return _context2.finish(16);
+
+            case 19:
+              axios.get("/eatingplan/created/".concat(_this2.plan.id));
+
+            case 20:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[1, 13, 16, 19]]);
+    }))();
+  }
+};
+window.nutriPatients = {
+  patients: [],
+  filterNamePatient: [],
+  filterCPFPatient: [],
+  filter: false,
+  loadPatients: function loadPatients() {
+    var _this3 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      var response, _iterator2, _step2, patient;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return axios.get('/nutri-patients');
+
+            case 2:
+              response = _context3.sent;
+              _this3.patients = response.data;
+              _iterator2 = _createForOfIteratorHelper(_this3.patients);
+
+              try {
+                for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                  patient = _step2.value;
+                  patient.show = true;
+                }
+              } catch (err) {
+                _iterator2.e(err);
+              } finally {
+                _iterator2.f();
+              }
+
+              _this3.$watch('filterNamePatient', function () {
+                _this3.patients.map(function (p) {
+                  return p.show = p.name.toLowerCase().includes(_this3.filterNamePatient.toLowerCase());
+                });
+              });
+
+              _this3.$watch('filterCPFPatient', function () {
+                _this3.patients.map(function (p) {
+                  return p.show = p.CPF.includes(_this3.filterCPFPatient);
+                });
+              });
+
+            case 8:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }))();
+  },
+  orderBy: function orderBy(col) {
+    this.patients = this.patients.sort(function (p1, p2) {
+      return p1[col].localeCompare(p2[col]);
+    });
+  },
+  reverseOrderBy: function reverseOrderBy(col) {
+    this.patients = this.patients.sort(function (p1, p2) {
+      return p2[col].localeCompare(p1[col]);
+    });
+  }
+};
+window.eatingPlansTable = {
+  eatingPlans: [],
+  confirm: false,
+  modal: false,
+  filter: false,
+  filterTitleEatingPlan: [],
+  filterDateStartEatingPlan: [],
+  filterDateFinishEatingPlan: [],
+  loadEatingPlans: function loadEatingPlans(UserIdPatient) {
+    var _this4 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+      var response, _iterator3, _step3, eP;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return axios.get('/eating-plans/' + UserIdPatient);
+
+            case 2:
+              response = _context4.sent;
+              _this4.eatingPlans = response.data;
+              _iterator3 = _createForOfIteratorHelper(_this4.eatingPlans);
+
+              try {
+                for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+                  eP = _step3.value;
+                  eP.show = true;
+                }
+              } catch (err) {
+                _iterator3.e(err);
+              } finally {
+                _iterator3.f();
+              }
+
+              _this4.$watch('filterTitleEatingPlan', function () {
+                _this4.eatingPlans.map(function (p) {
+                  return p.show = p.title.toLowerCase().includes(_this4.filterTitleEatingPlan.toLowerCase());
+                });
+              });
+
+              _this4.$watch('filterDateStartEatingPlan', function () {
+                _this4.eatingPlans.map(function (p) {
+                  return p.show = p.formatted_date_start.includes(_this4.filterDateStartEatingPlan);
+                });
+              });
+
+              _this4.$watch('filterDateFinishEatingPlan', function () {
+                _this4.eatingPlans.map(function (p) {
+                  return p.show = p.formatted_date_finish.includes(_this4.filterDateFinishEatingPlan);
+                });
+              });
+
+            case 9:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }))();
+  },
+  orderBy: function orderBy(col) {
+    this.eatingPlans = this.eatingPlans.sort(function (p1, p2) {
+      return p1[col].localeCompare(p2[col]);
+    });
+  },
+  reverseOrderBy: function reverseOrderBy(col) {
+    this.eatingPlans = this.eatingPlans.sort(function (p1, p2) {
+      return p2[col].localeCompare(p1[col]);
+    });
+  },
+  deletePlan: function deletePlan(planId) {
+    axios.get("/home/eatingplan/remove/".concat(planId));
   }
 };
 

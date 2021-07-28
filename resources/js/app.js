@@ -4,34 +4,55 @@ require('./bootstrap');
 
 require('alpinejs');
 
-(function(){
-    
+(function () {
+
     let message = document.getElementById('message');
 
-    if(!!message){
-        setTimeout(()=>message.remove(), 5000);
+    if (!!message) {
+        setTimeout(() => message.remove(), 5000);
     }
 
 })();
 
 window.eatingPlan = {
-    refeicoes: [],
+    meals: [],
+    plan: {},
     async savePlan(route) {
-        const form = this.$refs.planForm
-        const formData = new FormData(form)
-        const data = Object.fromEntries(formData.entries())
+        const form = this.$refs.planForm;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
 
-        let response = await axios.post(route, data)
-        console.log(response)
-        this.addRefeicao()
+        let response = await axios.post(route, data);
+        this.plan = response.data;
+        this.addMeal();
     },
-    addRefeicao() {
-        this.refeicoes.push({nome: '', carbo: '', protein: '', fat: ''})
+    addMeal() {
+        this.meals.push({
+            desc: '',
+            carbo: '',
+            carboWeight: '',
+            protein: '',
+            proteinWeight: '',
+            fat: '',
+            fatWeight: ''
+        });
     },
-    saveRefeicoes() {
-        for (let r of this.refeicoes) {
-            console.log(`salvar os dados: ${r.nome} ${r.carbo}`) // axios.post
+    removeMeal(i) {
+        if (this.meals.length > 1) {
+            this.meals.splice(i, 1);
         }
+    },
+    async saveMeals() {
+        for (let meal of this.meals) {
+            meal['_token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            let response = await axios.post(`/home/eatingplan/create/meal/${this.plan.id}`, meal, {
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            });
+        }
+
+        axios.get(`/eatingplan/created/${this.plan.id}`);
     }
 }
 
@@ -64,6 +85,7 @@ window.nutriPatients = {
 window.eatingPlansTable = {
     eatingPlans: [],
     confirm: false,
+    modal: false,
     filter: false,
     filterTitleEatingPlan: [],
     filterDateStartEatingPlan: [],
@@ -89,5 +111,8 @@ window.eatingPlansTable = {
     },
     reverseOrderBy(col) {
         this.eatingPlans = this.eatingPlans.sort((p1, p2) => p2[col].localeCompare(p1[col]))
+    },
+    deletePlan(planId){
+        axios.get(`/home/eatingplan/remove/${planId}`);
     }
 }
