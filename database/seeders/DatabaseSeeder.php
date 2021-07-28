@@ -22,10 +22,9 @@ class DatabaseSeeder extends Seeder
             BodyMeasurementSeeder::class,
             AnamneseSeeder::class,
             FoodSeeder::class,
+            EatingPlanSeeder::class,
             MealSeeder::class,
             FoodItemSeeder::class,
-            EatingPlanSeeder::class,
-            EatingPlanMealSeeder::class
             ]);
     }
 }

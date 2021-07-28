@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Meal;
 use App\Models\Nutritionist;
+use App\Models\EatingPlan;
 
 
 class MealSeeder extends Seeder
@@ -16,9 +17,10 @@ class MealSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=1; $i <= 5 ; $i++) { 
+        for ($i=1; $i <= 5 ; $i++) {
             Meal::factory(5)->create([
-                'nutritionist_id' => Nutritionist::find($i),    
+                'nutritionist_id' => Nutritionist::find($i),
+                'eating_plan_id' => EatingPlan::find($i),
             ]);
         }
     }
