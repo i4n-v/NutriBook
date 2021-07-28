@@ -10,6 +10,7 @@ class EatingPlan extends Pivot
 {
     use HasFactory;
     protected $table = 'eating_plans';
+    public $incrementing = true;
     protected $fillable = [
         'date_start',
         'date_finish',
@@ -23,16 +24,16 @@ class EatingPlan extends Pivot
         'formatted_date_finish',
     ];
 
-   public function nutritionist(){
+    public function nutritionist(){
         return $this->belongsTo(Nutritionist::class);
     }
-    
-   public function patient(){
+
+    public function patient(){
         return $this->belongsTo(Patient::class);
     }
 
-   public function meals() {
-        return $this->belongsToMany(Meal::class, 'eating_plan_meals', 'eating_plan_id', 'meal_id')->using(EatingPlanMeal::class)->as('eatingPlanMeal')->withPivot('id'); 
+    public function meals() {
+        return $this->hasMany(Meal::class);
     }
 
     public function getFormattedDateStartAttribute() {

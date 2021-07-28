@@ -9,17 +9,16 @@ use Illuminate\Database\Eloquent\Model;
 class Meal extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
-        'name',
-        'day',
-        'day_period',
+        'description',
+        'eating_plan_id',
         'nutritionist_id',
 
     ];
 
     public function foods() {
-        return $this->belongsToMany(Food::class, 'food_items', 'meal_id', 'food_id')->using(FoodItem::class)->as('fooditem')->withPivot('id', 'weight'); 
+        return $this->belongsToMany(Food::class, 'food_items', 'meal_id', 'food_id')->using(FoodItem::class)->as('fooditem')->withPivot('id', 'weight');
     }
 
     public function nutritionists(){
@@ -27,7 +26,7 @@ class Meal extends Model
     }
 
     public function eatingPlans(){
-        return $this->belongsToMany(EatingPlan::class, 'eating_plan_meals', 'meal_id', 'eating_plan_id')->using(EatingPlanMeal::class)->as('eatingPlanMeal')->withPivot('id'); 
+        return $this->belongsTo(EantingPlan::class);
     }
 
 }
