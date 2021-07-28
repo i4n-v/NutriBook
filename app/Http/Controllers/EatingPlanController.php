@@ -37,10 +37,18 @@ class EatingPlanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Patient $patient)
     {
-        //
-        return 'Saving';
+        $eatingPlan = EatingPlan::create([
+            'title' => $request->title,
+            'date_start' => $request->date_start,
+            'date_finish' => $request->date_finish,
+            'nutritionist_id' => auth()->user()->nutritionistProfile->id,
+            'patient_id' => $patient->id,
+        ]);
+
+        return $eatingPlan;
+
     }
 
     /**
@@ -100,7 +108,7 @@ class EatingPlanController extends Controller
         $eatingplan->delete();
 
          return redirect()
-         ->route('view_eating_plan', $patient->user)
+         ->route('eating_plan', $patient->user)
          ->with('success', 'Plano alimentar excluido com sucesso!');
 
     }

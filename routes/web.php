@@ -9,6 +9,7 @@ use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\EatingPlanController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\MealController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
@@ -104,6 +105,10 @@ Route::get('/home/eatingplan/remove/{eatingplan}', [EatingPlanController::Class,
 Route::get('/home/eatingplan/forms/{patient}', [EatingPlanController::Class, 'index'])->middleware(['auth'])->name('action_eatingplan');
 
 Route::post('/home/eatingplan/create/{patient}', [EatingPlanController::Class, 'store'])->middleware(['auth'])->name('eatingplan_create');
+
+Route::post('/home/eatingplan/create/meal/{eatingPlan}', [MealController::Class, 'store'])->middleware(['auth'])->name('meal_create');
+
+Route::get('/eatingplan/created/{eatingPlan}', [MealController::class, 'index'])->middleware(['auth'])->name('created_eatingplan');
 
 Route::get('/nutri-patients', [PatientController::class, 'nutriPatients'])->middleware(['auth']);
 

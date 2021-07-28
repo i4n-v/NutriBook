@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Meal;
+use App\Models\EatingPlan;
+use App\Models\FoodItem;
 use Illuminate\Http\Request;
 
 class MealController extends Controller
@@ -12,9 +14,11 @@ class MealController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(EatingPlan $eatingPlan)
     {
-        //
+        return redirect()
+        ->route('eating_plan', $eatingPlan->patient->user)
+        ->with('success', 'Plano alimentar criado com sucesso!');
     }
 
     /**
@@ -33,9 +37,33 @@ class MealController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, EatingPlan $eatingPlan)
     {
-        //
+        $meal = Meal::create([
+            'description' => $request->desc,
+            'nutritionist_id' => auth()->user()->nutritionistProfile->id,
+            'eating_plan_id' => $eatingPlan->id,
+        ]);
+
+        $food_carbo = FoodItem::create([
+            'weight' => $request->carboWeight,
+            'meal_id' => $meal->id,
+            'food_id' => $request->carbo,
+        ]);
+
+        $food_protein = FoodItem::create([
+            'weight' => $request->proteinWeight,
+            'meal_id' => $meal->id,
+            'food_id' => $request->protein,
+        ]);
+
+        $food_fat = FoodItem::create([
+            'weight' => $request->fatWeight,
+            'meal_id' => $meal->id,
+            'food_id' => $request->fat,
+        ]);
+
+        return $meal;
     }
 
     /**
