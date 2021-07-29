@@ -53,20 +53,20 @@
                         <x-button-visual href="#"/>
                         @if(Auth::user()->isNutritionist())
                             <x-button-edit/>
-                            <x-button-delete @click="confirm = true"/>
+                            <x-button-delete @click="confirm = true; plan = eatingPlan"/>
                         @endif
-                        <template x-if="confirm">
-                            <x-modal>
-                                <x-confirm-template>
-                                <x-confirm-button class="px-9" x-on:click="deletePlan(eatingPlan.id)">Sim</x-confirm-button>
-                                    <x-slot name="text">
-                                        Você realmente deseja excluir este plano alimentar?
-                                    </x-slot>
-                                </x-confirm-template>
-                            </x-modal>
-                        </template>
                     </td>
                 </tr>
+            </template>
+            <template x-if="confirm">
+                <x-modal>
+                    <x-confirm-template>
+                    <x-confirm-button class="px-9" x-on:click="deletePlan(plan.id)">Sim</x-confirm-button>
+                        <x-slot name="text">
+                            Você realmente deseja excluir plano alimentar <span x-text="plan.title"></span>?
+                        </x-slot>
+                    </x-confirm-template>
+                </x-modal>
             </template>
 
         </table>

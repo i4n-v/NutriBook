@@ -17,8 +17,8 @@
 		<label>Título do plano alimentar:</label>
 		<x-input class="w-1/3" type="text" x-model="filterTitleEatingPlan"/>
 		<label>Data de início:</label>
-		<x-input class="w-44" type="text" x-model="filterDateStartEatingPlan" maxlength="10" oninput="this.value = this.value.replace(/[^0-9/]/g, '').replace(/(\..*)\./g, '$1');"/>
+		<x-input class="w-44" type="date" x-model="filterDateStartEatingPlan" maxlength="10"/>
 		<label>Data de término:</label>
-		<x-input class="w-44" type="text" x-model="filterDateFinishEatingPlan"  maxlength="10" oninput="this.value = this.value.replace(/[^0-9/]/g, '').replace(/(\..*)\./g, '$1');"/>
+		<x-input class="w-44" type="date" x-model="filterDateFinishEatingPlan"  maxlength="10"/>
 	</div>
 </div>

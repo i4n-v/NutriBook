@@ -35,10 +35,10 @@
 
         <x-input id="location" class="block mt-1 w-full disable" type="text" name="location" :value="$user->location" :disabled="$user->id != Auth::user()->id" required autofocus />
     </div>
-    <div>
+    <div x-data="phoneFormatter" x-init="watch">
         <x-label for="phone" class="text-gray-900 font-bold" :value="__('Telefone')" />
 
-        <x-input id="phone" class="block mt-1 w-full disable" type="tel" name="phone" :value="$user->phone" minlength="11" maxlength="13" :disabled="$user->id != Auth::user()->id" required autofocus />
+        <x-input id="phone" class="block mt-1 w-full disable" type="tel" name="phone" x-model="phone" :value="$user->phone" minlength="14" maxlength="15" :disabled="$user->id != Auth::user()->id" required autofocus />
     </div>
     @if($user->id == Auth::user()->id)
         <div class="flex items-center justify-center mt-4">
