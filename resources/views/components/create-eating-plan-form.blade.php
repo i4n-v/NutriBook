@@ -1,7 +1,7 @@
 @props(['patient'])
 
 <div x-data="eatingPlan">
-    <form x-ref="planForm" x-on:submit.prevent="savePlan('{{ route('eatingplan_create', $patient) }}')">
+    <form x-ref="planForm" action="{{ route('eatingplan_create', $patient) }}" x-on:submit.prevent="savePlanAndAddMeal">
         @csrf
         <legend><span class="text-white text-xl border-b-2 mb-5">Dados do plano alimentar</span></legend>
 

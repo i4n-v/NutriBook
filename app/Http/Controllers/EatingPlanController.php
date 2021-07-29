@@ -39,6 +39,17 @@ class EatingPlanController extends Controller
      */
     public function store(Request $request, Patient $patient)
     {
+        if ($request->id) {
+            $eatingPlan = EatingPlan::find($request->id);
+            if ($eatingPlan->nutritionist == auth()->user()->nutritionistProfile) {
+                $eatingPlan->update([
+                    'title' => $request->title,
+                    'date_start' => $request->date_start,
+                    'date_finish' => $request->date_finish
+                ]);
+            }
+            return $eatingPlan;
+        }
         $eatingPlan = EatingPlan::create([
             'title' => $request->title,
             'date_start' => $request->date_start,

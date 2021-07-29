@@ -17,14 +17,19 @@ require('alpinejs');
 window.eatingPlan = {
     meals: [],
     plan: {},
-    async savePlan(route) {
+    async savePlanAndAddMeal() {
+        this.savePlan()
+        this.addMeal()
+    },
+    async savePlan() {
         const form = this.$refs.planForm;
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
+        data['id'] = this.plan.id ?? null
 
+        let route = form.action
         let response = await axios.post(route, data);
         this.plan = response.data;
-        this.addMeal();
     },
     addMeal() {
         this.meals.push({
@@ -43,6 +48,7 @@ window.eatingPlan = {
         }
     },
     async saveMeals() {
+        await this.savePlan()
         for (let meal of this.meals) {
             meal['_token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             let response = await axios.post(`/home/eatingplan/create/meal/${this.plan.id}`, meal, {
@@ -52,7 +58,8 @@ window.eatingPlan = {
             });
         }
 
-        axios.get(`/eatingplan/created/${this.plan.id}`);
+        // axios.get(`/eatingplan/created/${this.plan.id}`);
+        window.location = `/eatingplan/created/${this.plan.id}`
     }
 }
 
@@ -93,17 +100,22 @@ window.eatingPlansTable = {
     async loadEatingPlans(UserIdPatient) {
         let response = await axios.get('/eating-plans/' + UserIdPatient)
         this.eatingPlans = response.data
-        for (let eP of this.eatingPlans) {
-            eP.show = true
+        for (let ep of this.eatingPlans) {
+            ep.show = true
+            ep.date_start = new Date(ep.date_start)
+            ep.date_finish = new Date(ep.date_finish)
         }
+        console.dir(this.eatingPlans)
         this.$watch('filterTitleEatingPlan', () => {
             this.eatingPlans.map(p => p.show = p.title.toLowerCase().includes(this.filterTitleEatingPlan.toLowerCase()))
         })
         this.$watch('filterDateStartEatingPlan', () => {
-            this.eatingPlans.map(p => p.show = p.formatted_date_start.includes(this.filterDateStartEatingPlan))
+            let date = new Date(this.filterDateStartEatingPlan)
+            this.eatingPlans.map(p => p.show = p.date_start >= date)
         })
         this.$watch('filterDateFinishEatingPlan', () => {
-            this.eatingPlans.map(p => p.show = p.formatted_date_finish.includes(this.filterDateFinishEatingPlan))
+            let date = new Date(this.filterDateFinishEatingPlan)
+            this.eatingPlans.map(p => p.show = p.date_finish <= date)
         })
     },
     orderBy(col) {
@@ -113,6 +125,33 @@ window.eatingPlansTable = {
         this.eatingPlans = this.eatingPlans.sort((p1, p2) => p2[col].localeCompare(p1[col]))
     },
     deletePlan(planId){
-        axios.get(`/home/eatingplan/remove/${planId}`);
+        // console.log(planId)
+        // axios.get(`/home/eatingplan/remove/${planId}`);
+        window.location = `/home/eatingplan/remove/${planId}`
+    }
+}
+
+window.phoneFormatter = {
+    phone: '',
+    watch() {
+        this.$watch('phone', () => {
+            let data = this.phone
+            data = data.replace(/[^0-9]/g, '')
+            let ddd = data.slice(0, 2)
+            let part1 = data.slice(2, 6)
+            let part2 = data.slice(6)
+            let formatted = ''
+            if (data.length > 2) {
+                formatted = `(${ddd}) `
+            } else {
+                formatted = ddd
+            }
+            formatted += part1
+            if (data.length > 6) {
+                formatted += '-'
+            }
+            formatted += part2
+            this.phone = formatted
+        })
     }
 }
