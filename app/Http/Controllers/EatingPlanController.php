@@ -103,7 +103,9 @@ class EatingPlanController extends Controller
      */
     public function destroy(EatingPlan $eatingplan)
     {
-
+        if ($eatingplan->nutritionist->user != auth()->user()) {
+            return response('', 403);
+        }
         $patient = $eatingplan->patient;
         $eatingplan->delete();
 
