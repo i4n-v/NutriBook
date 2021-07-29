@@ -21,9 +21,11 @@ class EatingPlanFactory extends Factory
      */
     public function definition()
     {
+        $dates = [$this->faker->date(), $this->faker->date()];
+        sort($dates);
         return [
-        'date_start' => $this->faker->date(),
-        'date_finish'=> $this->faker->date(),
+        'date_start' => $dates[0],
+        'date_finish'=> $dates[1],
         'title' => $this->faker->sentence(2),
         ];
     }
