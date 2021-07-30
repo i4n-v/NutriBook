@@ -16,7 +16,7 @@
         </x-slot>
         @if(Auth::user()->isNutritionist() && isset($patient))
             <div class="float-right mt-5 mr-5" @click="plan = false" x-show="plan">
-                <x-add-button href="{{ route('action_eatingplan', $patient) }}">
+                <x-add-button href="{{ route('action_eatingplan_create', $patient) }}">
                     {{ __('Adicionar') }}
                 </x-add-button>
             </div>

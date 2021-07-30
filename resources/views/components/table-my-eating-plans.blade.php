@@ -50,9 +50,9 @@
                     <td class="text-center"x-text="eatingPlan.formatted_date_finish" >
                     </td>
                     <td class="flex items-center justify-center gap-4 rounded-tr-sm">
-                        <x-button-visual href="#"/>
+                    <x-button-visual/>
                         @if(Auth::user()->isNutritionist())
-                            <x-button-edit/>
+                            <x-button-edit x-on:click="redirectToEdit(eatingPlan.id)"/>
                             <x-button-delete @click="confirm = true; plan = eatingPlan"/>
                         @endif
                     </td>
