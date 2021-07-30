@@ -18,6 +18,11 @@ class EatingPlanController extends Controller
      */
     public function index( Patient $patient)
     {
+        $nutri_id = $patient->nutritionist->user->id;
+        if($nutri_id == auth()->user()->id){
+            return response('', 403);
+        }
+
         return view('components/eating-plan-action', ['patient' => $patient]);
     }
 
@@ -50,6 +55,7 @@ class EatingPlanController extends Controller
             }
             return $eatingPlan;
         }
+
         $eatingPlan = EatingPlan::create([
             'title' => $request->title,
             'date_start' => $request->date_start,
@@ -91,7 +97,7 @@ class EatingPlanController extends Controller
      */
     public function edit(EatingPlan $eatingPlan)
     {
-        //
+        return view('components/eating-plan-action', ['eatingPlan' => $eatingPlan]);
     }
 
     /**
@@ -123,6 +129,10 @@ class EatingPlanController extends Controller
          return redirect()
          ->route('eating_plan', $patient->user)
          ->with('success', 'Plano alimentar excluido com sucesso!');
+
+    }
+
+    public function view(){
 
     }
 }

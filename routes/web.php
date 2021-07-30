@@ -100,15 +100,25 @@ Route::post('/evaluation/update/bodymeasurement/{bodyMeasurement}', [BodyMeasure
 // eating plan routes
 Route::get('/eatingPlan/{user}', [EatingPlanController::Class, 'show'])->middleware(['auth'])->name('eating_plan');
 
+Route::get('/eatingPlan/{user}', [EatingPlanController::Class, 'show'])->middleware(['auth'])->name('eating_plan');
+
 Route::get('/home/eatingplan/remove/{eatingplan}', [EatingPlanController::Class, 'destroy'])->middleware(['auth'])->name('eatingplan_delete');
 
-Route::get('/home/eatingplan/forms/{patient}', [EatingPlanController::Class, 'index'])->middleware(['auth'])->name('action_eatingplan');
+Route::get('/home/eatingplan/forms/create/{patient}', [EatingPlanController::Class, 'index'])->middleware(['auth'])->name('action_eatingplan_create');
+
+Route::get('/home/eatingplan/forms/edit/{eatingPlan}', [EatingPlanController::Class, 'edit'])->middleware(['auth'])->name('action_eatingplan_edit');
 
 Route::post('/home/eatingplan/create/{patient}', [EatingPlanController::Class, 'store'])->middleware(['auth'])->name('eatingplan_create');
 
 Route::post('/home/eatingplan/create/meal/{eatingPlan}', [MealController::Class, 'store'])->middleware(['auth'])->name('meal_create');
 
+Route::post('/home/eatingplan/update/meal/{meal}', [MealController::Class, 'update'])->middleware(['auth'])->name('meal_update');
+
+Route::get('/loadMeals/{eatingPlan}', [MealController::class, 'loadMeals'])->middleware(['auth']);
+
 Route::get('/eatingplan/created/{eatingPlan}', [MealController::class, 'index'])->middleware(['auth'])->name('created_eatingplan');
+
+Route::get('/eatingplan/saved/{eatingPlan}', [MealController::class, 'edit'])->middleware(['auth'])->name('saved_eatingplan');
 
 Route::get('/nutri-patients', [PatientController::class, 'nutriPatients'])->middleware(['auth']);
 

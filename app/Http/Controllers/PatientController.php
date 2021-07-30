@@ -13,6 +13,6 @@ class PatientController extends Controller
             return $ep->patient->user->id;
         });
         $patient_query = \App\Models\User::with('patientProfile')->whereIn('id', $nutri_patients)->orderBy('name', 'asc')->get()->append('formattedCPF');
-        return $patient_query->toJson();
+    return $patient_query->toJson();
     }
 }
