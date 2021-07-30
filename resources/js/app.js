@@ -21,11 +21,11 @@ window.eatingPlan = {
         this.savePlan()
         this.addMeal()
     },
-    async savePlan() {
+    async savePlan(planId) {
         const form = this.$refs.planForm;
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
-        data['id'] = this.plan.id ?? null
+        data['id'] = this.plan.id ?? planId ?? null;
 
         let route = form.action
         let response = await axios.post(route, data);
@@ -33,6 +33,7 @@ window.eatingPlan = {
     },
     addMeal() {
         this.meals.push({
+            id: '',
             desc: '',
             carbo: '',
             carboWeight: '',
@@ -58,9 +59,29 @@ window.eatingPlan = {
             });
         }
 
-        // axios.get(`/eatingplan/created/${this.plan.id}`);
         window.location = `/eatingplan/created/${this.plan.id}`
+    },
+    async loadMeals(planId){
+        let response = await axios.get(`/loadMeals/${planId}`);
+        let array = response.data;
+
+        array.forEach( meal => {
+            this.meals.push(meal);
+        });
+    },
+    async saveMealsCreated(planId) {
+        await this.savePlan(planId)
+        for (let meal of this.meals) {
+            meal['_token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                let response = await axios.post(`/home/eatingplan/update/meal/${meal.id}`, meal, {
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            });
+        }
+        window.location = `/eatingplan/saved/${this.plan.id}`
     }
+
 }
 
 window.nutriPatients = {
@@ -125,9 +146,10 @@ window.eatingPlansTable = {
         this.eatingPlans = this.eatingPlans.sort((p1, p2) => p2[col].localeCompare(p1[col]))
     },
     deletePlan(planId){
-        // console.log(planId)
-        // axios.get(`/home/eatingplan/remove/${planId}`);
         window.location = `/home/eatingplan/remove/${planId}`
+    },
+    redirectToEdit(planId){
+        window.location = `/home/eatingplan/forms/edit/${planId}`
     }
 }
 
@@ -138,8 +160,8 @@ window.phoneFormatter = {
             let data = this.phone
             data = data.replace(/[^0-9]/g, '')
             let ddd = data.slice(0, 2)
-            let part1 = data.slice(2, 6)
-            let part2 = data.slice(6)
+            let part1 = data.slice(2, 7)
+            let part2 = data.slice(7)
             let formatted = ''
             if (data.length > 2) {
                 formatted = `(${ddd}) `
@@ -147,7 +169,7 @@ window.phoneFormatter = {
                 formatted = ddd
             }
             formatted += part1
-            if (data.length > 6) {
+            if (data.length > 7) {
                 formatted += '-'
             }
             formatted += part2
@@ -155,3 +177,28 @@ window.phoneFormatter = {
         })
     }
 }
+
+window.cpfFormatter = {
+    cpf: '',
+    watch() {
+        this.$watch('cpf', () => {
+            let data = this.cpf;
+            data = data.replace(/[^0-9]/g, '')
+            let part1 = data.slice(0, 3);
+            let part2 = data.slice(3, 6);
+            let part3 = data.slice(6, 9);
+            let part4 = data.slice(9);
+            let formatted = '';
+
+            formatted += part1;
+            formatted += data.length > 3 ? '.' : '';
+            formatted += part2;
+            formatted += data.length > 6 ? '.' : '';
+            formatted += part3;
+            formatted += data.length > 9 ? '-' : '';
+            formatted += part4
+            this.cpf = formatted;
+        })
+    }
+}
+
