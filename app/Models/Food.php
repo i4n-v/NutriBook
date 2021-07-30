@@ -14,6 +14,7 @@ class Food extends Model
     protected $fillable = [
         'weight',
         'food',
+        'type',
         'sodium',
         'dietary_fiber',
         'trans_fat',
@@ -29,20 +30,26 @@ class Food extends Model
     }
 
     public static function carboFoods(){
-        return array_filter(Food::get()->all(), function ($food){
-            return ($food->carbohydrate > $food->total_fat && $food->carbohydrate > $food->protein);
-        });
+        return Food::where('type', 'carbo')->get();
+    }
+
+    public function isCarbo(){
+        return ($this->carbohydrate > $this->total_fat && $this->carbohydrate > $this->protein);
     }
 
     public static function fatFoods(){
-        return array_filter(Food::get()->all(), function ($food){
-            return ($food->total_fat > $food->carbohydrate && $food->total_fat > $food->protein);
-        });
+        return Food::where('type', 'fat')->get();
+    }
+
+    public function isFat(){
+        return ($this->total_fat > $this->carbohydrate && $this->total_fat > $this->protein);
     }
 
     public static function proteinFoods(){
-        return array_filter(Food::get()->all(), function ($food){
-            return ($food->protein > $food->carbohydrate && $food->protein > $food->total_fat);
-        });
+        return Food::where('type', 'protein')->get();
+    }
+
+    public function isProtein(){
+        return ($this->protein > $this->carbohydrate && $this->protein > $this->total_fat);
     }
 }

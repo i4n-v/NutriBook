@@ -18,15 +18,15 @@ class Meal extends Model
     ];
 
     public function foods() {
-        return $this->belongsToMany(Food::class, 'food_items', 'meal_id', 'food_id')->using(FoodItem::class)->as('fooditem')->withPivot('id', 'weight');
+        return $this->belongsToMany(Food::class, 'food_items', 'meal_id', 'food_id')->using(FoodItem::class)->as('foodItem')->withPivot('id', 'weight');
     }
 
     public function nutritionists(){
         return $this->belongsTo(Nutritionist::class);
     }
 
-    public function eatingPlans(){
-        return $this->belongsTo(EantingPlan::class);
+    public function eatingPlan(){
+        return $this->belongsTo(EatingPlan::class);
     }
 
 }

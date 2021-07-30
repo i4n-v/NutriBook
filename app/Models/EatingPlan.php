@@ -33,7 +33,7 @@ class EatingPlan extends Pivot
     }
 
     public function meals() {
-        return $this->hasMany(Meal::class);
+        return $this->hasMany(Meal::class, 'eating_plan_id');
     }
 
     public function getFormattedDateStartAttribute() {
