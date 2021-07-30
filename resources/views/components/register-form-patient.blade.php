@@ -19,10 +19,10 @@
             </div>
 
             <!-- CPF -->
-            <div class="mt-4">
+            <div class="mt-4" x-data="cpfFormatter" x-init="watch">
                 <x-label for="cpf" :value="__('CPF')" />
 
-                <x-input id="cpf" class="block mt-1 w-full" type="text" name="cpf" :value="old('cpf')" required minlength="11" maxlength="11" placeholder="Digite seu CPF"/>
+                <x-input id="cpf" class="block mt-1 w-full" type="text" name="cpf" :value="old('cpf')" required minlength="14" maxlength="14" placeholder="Digite seu CPF" x-model="cpf"/>
             </div>
 
               <!-- Birth date -->
@@ -39,7 +39,7 @@
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
                                 name="password"
-                                required autocomplete="new-password" 
+                                required autocomplete="new-password"
                                 placeholder="Digite sua senha"/>
             </div>
 
@@ -49,7 +49,7 @@
 
                 <x-input id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
-                                name="password_confirmation" required 
+                                name="password_confirmation" required
                                 placeholder="Confirme sua senha"/>
             </div>
 
