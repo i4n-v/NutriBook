@@ -16,14 +16,14 @@ class FoodItemSeeder extends Seeder
      */
     public function run()
     {
-        
+
         for($i = 1; $i <= 5; $i++){
-            for ($j=1; $j <= 3 ; $j++) { 
+            for ($j=1; $j <= 3 ; $j++) {
                 FoodItem::factory(1)->create([
-                    'meal_id' => Meal::find($i), 
-                    'food_id' => Food::all()->random(), 
-                    ]);
+                    'meal_id' => Meal::find($i),
+                    'food_id' => Food::all()->random(),
+                ]);
             }
-        }    
+        }
     }
 }

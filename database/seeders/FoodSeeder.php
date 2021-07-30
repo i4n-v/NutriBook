@@ -13,7 +13,20 @@ class FoodSeeder extends Seeder
      * @return void
      */
     public function run()
-    {    
-            Food::factory(20)->create();
+    {
+        $foods = Food::factory(20)->create();
+
+        foreach($foods as $food){
+            if($food->isCarbo()){
+                $food->type = 'carbo';
+                $food->save();
+            }else if($food->isProtein()){
+                $food->type = 'protein';
+                $food->save();
+            }else{
+                $food->type = 'fat';
+                $food->save();
+            }
+        }
     }
 }
