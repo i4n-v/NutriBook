@@ -18,12 +18,15 @@ class EatingPlanController extends Controller
      */
     public function index( Patient $patient)
     {
-        $nutri_id = $patient->nutritionist->user->id;
-        if($nutri_id == auth()->user()->id){
-            return response('', 403);
+        $nutris = $patient->nutritionist->all();
+
+        foreach( $nutris as $nutri){
+            if($nutri->user->id == auth()->user()->id){
+                return view('components/eating-plan-action', ['patient' => $patient]);
+            }
         }
 
-        return view('components/eating-plan-action', ['patient' => $patient]);
+        return response('', 403);
     }
 
     /**

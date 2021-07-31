@@ -19,8 +19,6 @@ class EvaluationController extends Controller
      */
     public function index(Patient $patient)
     {
-        //$myPatient = auth()->user()->nutritionistProfile->patients->find($patient->id);
-
         if(auth()->user()->isNutritionist()){
             return view('evaluation', ['patient' => $patient->user]);
         }else if(auth()->user()->isPatient()){
@@ -108,7 +106,7 @@ class EvaluationController extends Controller
         $myPatient = auth()->user()->nutritionistProfile->patients->find($evaluation->patient->id);
 
         if(isset($myPatient)){
-            return view('components/evaluation-view', ['evaluation' => $evaluation]);
+            return view('components/evaluation-view', ['evaluation' => $evaluation, 'patient' => $evaluation->patient->user]);
         }else if(auth()->user()->isPatient()){
             return view('components/evaluation-view', ['evaluation' => $evaluation]);
         }else{
@@ -125,7 +123,7 @@ class EvaluationController extends Controller
     public function edit(Evaluation $evaluation)
     {
         if(auth()->user()->id == $evaluation->nutritionist->user->id){
-            return view('components/create-evaluation', ['evaluation' => $evaluation]);
+            return view('components/create-evaluation', ['evaluation' => $evaluation, 'patient' => $evaluation->patient->user]);
        }else{
            return redirect()->route('login');
        }
