@@ -1,8 +1,10 @@
 @php
     if(Auth::user()->isPatient()){
-        $name = explode(' ', Auth::user()->name)[0];
+        $name = explode(' ', Auth::user()->name);
+        $name = "$name[0] $name[1]";
     }else{
-        $name =explode(' ', $patient->name)[0];;
+        $name = explode(' ', $patient->name);
+        $name = "$name[0] $name[1]";
     }
 @endphp
 <x-guest-layout>
@@ -12,7 +14,13 @@
                 Avaliações
             </h2>
             <div class="ml-2 text-gray-600 font-bold text-sm mt-2">
-                <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Home</a>
+                @if(Auth::user()->isNutritionist())
+                    <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Meus pacientes</a> >
+                    <span class="cursor-default">{{ $name }}</span>
+                @else
+                <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Planos alimentares</a> >
+                <span class="cursor-default">Minhas avaliações</span>
+                @endif
             </div>
         </x-slot>
         @if(Auth::user()->isNutritionist())

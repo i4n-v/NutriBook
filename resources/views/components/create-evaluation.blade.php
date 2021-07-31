@@ -1,3 +1,7 @@
+@php
+    $name = explode(' ', $patient->name);
+    $name = "$name[0] $name[1]";
+@endphp
 <x-guest-layout>
     <div class="min-h-screen bg-white">
         <x-slot name="header">
@@ -5,8 +9,9 @@
                 Formulário da avaliação
             </h2>
             <div class="ml-2 text-gray-600 font-bold text-sm mt-2">
-                <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Home</a> >
-                <a href="{{ route('evaluation', $evaluation->patient) }}" class="transition delay-150 hover:text-gray-900">Avaliações</a>
+                <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Meus pacientes</a> >
+                <a href="{{ route('evaluation', $evaluation->patient) }}" class="transition delay-150 hover:text-gray-900">{{ $name }}</a> >
+                <span class="cursor-default">Editar avaliação</span>
             </div>
         </x-slot>
         <div class="py-12">
