@@ -135,7 +135,7 @@ class EatingPlanController extends Controller
 
     }
 
-    public function view(){
-
+    public function view(EatingPlan $eatingPlan){
+        return view('components/eating-plans-view', ['eatingPlan' => $eatingPlan]);
     }
 }

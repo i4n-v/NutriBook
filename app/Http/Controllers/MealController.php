@@ -147,19 +147,19 @@ class MealController extends Controller
 
         foreach( $meals as $meal){
 
-            $carbo = $meal->foods()->where('type', 'carbo')->get()[0]->foodItem;
-            $protein = $meal->foods()->where('type', 'protein')->get()[0]->foodItem;
-            $fat = $meal->foods()->where('type', 'fat')->get()[0]->foodItem;
+            $carbo = $meal->foods()->where('type', 'carbo')->get()[0]->foodItem ?? '';
+            $protein = $meal->foods()->where('type', 'protein')->get()[0]->foodItem ?? '';
+            $fat = $meal->foods()->where('type', 'fat')->get()[0]->foodItem ?? '';
 
             array_push($response, [
-                'id' => $meal->id,
-                'desc' => $meal->description,
-                'carbo' => $carbo->food_id,
-                'carboWeight' => $carbo->weight,
-                'protein' => $protein->food_id,
-                'proteinWeight' => $protein->weight,
-                'fat' => $fat->food_id,
-                'fatWeight' => $fat->weight,
+                'id' => $meal->id ?? '',
+                'desc' => $meal->description ?? '',
+                'carbo' => $carbo->food_id ?? '',
+                'carboWeight' => $carbo->weight ?? '',
+                'protein' => $protein->food_id ?? '',
+                'proteinWeight' => $protein->weight ?? '',
+                'fat' => $fat->food_id ?? '',
+                'fatWeight' => $fat->weight ?? '',
             ]);
         }
 
