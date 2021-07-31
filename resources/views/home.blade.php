@@ -1,16 +1,21 @@
+@php
+    if(isset($patient)){
+        $name = explode(' ', $patient->user->name);
+        $name = "$name[0] $name[1]";
+    }
+@endphp
 <x-guest-layout>
     <div class="min-h-screen bg-white">
         <x-slot name="header">
             <h2 class="font-semibold text-2xl text-gray-900 leading-tight">
                 @if(isset($patient))
                     Planos Alimentares
-                @else
-                    Home
                 @endif
             </h2>
             @if(isset($patient))
                 <div class="ml-2 text-gray-600 font-bold text-sm mt-2">
-                    <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Home</a>
+                    <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Meus pacientes</a> >
+                    <span class="cursor-default">{{ $name }}</span>
                 </div>
             @endif
         </x-slot>

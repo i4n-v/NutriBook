@@ -1,11 +1,19 @@
 <x-guest-layout>
-    <div class="min-h-screen bg-white" x-data="{ food:true }">
+    <div class="min-h-screen bg-white">
         <x-slot name="header">
-            <h2 class="font-semibold text-2xl text-gray-900 leading-tight">
+            <h2 class="font-semibold text-2xl text-gray-900 leading-tight" x-show="food">
                 Alimentos
             </h2>
-            <div class="ml-2 text-gray-600 font-bold text-sm mt-2">
-                <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Home</a>
+            <div class="ml-2 text-gray-600 font-bold text-sm mt-2" x-show="food">
+                <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Meus pacientes</a> >
+                <span class="cursor-default">Alimentos</span>
+            </div>
+            <div class="ml-2 text-gray-600 font-bold text-sm mt-2" x-show="!food">
+                <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900"
+                >Meus pacientes</a> >
+                <a href="{{ route('foods') }}" class="transition delay-150 hover:text-gray-900"
+                >Alimentos</a> >
+                <span class="cursor-default">Adicionar alimento</span>
             </div>
         </x-slot>
         <div class="float-right mt-5 mr-5" @click="food = false" x-show="food">
