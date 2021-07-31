@@ -4230,6 +4230,9 @@ window.eatingPlansTable = {
   },
   redirectToEdit: function redirectToEdit(planId) {
     window.location = "/home/eatingplan/forms/edit/".concat(planId);
+  },
+  redirectToView: function redirectToView(planId) {
+    window.location = "/home/eatingplan/view/".concat(planId);
   }
 };
 window.phoneFormatter = {

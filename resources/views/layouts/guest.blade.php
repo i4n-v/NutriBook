@@ -17,7 +17,7 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
-    <body class="relative" x-data="food">
+    <body class="relative" x-data="{ food: true }">
         <div class="bg-white">
             @if (isset($header))
                 @include('layouts.navigation-home')

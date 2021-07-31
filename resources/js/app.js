@@ -150,6 +150,9 @@ window.eatingPlansTable = {
     },
     redirectToEdit(planId){
         window.location = `/home/eatingplan/forms/edit/${planId}`
+    },
+    redirectToView(planId){
+        window.location = `/home/eatingplan/view/${planId}`
     }
 }
 
