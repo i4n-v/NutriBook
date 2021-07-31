@@ -4,9 +4,9 @@
         $name = "$name[0] $name[1]";
         $user = $eatingPlan->patient->user;
     }else{
-        $name = explode(' ', $patient->name);
+        $name = explode(' ', $patient->user->name);
         $name = "$name[0] $name[1]";
-        $user = $patient;
+        $user = $patient->user;
     }
 @endphp
 <x-guest-layout>
@@ -28,7 +28,7 @@
                     <div class="p-6 border-gray-200 bg-gray-800 w-10/12 rounded-lg m-auto">
                         <div class="flex gap-4">
 
-                            <x-form-create-layout>
+                            <div class="mx-auto w-6/12">
                                 @if(isset($patient))
                                     <h2 class="text-center h2 text-white text-3xl mb-4"> Criar plano alimentar </h2>
                                     <x-create-eating-plan-form :patient="$patient"/>
@@ -36,7 +36,7 @@
                                     <h2 class="text-center h2 text-white text-3xl mb-4"> Editar plano alimentar </h2>
                                     <x-edit-eating-plan-form :eatingPlan="$eatingPlan"/>
                                 @endif
-                            </x-form-create-layout>
+                            </div>
 
                         </div>
                     </div>

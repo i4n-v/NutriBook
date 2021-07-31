@@ -100,7 +100,7 @@ Route::post('/evaluation/update/bodymeasurement/{bodyMeasurement}', [BodyMeasure
 // eating plan routes
 Route::get('/eatingPlan/{user}', [EatingPlanController::Class, 'show'])->middleware(['auth'])->name('eating_plan');
 
-Route::get('/eatingPlan/{user}', [EatingPlanController::Class, 'show'])->middleware(['auth'])->name('eating_plan');
+Route::get('/home/eatingplan/view/{eatingPlan}', [EatingPlanController::Class, 'view'])->middleware(['auth'])->name('eating_plan_view');
 
 Route::get('/home/eatingplan/remove/{eatingplan}', [EatingPlanController::Class, 'destroy'])->middleware(['auth'])->name('eatingplan_delete');
 
