@@ -18,7 +18,7 @@ class MealSeeder extends Seeder
     public function run()
     {
         for ($i=1; $i <= 5 ; $i++) {
-            Meal::factory(5)->create([
+            Meal::factory(3)->create([
                 'nutritionist_id' => Nutritionist::find($i),
                 'eating_plan_id' => EatingPlan::find($i),
             ]);
