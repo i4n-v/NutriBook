@@ -40,6 +40,7 @@ class MealController extends Controller
     public function store(Request $request, EatingPlan $eatingPlan)
     {
 
+
         $meal = Meal::create([
             'description' => $request->desc,
             'nutritionist_id' => auth()->user()->nutritionistProfile->id,
@@ -101,6 +102,7 @@ class MealController extends Controller
     public function update(Request $request, Meal $meal)
     {
         $nutri_id = $meal->eatingPlan->nutritionist->user->id;
+
         if($nutri_id != auth()->user()->id){
             return response('', 403);
         }
@@ -138,7 +140,9 @@ class MealController extends Controller
      */
     public function destroy(Meal $meal)
     {
-        //
+        $meal->delete();
+
+        return 'deleted';
     }
 
     public function loadMeals(EatingPlan $eatingPlan){

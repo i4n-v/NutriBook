@@ -114,6 +114,8 @@ Route::post('/home/eatingplan/create/meal/{eatingPlan}', [MealController::Class,
 
 Route::post('/home/eatingplan/update/meal/{meal}', [MealController::Class, 'update'])->middleware(['auth'])->name('meal_update');
 
+Route::post('/home/eatingplan/meal/delete/{meal}', [MealController::Class, 'destroy'])->middleware(['auth'])->name('meal_delete');
+
 Route::get('/loadMeals/{eatingPlan}', [MealController::class, 'loadMeals'])->middleware(['auth']);
 
 Route::get('/eatingplan/created/{eatingPlan}', [MealController::class, 'index'])->middleware(['auth'])->name('created_eatingplan');
