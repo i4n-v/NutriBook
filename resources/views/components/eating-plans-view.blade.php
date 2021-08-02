@@ -12,7 +12,7 @@
                     >Meus pacientes</a> >
                     <a href="{{ route('eating_plan', $user) }}" class="transition delay-150 hover:text-gray-900">{{ $name }}</a> >
                 @else
-                    <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Planos alimentares</a> >
+                    <a href="'{{ route('home') }}'" class="transition delay-150 hover:text-gray-900">Planos alimentares</a> >
                 @endif
                 <span class="cursor-default">Plano alimentar</span>
             </div>

@@ -3843,6 +3843,7 @@ __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 })();
 
 window.eatingPlan = {
+  confirm: false,
   meals: [],
   plan: {},
   savePlanAndAddMeal: function savePlanAndAddMeal() {
@@ -3898,7 +3899,7 @@ window.eatingPlan = {
   },
   addMeal: function addMeal() {
     this.meals.push({
-      id: '',
+      id: null,
       desc: '',
       carbo: '',
       carboWeight: '',
@@ -3909,173 +3910,212 @@ window.eatingPlan = {
     });
   },
   removeMeal: function removeMeal(i) {
-    if (this.meals.length > 1) {
-      this.meals.splice(i, 1);
-    }
-  },
-  saveMeals: function saveMeals() {
     var _this3 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-      var _iterator, _step, meal, response;
-
+      var meal, response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              _context3.next = 2;
-              return _this3.savePlan();
+              if (_this3.meals.length > 1) {
+                meal = _this3.meals[i];
+                response = axios.post("/home/eatingplan/meal/delete/".concat(meal.id));
+
+                _this3.meals.splice(i, 1);
+              }
+
+            case 1:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }))();
+  },
+  saveMeals: function saveMeals() {
+    var _this4 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+      var _iterator, _step, meal, response;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return _this4.savePlan();
 
             case 2:
-              _iterator = _createForOfIteratorHelper(_this3.meals);
-              _context3.prev = 3;
+              _iterator = _createForOfIteratorHelper(_this4.meals);
+              _context4.prev = 3;
 
               _iterator.s();
 
             case 5:
               if ((_step = _iterator.n()).done) {
-                _context3.next = 13;
+                _context4.next = 13;
                 break;
               }
 
               meal = _step.value;
               meal['_token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-              _context3.next = 10;
-              return axios.post("/home/eatingplan/create/meal/".concat(_this3.plan.id), meal, {
+              _context4.next = 10;
+              return axios.post("/home/eatingplan/create/meal/".concat(_this4.plan.id), meal, {
                 headers: {
                   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 }
               });
 
             case 10:
-              response = _context3.sent;
+              response = _context4.sent;
 
             case 11:
-              _context3.next = 5;
+              _context4.next = 5;
               break;
 
             case 13:
-              _context3.next = 18;
+              _context4.next = 18;
               break;
 
             case 15:
-              _context3.prev = 15;
-              _context3.t0 = _context3["catch"](3);
+              _context4.prev = 15;
+              _context4.t0 = _context4["catch"](3);
 
-              _iterator.e(_context3.t0);
+              _iterator.e(_context4.t0);
 
             case 18:
-              _context3.prev = 18;
+              _context4.prev = 18;
 
               _iterator.f();
 
-              return _context3.finish(18);
+              return _context4.finish(18);
 
             case 21:
-              window.location = "/eatingplan/created/".concat(_this3.plan.id);
+              window.location = "/eatingplan/created/".concat(_this4.plan.id);
 
             case 22:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee3, null, [[3, 15, 18, 21]]);
-    }))();
-  },
-  loadMeals: function loadMeals(planId) {
-    var _this4 = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-      var response, array;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              _context4.next = 2;
-              return axios.get("/loadMeals/".concat(planId));
-
-            case 2:
-              response = _context4.sent;
-              array = response.data;
-              array.forEach(function (meal) {
-                _this4.meals.push(meal);
-              });
-
-            case 5:
             case "end":
               return _context4.stop();
           }
         }
-      }, _callee4);
+      }, _callee4, null, [[3, 15, 18, 21]]);
     }))();
   },
-  saveMealsCreated: function saveMealsCreated(planId) {
+  loadMeals: function loadMeals(planId) {
     var _this5 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-      var _iterator2, _step2, meal, response;
-
+      var response, array;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
               _context5.next = 2;
-              return _this5.savePlan(planId);
+              return axios.get("/loadMeals/".concat(planId));
 
             case 2:
-              _iterator2 = _createForOfIteratorHelper(_this5.meals);
-              _context5.prev = 3;
+              response = _context5.sent;
+              array = response.data;
+              _this5.plan.id = planId;
+              array.forEach(function (meal) {
+                _this5.meals.push(meal);
+              });
+
+            case 6:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }))();
+  },
+  saveMealsCreated: function saveMealsCreated(planId) {
+    var _this6 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+      var _iterator2, _step2, meal, response, _response;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              _context6.next = 2;
+              return _this6.savePlan(planId);
+
+            case 2:
+              _iterator2 = _createForOfIteratorHelper(_this6.meals);
+              _context6.prev = 3;
 
               _iterator2.s();
 
             case 5:
               if ((_step2 = _iterator2.n()).done) {
-                _context5.next = 13;
+                _context6.next = 19;
                 break;
               }
 
               meal = _step2.value;
               meal['_token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-              _context5.next = 10;
+
+              if (!(meal.id != null)) {
+                _context6.next = 14;
+                break;
+              }
+
+              _context6.next = 11;
               return axios.post("/home/eatingplan/update/meal/".concat(meal.id), meal, {
                 headers: {
                   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 }
               });
 
-            case 10:
-              response = _context5.sent;
-
             case 11:
-              _context5.next = 5;
+              response = _context6.sent;
+              _context6.next = 17;
               break;
 
-            case 13:
-              _context5.next = 18;
+            case 14:
+              _context6.next = 16;
+              return axios.post("/home/eatingplan/create/meal/".concat(_this6.plan.id), meal, {
+                headers: {
+                  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+              });
+
+            case 16:
+              _response = _context6.sent;
+
+            case 17:
+              _context6.next = 5;
               break;
 
-            case 15:
-              _context5.prev = 15;
-              _context5.t0 = _context5["catch"](3);
+            case 19:
+              _context6.next = 24;
+              break;
 
-              _iterator2.e(_context5.t0);
+            case 21:
+              _context6.prev = 21;
+              _context6.t0 = _context6["catch"](3);
 
-            case 18:
-              _context5.prev = 18;
+              _iterator2.e(_context6.t0);
+
+            case 24:
+              _context6.prev = 24;
 
               _iterator2.f();
 
-              return _context5.finish(18);
+              return _context6.finish(24);
 
-            case 21:
-              window.location = "/eatingplan/saved/".concat(_this5.plan.id);
+            case 27:
+              window.location = "/eatingplan/saved/".concat(_this6.plan.id);
 
-            case 22:
+            case 28:
             case "end":
-              return _context5.stop();
+              return _context6.stop();
           }
         }
-      }, _callee5, null, [[3, 15, 18, 21]]);
+      }, _callee6, null, [[3, 21, 24, 27]]);
     }))();
   }
 };
@@ -4085,22 +4125,22 @@ window.nutriPatients = {
   filterCPFPatient: [],
   filter: false,
   loadPatients: function loadPatients() {
-    var _this6 = this;
+    var _this7 = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
       var response, _iterator3, _step3, patient;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
         while (1) {
-          switch (_context6.prev = _context6.next) {
+          switch (_context7.prev = _context7.next) {
             case 0:
-              _context6.next = 2;
+              _context7.next = 2;
               return axios.get('/nutri-patients');
 
             case 2:
-              response = _context6.sent;
-              _this6.patients = response.data;
-              _iterator3 = _createForOfIteratorHelper(_this6.patients);
+              response = _context7.sent;
+              _this7.patients = response.data;
+              _iterator3 = _createForOfIteratorHelper(_this7.patients);
 
               try {
                 for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
@@ -4113,24 +4153,24 @@ window.nutriPatients = {
                 _iterator3.f();
               }
 
-              _this6.$watch('filterNamePatient', function () {
-                _this6.patients.map(function (p) {
-                  return p.show = p.name.toLowerCase().includes(_this6.filterNamePatient.toLowerCase());
+              _this7.$watch('filterNamePatient', function () {
+                _this7.patients.map(function (p) {
+                  return p.show = p.name.toLowerCase().includes(_this7.filterNamePatient.toLowerCase());
                 });
               });
 
-              _this6.$watch('filterCPFPatient', function () {
-                _this6.patients.map(function (p) {
-                  return p.show = p.CPF.includes(_this6.filterCPFPatient);
+              _this7.$watch('filterCPFPatient', function () {
+                _this7.patients.map(function (p) {
+                  return p.show = p.CPF.includes(_this7.filterCPFPatient);
                 });
               });
 
             case 8:
             case "end":
-              return _context6.stop();
+              return _context7.stop();
           }
         }
-      }, _callee6);
+      }, _callee7);
     }))();
   },
   orderBy: function orderBy(col) {
@@ -4153,22 +4193,22 @@ window.eatingPlansTable = {
   filterDateStartEatingPlan: [],
   filterDateFinishEatingPlan: [],
   loadEatingPlans: function loadEatingPlans(UserIdPatient) {
-    var _this7 = this;
+    var _this8 = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
       var response, _iterator4, _step4, ep;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
         while (1) {
-          switch (_context7.prev = _context7.next) {
+          switch (_context8.prev = _context8.next) {
             case 0:
-              _context7.next = 2;
+              _context8.next = 2;
               return axios.get('/eating-plans/' + UserIdPatient);
 
             case 2:
-              response = _context7.sent;
-              _this7.eatingPlans = response.data;
-              _iterator4 = _createForOfIteratorHelper(_this7.eatingPlans);
+              response = _context8.sent;
+              _this8.eatingPlans = response.data;
+              _iterator4 = _createForOfIteratorHelper(_this8.eatingPlans);
 
               try {
                 for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
@@ -4183,36 +4223,36 @@ window.eatingPlansTable = {
                 _iterator4.f();
               }
 
-              console.dir(_this7.eatingPlans);
+              console.dir(_this8.eatingPlans);
 
-              _this7.$watch('filterTitleEatingPlan', function () {
-                _this7.eatingPlans.map(function (p) {
-                  return p.show = p.title.toLowerCase().includes(_this7.filterTitleEatingPlan.toLowerCase());
+              _this8.$watch('filterTitleEatingPlan', function () {
+                _this8.eatingPlans.map(function (p) {
+                  return p.show = p.title.toLowerCase().includes(_this8.filterTitleEatingPlan.toLowerCase());
                 });
               });
 
-              _this7.$watch('filterDateStartEatingPlan', function () {
-                var date = new Date(_this7.filterDateStartEatingPlan);
+              _this8.$watch('filterDateStartEatingPlan', function () {
+                var date = new Date(_this8.filterDateStartEatingPlan);
 
-                _this7.eatingPlans.map(function (p) {
+                _this8.eatingPlans.map(function (p) {
                   return p.show = p.date_start >= date;
                 });
               });
 
-              _this7.$watch('filterDateFinishEatingPlan', function () {
-                var date = new Date(_this7.filterDateFinishEatingPlan);
+              _this8.$watch('filterDateFinishEatingPlan', function () {
+                var date = new Date(_this8.filterDateFinishEatingPlan);
 
-                _this7.eatingPlans.map(function (p) {
+                _this8.eatingPlans.map(function (p) {
                   return p.show = p.date_finish <= date;
                 });
               });
 
             case 10:
             case "end":
-              return _context7.stop();
+              return _context8.stop();
           }
         }
-      }, _callee7);
+      }, _callee8);
     }))();
   },
   orderBy: function orderBy(col) {
@@ -4236,12 +4276,12 @@ window.eatingPlansTable = {
   }
 };
 window.phoneFormatter = {
-  phone: '',
+  phone: !!document.querySelector('#phone') ? document.querySelector('#phone').value : '',
   watch: function watch() {
-    var _this8 = this;
+    var _this9 = this;
 
     this.$watch('phone', function () {
-      var data = _this8.phone;
+      var data = _this9.phone;
       data = data.replace(/[^0-9]/g, '');
       var ddd = data.slice(0, 2);
       var part1 = data.slice(2, 7);
@@ -4261,17 +4301,17 @@ window.phoneFormatter = {
       }
 
       formatted += part2;
-      _this8.phone = formatted;
+      _this9.phone = formatted;
     });
   }
 };
 window.cpfFormatter = {
   cpf: '',
   watch: function watch() {
-    var _this9 = this;
+    var _this10 = this;
 
     this.$watch('cpf', function () {
-      var data = _this9.cpf;
+      var data = _this10.cpf;
       data = data.replace(/[^0-9]/g, '');
       var part1 = data.slice(0, 3);
       var part2 = data.slice(3, 6);
@@ -4285,7 +4325,7 @@ window.cpfFormatter = {
       formatted += part3;
       formatted += data.length > 9 ? '-' : '';
       formatted += part4;
-      _this9.cpf = formatted;
+      _this10.cpf = formatted;
     });
   }
 };

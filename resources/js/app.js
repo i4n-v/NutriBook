@@ -15,6 +15,7 @@ require('alpinejs');
 })();
 
 window.eatingPlan = {
+    confirm: false,
     meals: [],
     plan: {},
     async savePlanAndAddMeal() {
@@ -33,7 +34,7 @@ window.eatingPlan = {
     },
     addMeal() {
         this.meals.push({
-            id: '',
+            id: null,
             desc: '',
             carbo: '',
             carboWeight: '',
@@ -43,8 +44,10 @@ window.eatingPlan = {
             fatWeight: ''
         });
     },
-    removeMeal(i) {
+    async removeMeal(i) {
         if (this.meals.length > 1) {
+            let meal = this.meals[i];
+            let response = axios.post(`/home/eatingplan/meal/delete/${meal.id}`);
             this.meals.splice(i, 1);
         }
     },
@@ -64,20 +67,31 @@ window.eatingPlan = {
     async loadMeals(planId){
         let response = await axios.get(`/loadMeals/${planId}`);
         let array = response.data;
+        this.plan.id = planId;
 
         array.forEach( meal => {
             this.meals.push(meal);
         });
     },
     async saveMealsCreated(planId) {
-        await this.savePlan(planId)
+        await this.savePlan(planId);
         for (let meal of this.meals) {
+
             meal['_token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            if(meal.id != null){
                 let response = await axios.post(`/home/eatingplan/update/meal/${meal.id}`, meal, {
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                }
-            });
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }
+                });
+            }else{
+                let response = await axios.post(`/home/eatingplan/create/meal/${this.plan.id}`, meal, {
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }
+                });
+            }
         }
         window.location = `/eatingplan/saved/${this.plan.id}`
     }
@@ -157,10 +171,10 @@ window.eatingPlansTable = {
 }
 
 window.phoneFormatter = {
-    phone: '',
+    phone: !!document.querySelector('#phone') ? document.querySelector('#phone').value : '',
     watch() {
         this.$watch('phone', () => {
-            let data = this.phone
+            let data = this.phone;
             data = data.replace(/[^0-9]/g, '')
             let ddd = data.slice(0, 2)
             let part1 = data.slice(2, 7)

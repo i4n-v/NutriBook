@@ -36,7 +36,7 @@
         <template x-for="(meal, i) in meals">
             <div class="mt-10">
 
-                <span class="float-right font-bold text-white text-xl transition delay-150 hover:text-red-500 cursor-pointer mb-2" x-on:click="removeMeal(i)">x</span>
+                <span class="float-right font-bold text-white text-xl transition delay-150 hover:text-red-500 cursor-pointer mb-2" @click="confirm = true; mealIndex = i">x</span>
 
                 <div class="mb-3 w-full">
                     <x-label for="desc" :value="__('Descrição')" />
@@ -95,6 +95,16 @@
                     </div>
                 </div>
             </div>
+        </template>
+        <template x-if="confirm">
+            <x-modal>
+                <x-confirm-template>
+                <x-confirm-button class="px-9" x-on:click="removeMeal(mealIndex)">Sim</x-confirm-button>
+                    <x-slot name="text">
+                        Você realmente deseja remover essa refeição?
+                    </x-slot>
+                </x-confirm-template>
+            </x-modal>
         </template>
 
         <div class="bg-yellow-400 rounded-md text-center mt-5 transition delay-150 hover:bg-yellow-500 cursor-pointer shadow-md" x-on:click="addMeal">
