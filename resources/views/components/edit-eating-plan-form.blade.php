@@ -3,95 +3,96 @@
 <div x-data="eatingPlan" x-init="loadMeals({{ $eatingPlan->id }})">
     <form x-ref="planForm" action="{{ route('eatingplan_create', $eatingPlan->patient) }}">
         @csrf
-        <legend><span class="text-white text-xl border-b-2 mb-5">Dados do plano alimentar</span></legend>
+        <legend><span class="text-gray-800 text-xl border-b-2 mb-5">Dados do plano alimentar</span></legend>
 
+        <div class="flex w-full mt-4 gap-2">
+            <div class="flex-auto">
+                <x-label class="text-gray-800" for="title" :value="__('Título')" />
+
+                <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="$eatingPlan->title" required autofocus placeholder="Digite o título"/>
+            </div>
+
+            <!-- Date Start -->
+            <div class="">
+                <x-label class="text-gray-800" for="date-start" :value="__('Data de início')" />
+
+                <x-input id="date-start" class="block mt-1 w-full" type="date" name="date_start" :value="$eatingPlan->date_start" required autofocus
+                />
+            </div>
+
+            <!-- Date Finish -->
+            <div class="">
+                <x-label class="text-gray-800" for="date-finish" :value="__('Data de fim')" />
+
+                <x-input id="date-finish" class="block mt-1 w-full" type="date" name="date_finish" :value="$eatingPlan->date_finish" required autofocus
+                />
+            </div>
+        </div>
         <!-- Title -->
-        <div class="mt-4">
-            <x-label for="title" :value="__('Título')" />
-
-            <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="$eatingPlan->title" required autofocus placeholder="Digite o título"/>
-        </div>
-
-        <!-- Date Start -->
-        <div class="mt-4">
-            <x-label for="date-start" :value="__('Data de início')" />
-
-            <x-input id="date-start" class="block mt-1 w-full" type="date" name="date_start" :value="$eatingPlan->date_start" required autofocus
-            />
-        </div>
-
-        <!-- Date Finish -->
-        <div class="mt-4">
-            <x-label for="date-finish" :value="__('Data de fim')" />
-
-            <x-input id="date-finish" class="block mt-1 w-full" type="date" name="date_finish" :value="$eatingPlan->date_finish" required autofocus
-            />
-        </div>
     </form>
 
     <form class="mt-6">
         @csrf
-        <legend><span class="text-white text-xl border-b-2 mb-5">Refeições</span></legend>
+        <legend><span class="text-gray-800 text-xl mb-5">Refeições</span></legend>
 
         <template x-for="(meal, i) in meals">
-            <div class="mt-10">
+            <div class="mt-2 mb-4 border-t-2 border-gray-400">
 
-                <span class="float-right font-bold text-white text-xl transition delay-150 hover:text-red-500 cursor-pointer mb-2" @click="confirm = true; mealIndex = i">x</span>
-
-                <div class="mb-3 w-full">
-                    <x-label for="desc" :value="__('Descrição')" />
-
-                    <x-input id="desc" name="desc" class="block mt-1 w-full" type="text" required autofocus placeholder="Ex: Café da manhã, almoço..." x-model="meal.desc" />
+                <div class="h-4 w-full text-right">
+                    <span class="font-bold text-gray-800 text-xl transition delay-150 hover:text-red-500 cursor-pointer mb-2" @click="confirm = true; mealIndex = i">x</span>
                 </div>
 
-                <div class="grid grid-cols-2 gap-5">
+                <div class="mb-3 w-full">
+                    <x-label class="text-gray-800 text-md font-bold" for="desc" :value="__('Descrição')" />
+                    <x-input id="desc" name="desc" class="block mt-1 w-2/3" type="text" required autofocus placeholder="Ex: Café da manhã, almoço..." x-model="meal.desc" />
+                </div>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="grid grid-cols-5 gap-2">
+                        <div class="col-span-3">
+                            <x-label class="text-gray-800 text-md font-bold" for="carbo" :value="__('Carboidrato')" />
 
-                    <div>
-                        <x-label for="carbo" :value="__('Carboidrato')" />
+                            <select id="carbohydrate" class="block mt-1 w-full rounded-md focus:border-yellow-300 focus:shadow-lg focus:ring-1 focus:ring-yellow-300" name="carbo" required autofocus x-model="meal.carbo">
+                                @foreach (\App\Models\Food::carboFoods() as $food)
+                                    <option value="{{ $food->id }}">{{ $food->food }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-span-2">
+                            <x-label class="text-gray-800 text-md font-bold" for="carbo_weight" :value="__('Peso(g)')" />
 
-                        <select id="carbohydrate" class="block mt-1 w-full rounded-md focus:border-yellow-300 focus:shadow-lg focus:ring-1 focus:ring-yellow-300" name="carbo" required autofocus x-model="meal.carbo">
-                            @foreach (\App\Models\Food::carboFoods() as $food)
-                                <option value="{{ $food->id }}">{{ $food->food }}</option>
-                            @endforeach
-                        </select>
+                            <x-input id="carbo_weight" class="block mt-1 w-full" type="number" name="carbo_weight" required autofocus placeholder="Peso do alimento" x-model="meal.carboWeight"/>
+                        </div>
                     </div>
 
-                    <div>
-                        <x-label for="carbo_weight" :value="__('Peso(g)')" />
+                    <div class="grid grid-cols-5 gap-2">
+                        <div class="col-span-3">
+                            <x-label class="text-gray-800 text-md font-bold" for="protein" :value="__('Proteína')" />
+                            <select class="block mt-1 w-full rounded-md focus:border-yellow-300 focus:shadow-lg focus:ring-1 focus:ring-yellow-300" name="protein" required autofocus x-model="meal.protein">
+                                @foreach (\App\Models\Food::proteinFoods() as $food)
+                                    <option value="{{ $food->id }}">{{ $food->food }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                        <x-input id="carbo_weight" class="block mt-1 w-full" type="number" name="carbo_weight" required autofocus placeholder="Peso do alimento" x-model="meal.carboWeight"/>
+                        <div class="col-span-2">
+                            <x-label class="text-gray-800 text-md font-bold" for="protein_weight" :value="__('Peso(g)')" />
+
+                            <x-input id="protein_weight" class="block mt-1 w-full" type="number" name="protein_weight" required autofocus placeholder="Peso do alimento" x-model="meal.proteinWeight"/>
+                        </div>
                     </div>
-
-                    <div>
-                        <x-label for="protein" :value="__('Proteína')" />
-
-                        <select class="block mt-1 w-full rounded-md focus:border-yellow-300 focus:shadow-lg focus:ring-1 focus:ring-yellow-300" name="protein" required autofocus x-model="meal.protein">
-                            @foreach (\App\Models\Food::proteinFoods() as $food)
-                                <option value="{{ $food->id }}">{{ $food->food }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div>
-                        <x-label for="protein_weight" :value="__('Peso(g)')" />
-
-                        <x-input id="protein_weight" class="block mt-1 w-full" type="number" name="protein_weight" required autofocus placeholder="Peso do alimento" x-model="meal.proteinWeight"/>
-                    </div>
-
-                    <div>
-                        <x-label for="fat" :value="__('Gordura')" />
-
-                        <select id="fat" class="block mt-1 w-full rounded-md focus:border-yellow-300 focus:shadow-lg focus:ring-1 focus:ring-yellow-300" name="fat" required autofocus x-model="meal.fat">
-                            @foreach (\App\Models\Food::fatFoods() as $food)
-                                <option value="{{ $food->id }}">{{ $food->food }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div>
-                        <x-label for="fat_weight" :value="__('Peso(g)')" />
-
-                        <x-input id="fat_weight" class="block mt-1 w-full" type="number" name="fat_weight" required autofocus placeholder="Peso do alimento" x-model="meal.fatWeight"/>
+                    <div class="grid grid-cols-5 gap-2">
+                        <div class="col-span-3">
+                            <x-label class="text-gray-800 text-md font-bold" for="fat" :value="__('Gordura')" />
+                            <select id="fat" class="block mt-1 w-full rounded-md focus:border-yellow-300 focus:shadow-lg focus:ring-1 focus:ring-yellow-300" name="fat" required autofocus x-model="meal.fat">
+                                @foreach (\App\Models\Food::fatFoods() as $food)
+                                    <option value="{{ $food->id }}">{{ $food->food }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-span-2">
+                            <x-label class="text-gray-800 text-md font-bold" for="fat_weight" :value="__('Peso(g)')" />
+                            <x-input id="fat_weight" class="block mt-1 w-full" type="number" name="fat_weight" required autofocus placeholder="Peso do alimento" x-model="meal.fatWeight"/>
+                        </div>
                     </div>
                 </div>
             </div>
