@@ -126,6 +126,10 @@ Route::get('/nutri-patients', [PatientController::class, 'nutriPatients'])->midd
 
 Route::get('/eating-plans/{user?}', [EatingPlanController::class, 'eatingPlansData'])->middleware(['auth']);
 
+Route::get('/search', function () {
+    return view('search');
+})->middleware(['auth'])->name('search');
+
 require __DIR__.'/auth.php';
 // Route::get('/mailable', function () {
 //     $user = App\Models\User::find(1);
