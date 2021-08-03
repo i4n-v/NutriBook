@@ -70,6 +70,7 @@ window.eatingPlan = {
         this.plan.id = planId;
 
         array.forEach( meal => {
+            meal.deleteModal = false;
             this.meals.push(meal);
         });
     },

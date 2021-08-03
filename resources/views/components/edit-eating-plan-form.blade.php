@@ -36,10 +36,19 @@
         <legend><span class="text-gray-800 text-xl mb-5">Refeições</span></legend>
 
         <template x-for="(meal, i) in meals">
-            <div class="mt-2 mb-4 border-t-2 border-gray-400">
-
+            <div class="mt-2 mb-4 border-t-2 border-gray-400 relative">
+                <div x-show="meal.deleteModal">
+                    <x-modal>
+                        <x-confirm-template>
+                        <x-confirm-button class="px-9" x-on:click="removeMeal(mealIndex)">Sim</x-confirm-button>
+                            <x-slot name="text">
+                                Você realmente deseja remover essa refeição?
+                            </x-slot>
+                        </x-confirm-template>
+                    </x-modal>
+                </div>
                 <div class="h-4 w-full text-right">
-                    <span class="font-bold text-gray-800 text-xl transition delay-150 hover:text-red-500 cursor-pointer mb-2" @click="confirm = true; mealIndex = i">x</span>
+                    <span class="font-bold text-gray-800 text-xl transition delay-150 hover:text-red-500 cursor-pointer mb-2" @click="meal.deleteModal = true; mealIndex = i">x</span>
                 </div>
 
                 <div class="mb-3 w-full">
@@ -97,7 +106,7 @@
                 </div>
             </div>
         </template>
-        <template x-if="confirm">
+        {{-- <template x-if="confirm">
             <x-modal>
                 <x-confirm-template>
                 <x-confirm-button class="px-9" x-on:click="removeMeal(mealIndex)">Sim</x-confirm-button>
@@ -106,7 +115,7 @@
                     </x-slot>
                 </x-confirm-template>
             </x-modal>
-        </template>
+        </template> --}}
 
         <div class="bg-yellow-400 rounded-md text-center mt-5 transition delay-150 hover:bg-yellow-500 cursor-pointer shadow-md" x-on:click="addMeal">
             <span class="w-full text-gray-900 font-bold">Adicionar refeição</span>
