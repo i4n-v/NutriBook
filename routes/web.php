@@ -130,6 +130,8 @@ Route::get('/search', function () {
     return view('search');
 })->middleware(['auth'])->name('search');
 
+Route::get('/users', [UserController::class, 'users'])->middleware(['auth']);
+
 require __DIR__.'/auth.php';
 // Route::get('/mailable', function () {
 //     $user = App\Models\User::find(1);
