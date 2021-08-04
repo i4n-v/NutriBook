@@ -124,6 +124,18 @@ class UserController extends Controller
 
     }
 
+    public function users() {
+        $users = [];
+        foreach (User::all() as $user) {
+            if (Auth::user()->isNutritionist() && $user->isPatient()) {
+                array_push($users, $user);
+            } elseif (Auth::user()->isPatient() && $user->isNutritionist()) {
+                array_push($users, $user);
+            }
+        }
+        return json_encode($users);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
