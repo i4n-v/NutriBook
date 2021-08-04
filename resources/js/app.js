@@ -17,6 +17,7 @@ require('alpinejs');
 window.eatingPlan = {
     confirm: false,
     meals: [],
+    remove: [],
     plan: {},
     async savePlanAndAddMeal() {
         this.savePlan()
@@ -44,11 +45,15 @@ window.eatingPlan = {
             fatWeight: ''
         });
     },
-    async removeMeal(i) {
+    addMealToRemove(i){
         if (this.meals.length > 1) {
-            let meal = this.meals[i];
-            let response = axios.post(`/home/eatingplan/meal/delete/${meal.id}`);
+            this.remove.push(this.meals[i]);
             this.meals.splice(i, 1);
+        }
+    },
+    async removeMeals(){
+        for(let meal of this.remove){
+            let response = axios.post(`/home/eatingplan/meal/delete/${meal.id}`);
         }
     },
     async saveMeals() {
@@ -75,6 +80,7 @@ window.eatingPlan = {
         });
     },
     async saveMealsCreated(planId) {
+        await this.removeMeals();
         await this.savePlan(planId);
         for (let meal of this.meals) {
 

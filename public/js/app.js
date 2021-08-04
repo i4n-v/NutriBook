@@ -3845,6 +3845,7 @@ __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 window.eatingPlan = {
   confirm: false,
   meals: [],
+  remove: [],
   plan: {},
   savePlanAndAddMeal: function savePlanAndAddMeal() {
     var _this = this;
@@ -3909,23 +3910,36 @@ window.eatingPlan = {
       fatWeight: ''
     });
   },
-  removeMeal: function removeMeal(i) {
+  addMealToRemove: function addMealToRemove(i) {
+    if (this.meals.length > 1) {
+      this.remove.push(this.meals[i]);
+      this.meals.splice(i, 1);
+    }
+  },
+  removeMeals: function removeMeals() {
     var _this3 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-      var meal, response;
+      var _iterator, _step, meal, response;
+
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              if (_this3.meals.length > 1) {
-                meal = _this3.meals[i];
-                response = axios.post("/home/eatingplan/meal/delete/".concat(meal.id));
+              _iterator = _createForOfIteratorHelper(_this3.remove);
 
-                _this3.meals.splice(i, 1);
+              try {
+                for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                  meal = _step.value;
+                  response = axios.post("/home/eatingplan/meal/delete/".concat(meal.id));
+                }
+              } catch (err) {
+                _iterator.e(err);
+              } finally {
+                _iterator.f();
               }
 
-            case 1:
+            case 2:
             case "end":
               return _context3.stop();
           }
@@ -3937,7 +3951,7 @@ window.eatingPlan = {
     var _this4 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-      var _iterator, _step, meal, response;
+      var _iterator2, _step2, meal, response;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
         while (1) {
@@ -3947,18 +3961,18 @@ window.eatingPlan = {
               return _this4.savePlan();
 
             case 2:
-              _iterator = _createForOfIteratorHelper(_this4.meals);
+              _iterator2 = _createForOfIteratorHelper(_this4.meals);
               _context4.prev = 3;
 
-              _iterator.s();
+              _iterator2.s();
 
             case 5:
-              if ((_step = _iterator.n()).done) {
+              if ((_step2 = _iterator2.n()).done) {
                 _context4.next = 13;
                 break;
               }
 
-              meal = _step.value;
+              meal = _step2.value;
               meal['_token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
               _context4.next = 10;
               return axios.post("/home/eatingplan/create/meal/".concat(_this4.plan.id), meal, {
@@ -3982,12 +3996,12 @@ window.eatingPlan = {
               _context4.prev = 15;
               _context4.t0 = _context4["catch"](3);
 
-              _iterator.e(_context4.t0);
+              _iterator2.e(_context4.t0);
 
             case 18:
               _context4.prev = 18;
 
-              _iterator.f();
+              _iterator2.f();
 
               return _context4.finish(18);
 
@@ -4019,6 +4033,8 @@ window.eatingPlan = {
               array = response.data;
               _this5.plan.id = planId;
               array.forEach(function (meal) {
+                meal.deleteModal = false;
+
                 _this5.meals.push(meal);
               });
 
@@ -4034,88 +4050,92 @@ window.eatingPlan = {
     var _this6 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
-      var _iterator2, _step2, meal, response, _response;
+      var _iterator3, _step3, meal, response, _response;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
               _context6.next = 2;
-              return _this6.savePlan(planId);
+              return _this6.removeMeals();
 
             case 2:
-              _iterator2 = _createForOfIteratorHelper(_this6.meals);
-              _context6.prev = 3;
+              _context6.next = 4;
+              return _this6.savePlan(planId);
 
-              _iterator2.s();
+            case 4:
+              _iterator3 = _createForOfIteratorHelper(_this6.meals);
+              _context6.prev = 5;
 
-            case 5:
-              if ((_step2 = _iterator2.n()).done) {
-                _context6.next = 19;
+              _iterator3.s();
+
+            case 7:
+              if ((_step3 = _iterator3.n()).done) {
+                _context6.next = 21;
                 break;
               }
 
-              meal = _step2.value;
+              meal = _step3.value;
               meal['_token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
               if (!(meal.id != null)) {
-                _context6.next = 14;
+                _context6.next = 16;
                 break;
               }
 
-              _context6.next = 11;
+              _context6.next = 13;
               return axios.post("/home/eatingplan/update/meal/".concat(meal.id), meal, {
                 headers: {
                   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 }
               });
 
-            case 11:
+            case 13:
               response = _context6.sent;
-              _context6.next = 17;
+              _context6.next = 19;
               break;
 
-            case 14:
-              _context6.next = 16;
+            case 16:
+              _context6.next = 18;
               return axios.post("/home/eatingplan/create/meal/".concat(_this6.plan.id), meal, {
                 headers: {
                   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 }
               });
 
-            case 16:
+            case 18:
               _response = _context6.sent;
 
-            case 17:
-              _context6.next = 5;
-              break;
-
             case 19:
-              _context6.next = 24;
+              _context6.next = 7;
               break;
 
             case 21:
-              _context6.prev = 21;
-              _context6.t0 = _context6["catch"](3);
+              _context6.next = 26;
+              break;
 
-              _iterator2.e(_context6.t0);
+            case 23:
+              _context6.prev = 23;
+              _context6.t0 = _context6["catch"](5);
 
-            case 24:
-              _context6.prev = 24;
+              _iterator3.e(_context6.t0);
 
-              _iterator2.f();
+            case 26:
+              _context6.prev = 26;
 
-              return _context6.finish(24);
+              _iterator3.f();
 
-            case 27:
+              return _context6.finish(26);
+
+            case 29:
               window.location = "/eatingplan/saved/".concat(_this6.plan.id);
 
-            case 28:
+            case 30:
             case "end":
               return _context6.stop();
           }
         }
-      }, _callee6, null, [[3, 21, 24, 27]]);
+      }, _callee6, null, [[5, 23, 26, 29]]);
     }))();
   }
 };
@@ -4128,7 +4148,7 @@ window.nutriPatients = {
     var _this7 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
-      var response, _iterator3, _step3, patient;
+      var response, _iterator4, _step4, patient;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
         while (1) {
@@ -4140,17 +4160,17 @@ window.nutriPatients = {
             case 2:
               response = _context7.sent;
               _this7.patients = response.data;
-              _iterator3 = _createForOfIteratorHelper(_this7.patients);
+              _iterator4 = _createForOfIteratorHelper(_this7.patients);
 
               try {
-                for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-                  patient = _step3.value;
+                for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+                  patient = _step4.value;
                   patient.show = true;
                 }
               } catch (err) {
-                _iterator3.e(err);
+                _iterator4.e(err);
               } finally {
-                _iterator3.f();
+                _iterator4.f();
               }
 
               _this7.$watch('filterNamePatient', function () {
@@ -4196,7 +4216,7 @@ window.eatingPlansTable = {
     var _this8 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-      var response, _iterator4, _step4, ep;
+      var response, _iterator5, _step5, ep;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
         while (1) {
@@ -4208,19 +4228,19 @@ window.eatingPlansTable = {
             case 2:
               response = _context8.sent;
               _this8.eatingPlans = response.data;
-              _iterator4 = _createForOfIteratorHelper(_this8.eatingPlans);
+              _iterator5 = _createForOfIteratorHelper(_this8.eatingPlans);
 
               try {
-                for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-                  ep = _step4.value;
+                for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+                  ep = _step5.value;
                   ep.show = true;
                   ep.date_start = new Date(ep.date_start);
                   ep.date_finish = new Date(ep.date_finish);
                 }
               } catch (err) {
-                _iterator4.e(err);
+                _iterator5.e(err);
               } finally {
-                _iterator4.f();
+                _iterator5.f();
               }
 
               console.dir(_this8.eatingPlans);
