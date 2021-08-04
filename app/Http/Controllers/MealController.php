@@ -47,23 +47,29 @@ class MealController extends Controller
             'eating_plan_id' => $eatingPlan->id,
         ]);
 
-        $food_carbo = FoodItem::create([
-            'weight' => $request->carboWeight,
-            'meal_id' => $meal->id,
-            'food_id' => $request->carbo,
-        ]);
+        if($request->carbo != 0){
+            $food_carbo = FoodItem::create([
+                'weight' => $request->carboWeight,
+                'meal_id' => $meal->id,
+                'food_id' => $request->carbo,
+            ]);
+        }
 
-        $food_protein = FoodItem::create([
-            'weight' => $request->proteinWeight,
-            'meal_id' => $meal->id,
-            'food_id' => $request->protein,
-        ]);
+        if($request->protein != 0){
+            $food_protein = FoodItem::create([
+                'weight' => $request->proteinWeight,
+                'meal_id' => $meal->id,
+                'food_id' => $request->protein,
+            ]);
+        }
 
-        $food_fat = FoodItem::create([
-            'weight' => $request->fatWeight,
-            'meal_id' => $meal->id,
-            'food_id' => $request->fat,
-        ]);
+        if($request->fat != 0){
+            $food_fat = FoodItem::create([
+                'weight' => $request->fatWeight,
+                'meal_id' => $meal->id,
+                'food_id' => $request->fat,
+            ]);
+        }
 
         return $meal;
     }
@@ -110,24 +116,54 @@ class MealController extends Controller
         $meal->description = $request->desc;
         $meal->save();
 
-        $food_carbo = $meal->foods()->where('type', 'carbo')->get()[0]->foodItem;
-        $food_protein = $meal->foods()->where('type', 'protein')->get()[0]->foodItem;
-        $food_fat = $meal->foods()->where('type', 'fat')->get()[0]->foodItem;
+        $food_carbo = $meal->foods()->where('type', 'carbo')->get()[0]->foodItem ?? false;
+        $food_protein = $meal->foods()->where('type', 'protein')->get()[0]->foodItem ?? false;
+        $food_fat = $meal->foods()->where('type', 'fat')->get()[0]->foodItem ?? false;
 
-        $food_carbo->update([
-            'weight' => $request->carboWeight,
-            'food_id' => $request->carbo
-        ]);
+        if(!$food_carbo && $request->carbo != 0){
+            $food_carbo = FoodItem::create([
+                'weight' => $request->carboWeight,
+                'meal_id' => $meal->id,
+                'food_id' => $request->carbo,
+            ]);
+        }else if($food_carbo != false && $request->carbo == 0){
+            $food_carbo->delete();
+        }else if($food_carbo != false){
+            $food_carbo->update([
+                'weight' => $request->carboWeight,
+                'food_id' => $request->carbo
+            ]);
+        }
 
-        $food_protein->update([
-            'weight' => $request->proteinWeight,
-            'food_id' => $request->protein
-        ]);
+        if(!$food_protein && $request->protein != 0){
+            $food_carbo = FoodItem::create([
+                'weight' => $request->proteinWeight,
+                'meal_id' => $meal->id,
+                'food_id' => $request->protein,
+            ]);
+        }else if($food_protein != false && $request->protein == 0){
+            $food_protein->delete();
+        }else if($food_protein != false){
+            $food_protein->update([
+                'weight' => $request->proteinWeight,
+                'food_id' => $request->protein
+            ]);
+        }
 
-        $food_fat->update([
-            'weight' => $request->fatWeight,
-            'food_id' => $request->fat
-        ]);
+        if(!$food_fat && $request->fat != 0){
+            $food_fat = FoodItem::create([
+                'weight' => $request->fatWeight,
+                'meal_id' => $meal->id,
+                'food_id' => $request->fat,
+            ]);
+        }else if($food_fat != false && $request->fat == 0){
+            $food_fat->delete();
+        }else if($food_fat != false){
+            $food_fat->update([
+                'weight' => $request->fatWeight,
+                'food_id' => $request->fat
+            ]);
+        }
 
         return $meal;
     }
@@ -140,6 +176,12 @@ class MealController extends Controller
      */
     public function destroy(Meal $meal)
     {
+        $nutri_id = $meal->eatingPlan->nutritionist->user->id;
+
+        if($nutri_id != auth()->user()->id){
+            return response('', 403);
+        }
+
         $meal->delete();
 
         return 'deleted';
