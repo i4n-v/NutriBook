@@ -220,3 +220,12 @@ window.cpfFormatter = {
     }
 }
 
+window.users = {
+    users: [],
+    searchUsers: [],
+    showUsers: false,
+    async loadUsers() {
+        let response = await axios.get('/users')
+        this.users = response.data
+    }
+}
