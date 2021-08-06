@@ -230,8 +230,22 @@ window.users = {
     users: [],
     searchUsers: [],
     showUsers: false,
+    findUser: [],
     async loadUsers() {
         let response = await axios.get('/users')
         this.users = response.data
-    }
+        for (let user of this.users) {
+            user.show = false
+        }
+        this.$watch('findUser', () => {
+            let searchInput = document.getElementById('searchInput').value
+            if (searchInput.length > 0) {
+                this.users.map(u => u.show = u.name.toLowerCase().includes(this.findUser.toLowerCase()))
+            } else {
+                for (let user of this.users) {
+                    user.show = false
+                }
+            }
+        })
+    },
 }
