@@ -4349,6 +4349,73 @@ window.cpfFormatter = {
     });
   }
 };
+window.users = {
+  users: [],
+  searchUsers: [],
+  showUsers: false,
+  findUser: [],
+  loadUsers: function loadUsers() {
+    var _this11 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
+      var response, _iterator6, _step6, user;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+        while (1) {
+          switch (_context9.prev = _context9.next) {
+            case 0:
+              _context9.next = 2;
+              return axios.get('/users');
+
+            case 2:
+              response = _context9.sent;
+              _this11.users = response.data;
+              _iterator6 = _createForOfIteratorHelper(_this11.users);
+
+              try {
+                for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+                  user = _step6.value;
+                  user.show = false;
+                }
+              } catch (err) {
+                _iterator6.e(err);
+              } finally {
+                _iterator6.f();
+              }
+
+              _this11.$watch('findUser', function () {
+                var searchInput = document.getElementById('searchInput').value;
+
+                if (searchInput.length > 0) {
+                  _this11.users.map(function (u) {
+                    return u.show = u.name.toLowerCase().includes(_this11.findUser.toLowerCase());
+                  });
+                } else {
+                  var _iterator7 = _createForOfIteratorHelper(_this11.users),
+                      _step7;
+
+                  try {
+                    for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+                      var user = _step7.value;
+                      user.show = false;
+                    }
+                  } catch (err) {
+                    _iterator7.e(err);
+                  } finally {
+                    _iterator7.f();
+                  }
+                }
+              });
+
+            case 7:
+            case "end":
+              return _context9.stop();
+          }
+        }
+      }, _callee9);
+    }))();
+  }
+};
 
 /***/ }),
 

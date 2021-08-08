@@ -1,5 +1,13 @@
 @props(['user'])
 
+@php
+    $phone = $user->phone;
+    $dd = substr($phone, 1, 2);
+    $num = substr($phone, 5);
+    $num = explode('-', $num);
+    $phone = 55 . $dd .  $num[0] . $num[1];
+@endphp
+
 <form method="POST" action="{{route('update_profile', $user)}}" class="text-gray-900 grid grid-rows-3 gap-3"  x-show="profile">
 
     @csrf
@@ -45,6 +53,12 @@
             <x-button class="px-10" class="disable">
                 {{ __('Salvar') }}
             </x-button>
+        </div>
+    @else
+        <div class="flex items-center justify-center mt-4">
+            <a href="https://wa.me/{{ $phone }}" class="p-2 bg-yellow-400 transition delay-150 hover:bg-yellow-500 font-semibold rounded-md" class="disable">
+                Entrar em contato
+            </a>
         </div>
     @endif
 </form>

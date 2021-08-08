@@ -32613,6 +32613,10 @@ select {
   --tw-backdrop-sepia: sepia(100%);
 }
 
+#searchInput {
+  box-shadow: 0 0 0 0;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
@@ -191092,4 +191096,3 @@ select {
     --tw-backdrop-sepia: sepia(100%);
   }
 }
-
