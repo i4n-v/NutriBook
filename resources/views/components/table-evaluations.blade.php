@@ -54,6 +54,7 @@
                     <x-modal>
                         <x-confirm-template>
                             <x-confirm-button class="px-9" href="{{ route('evaluation_delete', $evaluation) }}">Sim</x-confirm-button>
+                            <x-confirm-button class="px-8" @click="confirm = false" @click.away="confirm = false">Não</x-confirm-button>
                             <x-slot name="text">{{ 'Você realmente deseja excluir a avaliação de '.explode(' ',$patient->name)[0].'?' }}</x-slot>
                         </x-confirm-template>
                     </x-modal>

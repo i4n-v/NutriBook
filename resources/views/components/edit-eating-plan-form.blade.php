@@ -42,6 +42,7 @@
                     <x-modal>
                         <x-confirm-template>
                         <x-confirm-button class="px-9" x-on:click="addMealToRemove(i)">Sim</x-confirm-button>
+                        <x-confirm-button class="px-8" @click="meal.deleteModal=false" @click.away="meal.deleteModal=false">Não</x-confirm-button>
                             <x-slot name="text">
                                 Você realmente deseja remover essa refeição?
                             </x-slot>

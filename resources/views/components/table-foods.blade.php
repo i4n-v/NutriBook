@@ -25,6 +25,7 @@ $foods = App\Models\Food::all();
                             <x-confirm-button class="px-9" href="{{ route('food_delete', $food) }}">
                                 Sim
                             </x-confirm-button>
+                            <x-confirm-button class="px-8" @click="confirm = false" @click.away="confirm = false">Não</x-confirm-button>
                             <x-slot name="text">Você realmente deseja excluir este alimento?</x-slot>
                         </x-confirm-template>
                     </x-modal>

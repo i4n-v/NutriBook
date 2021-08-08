@@ -62,8 +62,9 @@
                 <x-modal>
                     <x-confirm-template>
                     <x-confirm-button class="px-9" x-on:click="deletePlan(plan.id)">Sim</x-confirm-button>
+                    <x-confirm-button class="px-8" @click="confirm = false" @click.away="confirm = false">Não</x-confirm-button>
                         <x-slot name="text">
-                            Você realmente deseja excluir plano alimentar <span x-text="plan.title"></span>?
+                            Você realmente deseja excluir o plano alimentar <span x-text="plan.title"></span>?
                         </x-slot>
                     </x-confirm-template>
                 </x-modal>
