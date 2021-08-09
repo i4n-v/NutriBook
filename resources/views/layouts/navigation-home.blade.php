@@ -30,6 +30,7 @@
             @else
 
             <div class="col-start-3 col-span-8 pt-1 flex justify-end">
+                <div class="w-1/2">
                     <x-search-bar>
                         @if (Auth::user()->isNutritionist())
                         <x-slot name="placeholder">{{ _('Pesquisar pacientes') }}</x-slot>
@@ -37,6 +38,7 @@
                         <x-slot name="placeholder">{{ _('Pesquisar nutricionistas') }}</x-slot>
                         @endif
                     </x-search-bar>
+                </div>
             </div>
 
             <div class="col-start-11 col-span-2 pt-3.5 ml-12 text-right w-11/12">
