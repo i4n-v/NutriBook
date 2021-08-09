@@ -36,10 +36,14 @@
                             <div class="ml-auto w-9/12">
                                 <div class="mx-auto w-7/12 my-5">
                                     <h2 class="text-lg font-bold text-gray-900 mb-5" x-show="profile">
-                                        @if(isset($user))
+                                        @if (isset($user) && $user->id == Auth::user()->id)
                                             Meus dados
                                         @else
-                                            Dados do paciente
+                                            @if ($user->isPatient())
+                                                Dados do paciente
+                                            @else
+                                                Dados do nutricionista
+                                            @endif
                                         @endif
                                     </h2>
                                     <h2 class="text-lg font-bold text-gray-900 mb-5" x-show="password">Redefinir senha</h2>
