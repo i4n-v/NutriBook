@@ -3,7 +3,7 @@
         <x-slot name="header">
             <div class="ml-2 text-gray-600 font-bold text-sm mt-2">
                 <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900"
-                >Meus pacientes</a> >
+                >Página inicial</a> >
                 <a href="{{ route('foods') }}" class="transition delay-150 hover:text-gray-900"
                 >Alimentos</a> >
                 <span class="cursor-default">Editar alimento</span>

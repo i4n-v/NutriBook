@@ -12,11 +12,11 @@
             </h2>
             <div class="ml-2 text-gray-600 font-bold text-sm mt-2">
                 @if($user->isPatient())
-                    <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Meus pacientes</a> >
+                    <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Pacientes</a> >
                     <span class="cursor-default">{{ $name }}</span>
                 @else
                     @if(Auth::user()->isNutritionist())
-                        <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Meus pacientes</a> >
+                        <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Página inicial</a> >
                     @else
                         <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Meus planos alimentares</a> >
                     @endif

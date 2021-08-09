@@ -14,7 +14,7 @@
             </h2>
             @if(isset($patient))
                 <div class="ml-2 text-gray-600 font-bold text-sm mt-2">
-                    <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Meus pacientes</a> >
+                    <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Pacientes</a> >
                     <span class="cursor-default">{{ $name }}</span>
                 </div>
             @endif

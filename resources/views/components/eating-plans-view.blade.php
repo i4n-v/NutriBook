@@ -11,7 +11,7 @@
             <div class="ml-2 text-gray-600 font-bold text-sm mt-2" x-show="food">
                 @if(Auth::user()->isNutritionist())
                     <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900"
-                    >Meus pacientes</a> >
+                    >Pacientes</a> >
                     <a href="{{ route('eating_plan', $user) }}" class="transition delay-150 hover:text-gray-900">{{ $name }}</a> >
                 @else
                     <a href="'{{ route('home') }}'" class="transition delay-150 hover:text-gray-900">Planos alimentares</a> >
