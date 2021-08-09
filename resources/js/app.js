@@ -161,10 +161,10 @@ window.eatingPlansTable = {
         })
     },
     orderBy(col) {
-        this.eatingPlans = this.eatingPlans.sort((p1, p2) => p1[col].localeCompare(p2[col]))
+        this.eatingPlans = this.eatingPlans.sort((p1, p2) => p1[col] - p2[col])
     },
     reverseOrderBy(col) {
-        this.eatingPlans = this.eatingPlans.sort((p1, p2) => p2[col].localeCompare(p1[col]))
+        this.eatingPlans = this.eatingPlans.sort((p1, p2) => p2[col] - p1[col])
     },
     deletePlan(planId){
         window.location = `/home/eatingplan/remove/${planId}`
