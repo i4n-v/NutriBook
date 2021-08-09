@@ -43,7 +43,7 @@
             <template x-for="user in patients">
                 <tr class="border transition delay-150 hover:bg-gray-100 text-left" x-show="user.show">
                     <td class="w-2/4 pl-2 rounded-tl-sm" x-text="user.name"></td>
-                    <td class="w-1/4 text-center" x-text="user.formattedCPF"></td>
+                    <td class="w-1/4 text-center" x-text="user.CPF"></td>
                     <td class="w-1/4 text-center">
                         20/08/2021
                     </td>
