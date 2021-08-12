@@ -5,6 +5,7 @@
 
     $meals = $eatingPlan->meals->all();
 @endphp
+
 <x-guest-layout>
     <div class="min-h-screen bg-white">
         <x-slot name="header">
@@ -23,8 +24,8 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-5">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="bg-gray-100 rounded-lg m-auto p-6" x-bind:class="food?'':'bg-gray-800 w-10/12 rounded-lg m-auto'">
-                        <div class="text-gray-900">
-
+                        <div class="text-gray-800">
+                            <x-view-eating-plan-form :eatingPlan="$eatingPlan"/>
                         </div>
                     </div>
                 </div>
