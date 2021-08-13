@@ -14,9 +14,36 @@ class FoodSeeder extends Seeder
      */
     public function run()
     {
-        $foods = Food::factory(20)->create();
+        $my_foods = [
+            "banana",
+            "batata",
+            "frango",
+            "maçã",
+            "queijo",
+            "ovo",
+            "arroz",
+            "macarrão",
+            "pão",
+            "tomate",
+            "cebola",
+            "cenoura",
+            "cuscuz",
+            "tapioca",
+            "goiaba",
+            "repolho",
+            "feijão",
+            "chuchu",
+            "pepino",
+            "castanha"
+        ];
 
-        foreach($foods as $food){
+        foreach ($my_foods as $food){
+            Food::factory(1)->create([
+                'food' => $food
+            ]);           
+        }
+    
+        foreach(Food::all() as $food){
             if($food->isCarbo()){
                 $food->type = 'carbo';
                 $food->save();

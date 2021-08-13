@@ -23,7 +23,6 @@ class FoodFactory extends Factory
     {
         return [
             'weight'=> $this->faker->randomNumber(2, false),
-            'food'=> $this->faker->word(),
             'type'=> ' ',
             'sodium'=> $this->faker->randomNumber(2, false),
             'dietary_fiber'=> $this->faker->randomNumber(2, false),
