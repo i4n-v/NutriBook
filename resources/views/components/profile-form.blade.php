@@ -1,12 +1,13 @@
 @props(['user'])
 
-@php
+@if($user->phone != null)
+
     $phone = $user->phone;
     $dd = substr($phone, 1, 2);
     $num = substr($phone, 5);
     $num = explode('-', $num);
     $phone = 55 . $dd .  $num[0] . $num[1];
-@endphp
+@endif
 
 <form method="POST" action="{{route('update_profile', $user)}}" class="text-gray-900 grid grid-rows-3 gap-3"  x-show="profile">
 
