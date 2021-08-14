@@ -42,6 +42,46 @@ class FoodController extends Controller
 
         if (sizeof($uniqueFood)>0) {
             return redirect('foods?error=O Alimento já existe no sistema!');
+        }else if($request->carbohydrate > $request->protein && $request->carbohydrate > $request->total_fat){
+            $food = Food::create([
+                'weight'=> $request->weight,
+                'food'=> $request->food,
+                'sodium'=> $request->sodium,
+                'dietary_fiber'=> $request->fiber,
+                'trans_fat'=> $request->trans_fat,
+                'saturated_fat'=> $request->saturated_fat,
+                'total_fat'=> $request->total_fat,
+                'protein'=> $request->protein,
+                'carbohydrate'=> $request->carbohydrate,
+                'energetic_value'=> $request->energetic_value,
+                'type' => 'carbo'
+                // 'nutritionist_id' => Auth::user()->id
+            ]);
+
+            $food->update($request->all());
+            return redirect()
+            ->route('foods')
+            ->with('success', 'Alimento criado com sucesso!');
+        }else if($request->protein > $request->total_fat && $request->protein > $request->carbohydrate){
+            $food = Food::create([
+                'weight'=> $request->weight,
+                'food'=> $request->food,
+                'sodium'=> $request->sodium,
+                'dietary_fiber'=> $request->fiber,
+                'trans_fat'=> $request->trans_fat,
+                'saturated_fat'=> $request->saturated_fat,
+                'total_fat'=> $request->total_fat,
+                'protein'=> $request->protein,
+                'carbohydrate'=> $request->carbohydrate,
+                'energetic_value'=> $request->energetic_value,
+                // 'nutritionist_id' => Auth::user()->id
+                'type' => 'protein'
+            ]);
+
+            $food->update($request->all());
+            return redirect()
+            ->route('foods')
+            ->with('success', 'Alimento criado com sucesso!');
         }else{
             $food = Food::create([
                 'weight'=> $request->weight,
@@ -53,7 +93,8 @@ class FoodController extends Controller
                 'total_fat'=> $request->total_fat,
                 'protein'=> $request->protein,
                 'carbohydrate'=> $request->carbohydrate,
-                'energetic_value'=> $request->energetic_value
+                'energetic_value'=> $request->energetic_value,
+                'type' => 'fat'
                 // 'nutritionist_id' => Auth::user()->id
             ]);
 
