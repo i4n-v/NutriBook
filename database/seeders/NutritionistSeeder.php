@@ -15,10 +15,13 @@ class NutritionistSeeder extends Seeder
      */
     public function run()
     {   
-        for ($i=1; $i <= 5; $i++) { 
-                Nutritionist::factory(1)->create([
-                    'user_id'=> User::find($i)->id
-                    ]); 
+        for ($i=1; $i <= 5; $i++) {
+            $user = User::find($i);
+            Nutritionist::factory(1)->create([
+                'user_id'=> $user->id
+            ]);
+            $user->name = 'Dr. ' . $user->name;
+            $user->save();
         }
     }
 }

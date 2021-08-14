@@ -15,8 +15,8 @@ class CreateEatingPlansTable extends Migration
     {
         Schema::create('eating_plans', function (Blueprint $table) {
             $table->id();
-            $table->string('date_start');
-            $table->string('date_finish');
+            $table->date('date_start');
+            $table->date('date_finish');
             $table->integer('nutritionist_id');
             $table->integer('patient_id');
             $table->timestamps();

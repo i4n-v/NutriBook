@@ -15,13 +15,22 @@ class EatingPlanSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        for ($i=1; $i <= 5 ; $i++) {
+    {   
+        $my_eating_plans = [
+            ["Ganhar músculos","Emagrecer","Definir corpo"],
+            ["Ganhar peso","Perder gordura localizada","Perder 10kg"],
+            ["Ganhar 10kg","Dieta","Refeições pouco gordurosas"],
+            ["Conseguir massa","Refeições ricas em proteínas","Frutas"],
+            ["Sucos","Combater diabete","Refeições ricas em ferro"]
+        ];
+
+        for ($i = 1; $i <= 5 ; $i++) {
             $patients = Patient::all()->random(3);
-            foreach($patients as $patient) {
+            foreach($patients as $key => $patient) {
                 EatingPlan::factory(1)->create([
                     'nutritionist_id' => Nutritionist::find($i),
                     'patient_id' => Patient::find($patient->id),
+                    'title' => $my_eating_plans[$i-1][$key]
                 ]);
             }
         }
