@@ -120,6 +120,15 @@ class FoodController extends Controller
         }
     }
 
+    public function all_foods()
+    {
+        if (Auth::user()->isNutritionist())
+        {
+            $foods = Food::all();
+            return $foods->toJson();
+        }
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -153,8 +162,9 @@ class FoodController extends Controller
      * @param  \App\Models\Food  $food
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Food $food)
+    public function destroy($id)
     {
+        $food = Food::find($id);
         $food->delete();
 
         return redirect()

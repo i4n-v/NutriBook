@@ -249,3 +249,13 @@ window.users = {
         })
     },
 }
+
+window.foods = {
+    foods: [],
+    modal: false,
+    confirm: false,
+    async loadFoods() {
+        let response = await axios.get('/all-foods')
+        this.foods = response.data
+    } 
+}
