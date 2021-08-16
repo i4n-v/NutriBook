@@ -254,8 +254,58 @@ window.foods = {
     foods: [],
     modal: false,
     confirm: false,
+    filterFood: [],
+    filterWMax: [],
+    filterWMin: [],
+    filter: true,
     async loadFoods() {
         let response = await axios.get('/all-foods')
         this.foods = response.data
-    } 
+        for (let food of this.foods) {
+            food.show = true
+        }
+        this.$watch('filterFood', () => {
+            this.foods.map(f => f.show = f.food.toLowerCase().includes(this.filterFood.toLowerCase()))
+        }),
+        this.$watch('filterWMin', () => {
+            if (this.filterWMin.length == 0 && this.filterWMax.length == 0) {
+                for (let food of this.foods) {
+                    food.show = true
+                }  
+            } else if (this.filterWMin.length == 0) {
+                this.foods.map(f => f.show = f.weight <= this.filterWMax)
+            } else if (this.filterWMax.length == 0) {
+                this.foods.map(f => f.show = f.weight >= this.filterWMin)
+            } else {
+                this.foods.map(f => f.show = f.weight >= this.filterWMin && f.weight <= this.filterWMax)
+            }
+        }),
+        this.$watch('filterWMax', () => {
+            if (this.filterWMin.length == 0 && this.filterWMax.length == 0) {
+                for (let food of this.foods) {
+                    food.show = true
+                }
+            } else if (this.filterWMax.length == 0) {
+                this.foods.map(f => f.show = f.weight >= this.filterWMin)             
+            } else if (this.filterWMin.length == 0) {
+                this.foods.map(f => f.show = f.weight <= this.filterWMax)
+            } else {
+                this.foods.map(f => f.show = f.weight >= this.filterWMin && f.weight <= this.filterWMax)
+            }
+        })
+    },
+    orderBy(col) {
+        if (col == 'food') {
+            this.foods = this.foods.sort((f1, f2) => f1[col].localeCompare(f2[col]))
+        } else {
+            this.foods = this.foods.sort((f1, f2) => f1[col] - f2[col])
+        }
+    },
+    reverseOrderBy(col) {
+        if (col == 'food') {
+            this.foods = this.foods.sort((f1, f2) => f2[col].localeCompare(f1[col]))
+        } else {
+            this.foods = this.foods.sort((f1, f2) => f2[col] - f1[col])
+        }
+    }
 }
