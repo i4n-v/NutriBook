@@ -1,9 +1,14 @@
 @php
-    if(isset($user)){
+    if(isset($user)) {
         $name = explode(' ', $user->name);
-        $name = "$name[0] $name[1]";
+        if (isset($name[1])) {
+            $name = "$name[0] $name[1]";
+        } else {
+            $name = $user->name;
+        }
     }
 @endphp
+
 <x-guest-layout>
     <div class="min-h-screen bg-white">
         <x-slot name="header">

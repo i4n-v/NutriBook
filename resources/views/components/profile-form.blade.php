@@ -1,13 +1,16 @@
 @props(['user'])
 
-@if($user->phone != null)
+@php
 
+if($user->phone != null) {
     $phone = $user->phone;
     $dd = substr($phone, 1, 2);
     $num = substr($phone, 5);
     $num = explode('-', $num);
     $phone = 55 . $dd .  $num[0] . $num[1];
-@endif
+}
+
+@endphp
 
 <form method="POST" action="{{route('update_profile', $user)}}" class="text-gray-900 grid grid-rows-3 gap-3"  x-show="profile">
 
@@ -47,7 +50,7 @@
     <div x-data="phoneFormatter" x-init="watch">
         <x-label for="phone" class="text-gray-900 font-bold" :value="__('Telefone')" />
 
-        <x-input id="phone" class="block mt-1 w-full disable" type="tel" name="phone" x-model="phone" :value="$user->phone" minlength="14" maxlength="15" :disabled="$user->id != Auth::user()->id" required autofocus />
+        <x-input id="phone" class="block mt-1 w-full disable" type="tel" name="phone" x-model="phone" :value="$user->phone ?? ''" minlength="14" maxlength="15" :disabled="$user->id != Auth::user()->id" required autofocus />
     </div>
     @if($user->id == Auth::user()->id)
         <div class="flex items-center justify-center mt-4">
@@ -57,7 +60,7 @@
         </div>
     @else
         <div class="flex items-center justify-center mt-4">
-            <a href="https://wa.me/{{ $phone }}" class="p-2 bg-yellow-400 transition delay-150 hover:bg-yellow-500 font-semibold rounded-md" class="disable">
+            <a href="https://wa.me/{{ $phone ?? '' }}" class="p-2 bg-yellow-400 transition delay-150 hover:bg-yellow-500 font-semibold rounded-md" class="disable" target="_blank">
                 Entrar em contato
             </a>
         </div>
