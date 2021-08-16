@@ -120,7 +120,13 @@ window.nutriPatients = {
             this.patients.map(p => p.show = p.name.toLowerCase().includes(this.filterNamePatient.toLowerCase()))
         })
         this.$watch('filterCPFPatient', () => {
-            this.patients.map(p => p.show = p.CPF.includes(this.filterCPFPatient))
+            for (let patient of this.patients) {
+                let first = patient.CPF.split(".")
+                let last = first[2].split("-")
+                let cpfFinal = first[0] + first [1] + last[0] + last[1]
+                patient.cpfNoSpecialChar = cpfFinal
+            }
+            this.patients.map(p => p.show = p.cpfNoSpecialChar.includes(this.filterCPFPatient))
         })
     },
     orderBy(col) {
