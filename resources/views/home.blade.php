@@ -7,7 +7,7 @@
 <x-guest-layout>
     <div class="min-h-screen bg-white">
         <x-slot name="header">
-            <h2 class="font-semibold text-2xl text-gray-900 leading-tight">
+            <h2 class="font-semibold text-2xl text-gray-900 leading-tight ml-0.5">
                 @if(isset($patient))
                     Planos Alimentares
                 @endif
@@ -20,7 +20,7 @@
             @endif
         </x-slot>
         @if(Auth::user()->isNutritionist() && isset($patient))
-            <div class="float-right mt-5 mr-5">
+            <div class="float-right mt-5 mr-16 pr-1">
                 <x-add-button href="{{ route('action_eatingplan_create', $patient) }}">
                     {{ __('Adicionar') }}
                 </x-add-button>
