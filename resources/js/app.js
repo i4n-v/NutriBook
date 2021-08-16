@@ -135,7 +135,7 @@ window.eatingPlansTable = {
     eatingPlans: [],
     confirm: false,
     modal: false,
-    filter: false,
+    filter: true,
     filterTitleEatingPlan: [],
     filterDateStartEatingPlan: [],
     filterDateFinishEatingPlan: [],
