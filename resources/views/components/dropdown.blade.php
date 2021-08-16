@@ -6,7 +6,7 @@
     <form method="POST" action="{{ route('logout') }}">
         @csrf
 
-        <button type='submit', class="hover:bg-yellow-400 rounded-md py-1 w-full h-full focus:outline-none">Sair</button>
+        <button type='submit', class="hover:bg-yellow-400 rounded-md py-1 w-full h-full focus:outline-none font-semibold">Sair</button>
     </form>
 
 </div>
