@@ -103,7 +103,9 @@ class EvaluationController extends Controller
      */
     public function show(Evaluation $evaluation)
     {
-        $myPatient = auth()->user()->nutritionistProfile->patients->find($evaluation->patient->id);
+        if (Auth::user()->isNutritionist()) {
+            $myPatient = auth()->user()->nutritionistProfile->patients->find($evaluation->patient->id);
+        }
 
         if(isset($myPatient)){
             return view('components/evaluation-view', ['evaluation' => $evaluation, 'patient' => $evaluation->patient->user]);
@@ -112,6 +114,18 @@ class EvaluationController extends Controller
         }else{
             return redirect()->route('login');
         }
+    }
+
+    public function evaluations($patient_id)
+    {
+        if (Auth::user()->isNutritionist())
+        {
+            $evaluations = Evaluation::where('patient_id', $patient_id)->where('nutritionist_id', Auth::user()->nutritionistProfile->id)->orderBy('created_at', 'asc')->get();
+        } else
+        {
+            $evaluations = Evaluation::where('patient_id', Auth::user()->patientProfile->id)->orderBy('created_at', 'desc')->get();
+        }
+        return $evaluations->toJson();
     }
 
     /**

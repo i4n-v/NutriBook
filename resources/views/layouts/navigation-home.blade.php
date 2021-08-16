@@ -13,6 +13,10 @@
                     <div class="pt-5 pl-4">
                         <a class="border-b-2 border-white transition delay-150 hover:border-yellow-300" href="{{ route('foods') }}">Alimentos</a>
                     </div>
+                    @else
+                    <div class="pt-5 pl-4">
+                        <a class="border-b-2 border-white transition delay-150 hover:border-yellow-300" href="{{ route('evaluation', ['patient' => Auth::user()->patientProfile->id]) }}">Avaliações</a>
+                    </div>
                     @endif
                 @endauth
             </div>

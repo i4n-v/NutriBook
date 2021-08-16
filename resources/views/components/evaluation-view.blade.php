@@ -15,12 +15,13 @@
             </h2>
             <div class="ml-2 text-gray-600 font-bold text-sm mt-2">
                 @if(Auth::user()->isNutritionist())
-                    <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Meus pacientes</a> >
+                    <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Pacientes</a> >
                     <a href="{{ route('evaluation', $evaluation->patient) }}" class="transition delay-150 hover:text-gray-900">{{ $name }}</a> >
-                    <span class="cursor-default">Visualizar plano alimentar</span>
+                    <span class="cursor-default">Visualizar avaliação</span>
                 @else
-                    <a href="{{ route('profile') }}" class="transition delay-150 hover:text-gray-900">{{ $name }}</a> >
-                    <a href="{{ route('evaluation') }}" class="transition delay-150 hover:text-gray-900">Minhas avaliações</a>
+                    <a href="{{ route('home') }}" class="transition delay-150 hover:text-gray-900">Página inicial</a> >
+                    <a href="{{ route('evaluation', ['patient' => Auth::user()->profile()->id]) }}" class="transition delay-150 hover:text-gray-900">Avaliações</a> > 
+                    <span class="cursor-default">Visualizar avaliação</span>
                 @endif
             </div>
         </x-slot>

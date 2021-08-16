@@ -19,6 +19,11 @@ class Evaluation extends Pivot
         'patient_id',
     ];
 
+    protected $appends = [
+        'formatted_created_at',
+        'formatted_updated_at',
+    ];
+
     public function nutritionist(){
         return $this->belongsTo(Nutritionist::class);
     }
@@ -39,5 +44,17 @@ class Evaluation extends Pivot
         return $this->hasOne(Anamnese::class, 'evaluation_id');
     }
 
-    
+    public function getFormattedCreatedAtAttribute() {
+        $created_at = $this->created_at->format('d-m-Y');
+        $created_at_parts = explode('-', $created_at);
+        $created_at_reverse = array_reverse($created_at_parts);
+        return implode('/', $created_at_reverse);
+    }
+
+    public function getFormattedUpdatedAtAttribute() {
+        $updated_at = $this->updated_at->format('d-m-Y');
+        $updated_at_parts = explode('-', $updated_at);
+        $updated_at_reverse = array_reverse($updated_at_parts);
+        return implode('/', $updated_at_reverse);
+    }
 }

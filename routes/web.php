@@ -134,6 +134,8 @@ Route::get('/users', [UserController::class, 'users'])->middleware(['auth']);
 
 Route::get('/all-foods', [FoodController::class, 'all_foods'])->middleware(['auth']);
 
+Route::get('/evaluations/{patient}', [EvaluationController::class, 'evaluations'])->middleware(['auth']);
+
 require __DIR__.'/auth.php';
 // Route::get('/mailable', function () {
 //     $user = App\Models\User::find(1);

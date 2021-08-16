@@ -323,3 +323,17 @@ window.foods = {
         }
     }
 }
+
+window.evaluations = {
+    evaluations: [],
+    confirm: false,
+    async loadEvaluations(patientId) {
+        let response = await axios.get('/evaluations/' + patientId)
+        this.evaluations = response.data
+        for (let ev of this.evaluations) {
+            ev.show = true
+            ev.created_at = new Date(ev.created_at)
+            ev.updated_at = new Date(ev.updated_at)
+        }
+    },
+}
