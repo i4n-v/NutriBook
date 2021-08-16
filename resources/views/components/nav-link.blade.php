@@ -1,4 +1,4 @@
-<div class="flex items-center justify-center m-auto">
+<div class="flex items-center justify-center m-auto -mt-1.5">
     <div class="mr-2">
         <img class="cursor-pointer" class="pl-1" src="{{ asset('img/icons/bond.svg') }}" alt="dropdown icon">
     </div>
