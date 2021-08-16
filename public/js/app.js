@@ -4143,7 +4143,7 @@ window.nutriPatients = {
   patients: [],
   filterNamePatient: [],
   filterCPFPatient: [],
-  filter: false,
+  filter: true,
   loadPatients: function loadPatients() {
     var _this7 = this;
 
@@ -4180,8 +4180,25 @@ window.nutriPatients = {
               });
 
               _this7.$watch('filterCPFPatient', function () {
+                var _iterator5 = _createForOfIteratorHelper(_this7.patients),
+                    _step5;
+
+                try {
+                  for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+                    var patient = _step5.value;
+                    var first = patient.CPF.split(".");
+                    var last = first[2].split("-");
+                    var cpfFinal = first[0] + first[1] + last[0] + last[1];
+                    patient.cpfNoSpecialChar = cpfFinal;
+                  }
+                } catch (err) {
+                  _iterator5.e(err);
+                } finally {
+                  _iterator5.f();
+                }
+
                 _this7.patients.map(function (p) {
-                  return p.show = p.CPF.includes(_this7.filterCPFPatient);
+                  return p.show = p.cpfNoSpecialChar.includes(_this7.filterCPFPatient);
                 });
               });
 
@@ -4208,7 +4225,7 @@ window.eatingPlansTable = {
   eatingPlans: [],
   confirm: false,
   modal: false,
-  filter: false,
+  filter: true,
   filterTitleEatingPlan: [],
   filterDateStartEatingPlan: [],
   filterDateFinishEatingPlan: [],
@@ -4216,7 +4233,7 @@ window.eatingPlansTable = {
     var _this8 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-      var response, _iterator5, _step5, ep;
+      var response, _iterator6, _step6, ep;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
         while (1) {
@@ -4228,46 +4245,44 @@ window.eatingPlansTable = {
             case 2:
               response = _context8.sent;
               _this8.eatingPlans = response.data;
-              _iterator5 = _createForOfIteratorHelper(_this8.eatingPlans);
+              _iterator6 = _createForOfIteratorHelper(_this8.eatingPlans);
 
               try {
-                for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-                  ep = _step5.value;
+                for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+                  ep = _step6.value;
                   ep.show = true;
                   ep.date_start = new Date(ep.date_start);
                   ep.date_finish = new Date(ep.date_finish);
                 }
               } catch (err) {
-                _iterator5.e(err);
+                _iterator6.e(err);
               } finally {
-                _iterator5.f();
+                _iterator6.f();
               }
 
-              console.dir(_this8.eatingPlans);
-
               _this8.$watch('filterTitleEatingPlan', function () {
-                _this8.eatingPlans.map(function (p) {
-                  return p.show = p.title.toLowerCase().includes(_this8.filterTitleEatingPlan.toLowerCase());
+                _this8.eatingPlans.map(function (ep) {
+                  return ep.show = ep.title.toLowerCase().includes(_this8.filterTitleEatingPlan.toLowerCase());
                 });
               });
 
               _this8.$watch('filterDateStartEatingPlan', function () {
                 var date = new Date(_this8.filterDateStartEatingPlan);
 
-                _this8.eatingPlans.map(function (p) {
-                  return p.show = p.date_start >= date;
+                _this8.eatingPlans.map(function (ep) {
+                  return ep.show = ep.date_start >= date;
                 });
               });
 
               _this8.$watch('filterDateFinishEatingPlan', function () {
                 var date = new Date(_this8.filterDateFinishEatingPlan);
 
-                _this8.eatingPlans.map(function (p) {
-                  return p.show = p.date_finish <= date;
+                _this8.eatingPlans.map(function (ep) {
+                  return ep.show = ep.date_finish <= date;
                 });
               });
 
-            case 10:
+            case 9:
             case "end":
               return _context8.stop();
           }
@@ -4276,14 +4291,26 @@ window.eatingPlansTable = {
     }))();
   },
   orderBy: function orderBy(col) {
-    this.eatingPlans = this.eatingPlans.sort(function (p1, p2) {
-      return p1[col].localeCompare(p2[col]);
-    });
+    if (col == 'title') {
+      this.eatingPlans = this.eatingPlans.sort(function (ep1, ep2) {
+        return ep1[col].localeCompare(ep2[col]);
+      });
+    } else {
+      this.eatingPlans = this.eatingPlans.sort(function (ep1, ep2) {
+        return ep1[col] - ep2[col];
+      });
+    }
   },
   reverseOrderBy: function reverseOrderBy(col) {
-    this.eatingPlans = this.eatingPlans.sort(function (p1, p2) {
-      return p2[col].localeCompare(p1[col]);
-    });
+    if (col == 'title') {
+      this.eatingPlans = this.eatingPlans.sort(function (ep1, ep2) {
+        return ep2[col].localeCompare(ep1[col]);
+      });
+    } else {
+      this.eatingPlans = this.eatingPlans.sort(function (ep1, ep2) {
+        return ep2[col] - ep1[col];
+      });
+    }
   },
   deletePlan: function deletePlan(planId) {
     window.location = "/home/eatingplan/remove/".concat(planId);
@@ -4358,7 +4385,7 @@ window.users = {
     var _this11 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
-      var response, _iterator6, _step6, user;
+      var response, _iterator7, _step7, user;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
         while (1) {
@@ -4370,17 +4397,17 @@ window.users = {
             case 2:
               response = _context9.sent;
               _this11.users = response.data;
-              _iterator6 = _createForOfIteratorHelper(_this11.users);
+              _iterator7 = _createForOfIteratorHelper(_this11.users);
 
               try {
-                for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-                  user = _step6.value;
+                for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+                  user = _step7.value;
                   user.show = false;
                 }
               } catch (err) {
-                _iterator6.e(err);
+                _iterator7.e(err);
               } finally {
-                _iterator6.f();
+                _iterator7.f();
               }
 
               _this11.$watch('findUser', function () {
@@ -4391,18 +4418,18 @@ window.users = {
                     return u.show = u.name.toLowerCase().includes(_this11.findUser.toLowerCase());
                   });
                 } else {
-                  var _iterator7 = _createForOfIteratorHelper(_this11.users),
-                      _step7;
+                  var _iterator8 = _createForOfIteratorHelper(_this11.users),
+                      _step8;
 
                   try {
-                    for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-                      var user = _step7.value;
+                    for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+                      var user = _step8.value;
                       user.show = false;
                     }
                   } catch (err) {
-                    _iterator7.e(err);
+                    _iterator8.e(err);
                   } finally {
-                    _iterator7.f();
+                    _iterator8.f();
                   }
                 }
               });
@@ -4414,6 +4441,191 @@ window.users = {
         }
       }, _callee9);
     }))();
+  }
+};
+window.foods = {
+  open: true,
+  foods: [],
+  modal: false,
+  confirm: false,
+  filterFood: [],
+  filterWMax: [],
+  filterWMin: [],
+  filter: true,
+  loadFoods: function loadFoods() {
+    var _this12 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
+      var response, _iterator9, _step9, food;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
+        while (1) {
+          switch (_context10.prev = _context10.next) {
+            case 0:
+              _context10.next = 2;
+              return axios.get('/all-foods');
+
+            case 2:
+              response = _context10.sent;
+              _this12.foods = response.data;
+              _iterator9 = _createForOfIteratorHelper(_this12.foods);
+
+              try {
+                for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
+                  food = _step9.value;
+                  food.show = true;
+                }
+              } catch (err) {
+                _iterator9.e(err);
+              } finally {
+                _iterator9.f();
+              }
+
+              _this12.$watch('filterFood', function () {
+                _this12.foods.map(function (f) {
+                  return f.show = f.food.toLowerCase().includes(_this12.filterFood.toLowerCase());
+                });
+              }), _this12.$watch('filterWMin', function () {
+                if (_this12.filterWMin.length == 0 && _this12.filterWMax.length == 0) {
+                  var _iterator10 = _createForOfIteratorHelper(_this12.foods),
+                      _step10;
+
+                  try {
+                    for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+                      var food = _step10.value;
+                      food.show = true;
+                    }
+                  } catch (err) {
+                    _iterator10.e(err);
+                  } finally {
+                    _iterator10.f();
+                  }
+                } else if (_this12.filterWMin.length == 0) {
+                  _this12.foods.map(function (f) {
+                    return f.show = f.weight <= _this12.filterWMax;
+                  });
+                } else if (_this12.filterWMax.length == 0) {
+                  _this12.foods.map(function (f) {
+                    return f.show = f.weight >= _this12.filterWMin;
+                  });
+                } else {
+                  _this12.foods.map(function (f) {
+                    return f.show = f.weight >= _this12.filterWMin && f.weight <= _this12.filterWMax;
+                  });
+                }
+              }), _this12.$watch('filterWMax', function () {
+                if (_this12.filterWMin.length == 0 && _this12.filterWMax.length == 0) {
+                  var _iterator11 = _createForOfIteratorHelper(_this12.foods),
+                      _step11;
+
+                  try {
+                    for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
+                      var food = _step11.value;
+                      food.show = true;
+                    }
+                  } catch (err) {
+                    _iterator11.e(err);
+                  } finally {
+                    _iterator11.f();
+                  }
+                } else if (_this12.filterWMax.length == 0) {
+                  _this12.foods.map(function (f) {
+                    return f.show = f.weight >= _this12.filterWMin;
+                  });
+                } else if (_this12.filterWMin.length == 0) {
+                  _this12.foods.map(function (f) {
+                    return f.show = f.weight <= _this12.filterWMax;
+                  });
+                } else {
+                  _this12.foods.map(function (f) {
+                    return f.show = f.weight >= _this12.filterWMin && f.weight <= _this12.filterWMax;
+                  });
+                }
+              });
+
+            case 7:
+            case "end":
+              return _context10.stop();
+          }
+        }
+      }, _callee10);
+    }))();
+  },
+  orderBy: function orderBy(col) {
+    if (col == 'food') {
+      this.foods = this.foods.sort(function (f1, f2) {
+        return f1[col].localeCompare(f2[col]);
+      });
+    } else {
+      this.foods = this.foods.sort(function (f1, f2) {
+        return f1[col] - f2[col];
+      });
+    }
+  },
+  reverseOrderBy: function reverseOrderBy(col) {
+    if (col == 'food') {
+      this.foods = this.foods.sort(function (f1, f2) {
+        return f2[col].localeCompare(f1[col]);
+      });
+    } else {
+      this.foods = this.foods.sort(function (f1, f2) {
+        return f2[col] - f1[col];
+      });
+    }
+  }
+};
+window.evaluations = {
+  evaluations: [],
+  confirm: false,
+  filter: true,
+  loadEvaluations: function loadEvaluations(patientId) {
+    var _this13 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
+      var response, _iterator12, _step12, ev;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
+        while (1) {
+          switch (_context11.prev = _context11.next) {
+            case 0:
+              _context11.next = 2;
+              return axios.get('/evaluations/' + patientId);
+
+            case 2:
+              response = _context11.sent;
+              _this13.evaluations = response.data;
+              _iterator12 = _createForOfIteratorHelper(_this13.evaluations);
+
+              try {
+                for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
+                  ev = _step12.value;
+                  ev.show = true;
+                  ev.created_at = new Date(ev.created_at);
+                  ev.updated_at = new Date(ev.updated_at);
+                }
+              } catch (err) {
+                _iterator12.e(err);
+              } finally {
+                _iterator12.f();
+              }
+
+            case 6:
+            case "end":
+              return _context11.stop();
+          }
+        }
+      }, _callee11);
+    }))();
+  },
+  orderBy: function orderBy(col) {
+    this.evaluations = this.evaluations.sort(function (ev1, ev2) {
+      return ev1[col] - ev2[col];
+    });
+  },
+  reverseOrderBy: function reverseOrderBy(col) {
+    this.evaluations = this.evaluations.sort(function (ev1, ev2) {
+      return ev2[col] - ev1[col];
+    });
   }
 };
 

@@ -82,7 +82,7 @@
                                 <div class="text-white bg-gray-800 p-1 rounded-tl-sm rounded-tr-sm text-center font-bold">
                                     <span>Tabela nutricional</span>
                                 </div>
-                                <div class="m-auto rounded-lg grid grid-cols-2 border">  
+                                <div class="m-auto rounded-lg grid grid-cols-2 border">
                                     <div class="pl-2 border-b">Sódio</div><div class="pl-20 border-b" x-text="fS + 'mg'"></div>
                                     <div class="pl-2 border-b bg-gray-200">Fibra alimentar</div><div class="pl-20 border-b bg-gray-200" x-text="fDF + 'g'"></div>
                                     <div class="pl-2 border-b">Gorduras trans</div><div class="pl-20 border-b" x-text="fTrF + 'g'"></div>

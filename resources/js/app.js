@@ -264,6 +264,7 @@ window.users = {
 }
 
 window.foods = {
+    open: true,
     foods: [],
     modal: false,
     confirm: false,
@@ -284,7 +285,7 @@ window.foods = {
             if (this.filterWMin.length == 0 && this.filterWMax.length == 0) {
                 for (let food of this.foods) {
                     food.show = true
-                }  
+                }
             } else if (this.filterWMin.length == 0) {
                 this.foods.map(f => f.show = f.weight <= this.filterWMax)
             } else if (this.filterWMax.length == 0) {
@@ -299,7 +300,7 @@ window.foods = {
                     food.show = true
                 }
             } else if (this.filterWMax.length == 0) {
-                this.foods.map(f => f.show = f.weight >= this.filterWMin)             
+                this.foods.map(f => f.show = f.weight >= this.filterWMin)
             } else if (this.filterWMin.length == 0) {
                 this.foods.map(f => f.show = f.weight <= this.filterWMax)
             } else {

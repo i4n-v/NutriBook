@@ -82,7 +82,7 @@
             </fieldset>
 
             <div class="flex items-center justify-end mt-4">
-                <x-cancel-button @click="food = true">
+                <x-cancel-button @click="open = true">
                     Cancelar
                 </x-cancel-button>
 
