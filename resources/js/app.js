@@ -149,22 +149,30 @@ window.eatingPlansTable = {
         }
         console.dir(this.eatingPlans)
         this.$watch('filterTitleEatingPlan', () => {
-            this.eatingPlans.map(p => p.show = p.title.toLowerCase().includes(this.filterTitleEatingPlan.toLowerCase()))
+            this.eatingPlans.map(ep => ep.show = ep.title.toLowerCase().includes(this.filterTitleEatingPlan.toLowerCase()))
         })
         this.$watch('filterDateStartEatingPlan', () => {
             let date = new Date(this.filterDateStartEatingPlan)
-            this.eatingPlans.map(p => p.show = p.date_start >= date)
+            this.eatingPlans.map(ep => ep.show = ep.date_start >= date)
         })
         this.$watch('filterDateFinishEatingPlan', () => {
             let date = new Date(this.filterDateFinishEatingPlan)
-            this.eatingPlans.map(p => p.show = p.date_finish <= date)
+            this.eatingPlans.map(ep => ep.show = ep.date_finish <= date)
         })
     },
     orderBy(col) {
-        this.eatingPlans = this.eatingPlans.sort((p1, p2) => p1[col] - p2[col])
+        if (col == 'title') {
+            this.eatingPlans = this.eatingPlans.sort((ep1, ep2) => ep1[col].localeCompare(ep2[col]))
+        } else {
+            this.eatingPlans = this.eatingPlans.sort((ep1, ep2) => ep1[col] - ep2[col])
+        }
     },
     reverseOrderBy(col) {
-        this.eatingPlans = this.eatingPlans.sort((p1, p2) => p2[col] - p1[col])
+        if (col == 'title') {
+            this.eatingPlans = this.eatingPlans.sort((ep1, ep2) => ep2[col].localeCompare(ep1[col]))
+        } else {
+            this.eatingPlans = this.eatingPlans.sort((ep1, ep2) => ep2[col] - ep1[col])
+        }
     },
     deletePlan(planId){
         window.location = `/home/eatingplan/remove/${planId}`
