@@ -109,7 +109,7 @@ window.nutriPatients = {
     patients: [],
     filterNamePatient: [],
     filterCPFPatient: [],
-    filter: false,
+    filter: true,
     async loadPatients() {
         let response = await axios.get('/nutri-patients')
         this.patients = response.data
