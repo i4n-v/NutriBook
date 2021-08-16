@@ -153,7 +153,6 @@ window.eatingPlansTable = {
             ep.date_start = new Date(ep.date_start)
             ep.date_finish = new Date(ep.date_finish)
         }
-        console.dir(this.eatingPlans)
         this.$watch('filterTitleEatingPlan', () => {
             this.eatingPlans.map(ep => ep.show = ep.title.toLowerCase().includes(this.filterTitleEatingPlan.toLowerCase()))
         })
@@ -327,6 +326,7 @@ window.foods = {
 window.evaluations = {
     evaluations: [],
     confirm: false,
+    filter: true,
     async loadEvaluations(patientId) {
         let response = await axios.get('/evaluations/' + patientId)
         this.evaluations = response.data
@@ -336,4 +336,10 @@ window.evaluations = {
             ev.updated_at = new Date(ev.updated_at)
         }
     },
+    orderBy(col) {
+        this.evaluations = this.evaluations.sort((ev1, ev2) => ev1[col] - ev2[col])
+    },
+    reverseOrderBy(col) {
+        this.evaluations = this.evaluations.sort((ev1, ev2) => ev2[col] - ev1[col])
+    }
 }

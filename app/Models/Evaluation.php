@@ -47,14 +47,12 @@ class Evaluation extends Pivot
     public function getFormattedCreatedAtAttribute() {
         $created_at = $this->created_at->format('d-m-Y');
         $created_at_parts = explode('-', $created_at);
-        $created_at_reverse = array_reverse($created_at_parts);
-        return implode('/', $created_at_reverse);
+        return implode('/', $created_at_parts);
     }
 
     public function getFormattedUpdatedAtAttribute() {
         $updated_at = $this->updated_at->format('d-m-Y');
         $updated_at_parts = explode('-', $updated_at);
-        $updated_at_reverse = array_reverse($updated_at_parts);
-        return implode('/', $updated_at_reverse);
+        return implode('/', $updated_at_parts);
     }
 }

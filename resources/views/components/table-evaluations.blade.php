@@ -33,7 +33,7 @@ if(Auth::user()->isPatient()){
                 <th>
                     <div class="grid grid-cols-12">
                         <div class="col-start-1 col-end-12 m-auto">
-                            Data de atualização
+                            Última atualização
                         </div>
                         <div class="col-start-12 col-end-12">
                             <x-ordering-selector :col="'updated_at'"/>
