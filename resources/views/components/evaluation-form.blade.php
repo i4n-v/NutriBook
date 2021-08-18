@@ -14,7 +14,7 @@
         <!-- 'height' -->
         <div>
             <x-label for="height" :value="__('Altura do paciente (m)')" />
-            <x-input id="height" class="block mt-1 w-full" type="number" name="height" :value="$evaluation->height" required autofocus placeholder="Altura do paciente" />
+            <x-input id="height" step="0.01" class="block mt-1 w-full" type="number" name="height" :value="$evaluation->height" required autofocus placeholder="Altura do paciente" />
         </div>
 
     </fieldset>
